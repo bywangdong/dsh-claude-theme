@@ -1,0 +1,58 @@
+{
+  "plugin": "dsh-theme-claude",
+  "version": "0.8.0",
+  "host": "DeepSeek Harness 0.2.2-rc.3",
+  "iconCoverage": {
+    "dswIconFamilies": 102,
+    "dswSymbolsCovered": 204,
+    "inlineAndFileTypeSvgGlyphs": 64,
+    "codeLanguageSvgIconsCovered": 48,
+    "experimentalPackageIcons": 18
+  },
+  "installedMatchesBuild": {
+    "lib/client.js": true,
+    "lib/index.js": true,
+    "cordis.patch.yml": true,
+    "README.md": true,
+    "package.json": true
+  },
+  "sha256": {
+    "lib/client.js": "b85a5102468c90a4ed1f0001cc640d56e5a415c9e5b0f861ce65c8f8d15ecc86",
+    "lib/index.js": "60e2d41c24fe8aae18a27b1ff9b0eba58da8d0759ef06211c9f2e1e130bcdd45",
+    "cordis.patch.yml": "c2659fd7a68aba594fd9fce79245b3de83b0113d9f7575f9af18b79ba53b61b5",
+    "README.md": "611e5857879b7500eb3f051dbcfa97abe7a6e6f2ced16797ec44bef5aead0fce",
+    "package.json": "22b5f8d80d59d57cbfa63885d4c0657e6d895dd49b2aeea3ac01d2c2a7c50216"
+  },
+  "existingPluginVersionsPreserved": true,
+  "preservedPlugins": {
+    "dsh-shortcutter": "file:/Users/nick/Documents/Code/Javascript/dsh-shortcutter/dist/dsh-shortcutter-0.1.37.tgz",
+    "dsh-switcher": "file:/Users/nick/Documents/Code/Javascript/dsh-switcher/dist/dsh-switcher-0.1.14-dev.2.tgz"
+  },
+  "installation": "desktop runtime cli (dsh plugin --profile desktop)",
+  "defaults": {
+    "palette": "neutral",
+    "paletteStorageKey": "dsh-theme-claude.palette.v2",
+    "prose": "sans",
+    "proseStorageKey": "dsh-theme-claude.prose.v2",
+    "chrome": "claude"
+  },
+  "claudeDesktopVerbatimCalibration": {
+    "cjkFontStack": "PingFang SC",
+    "codeFontStack": "ui-monospace, SF Mono",
+    "sidebarRowHeightPx": 32,
+    "sidebarRowFontPx": 14,
+    "sidebarGroupFontPx": 13,
+    "sidebarPillRadiusPx": 8,
+    "chatBodyFont": "14px/20px",
+    "chatHeadingsPx": { "h1": 16, "h2": 15, "h3": 14 },
+    "darkStrongWeight": 500,
+    "darkSurfaces": {
+      "sidebar": "#1F1F1F",
+      "canvas": "#191919",
+      "selectedPill": "#3F3F3F",
+      "userBubble": "#212121"
+    },
+    "windowInactiveDimming": true
+  },
+  "verbatimMacOsDomVerifiedInBrowser": true
+}

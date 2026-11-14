@@ -1,0 +1,180 @@
+{
+  "version": "5.11492.5",
+  "app_path": "/Users/nick/Library/Caches/com.anthropic.claudefordesktop.ShipIt/update.N6t5KrO/Claude.app",
+  "files": [
+    {
+      "archive": "app.asar",
+      "path": "/.vite/renderer/main_window/assets/MainWindowPage-lhEHjHfd.css",
+      "local_file": "app-MainWindowPage-lhEHjHfd.css",
+      "sha256": "d28063ca960037bb1f25e652085f450bba0e5fb9bf11418827926c3aa9a1aaf3"
+    },
+    {
+      "archive": "app.asar",
+      "path": "/.vite/renderer/main_window/assets/clawdQuestEngine-C2Z1JudX.css",
+      "local_file": "app-clawdQuestEngine-C2Z1JudX.css",
+      "sha256": "fcf88d1f2d53ed9785594de48a18138234296571a1bc13fb83fd37dab99b4ac3"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c05b96c7f-B2fCCOZ2.css",
+      "local_file": "ion-dist-c05b96c7f-B2fCCOZ2.css",
+      "sha256": "1efd973355346c65b6f7b456c81174db909ee6259b3f25de49321d290754980b"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c06b83fb1-B8XBMJv5.css",
+      "local_file": "ion-dist-c06b83fb1-B8XBMJv5.css",
+      "sha256": "9a3106a1bdd7d806a6ce2e1763cc0ee1978f541361c062fd67be83dcf1b3ec9a"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c0ab037d8-CwG_XIxe.css",
+      "local_file": "ion-dist-c0ab037d8-CwG_XIxe.css",
+      "sha256": "70302118b2d2ce3e5c19d7349330048eeda7e59ebfa6adece5375bd30eac0d58"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c19e90103-j3gbSTi6.css",
+      "local_file": "ion-dist-c19e90103-j3gbSTi6.css",
+      "sha256": "bc13e24828c091c5fb81a85005d15793aa859663da8a162ec4025b78196c373d"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c3fde7009-BPpn3-7v.css",
+      "local_file": "ion-dist-c3fde7009-BPpn3-7v.css",
+      "sha256": "b3c867cd2511fdd0803819e3975e9f5a470870778498c45e63e2d04efab6cda4"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c403c4b83-yqAXiELG.css",
+      "local_file": "ion-dist-c403c4b83-yqAXiELG.css",
+      "sha256": "b7d08f51e8a7082ddad036014897afc0d020e62a800b1b6347312a0afffa89ba"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c427176b2-BQn2Bm7I.css",
+      "local_file": "ion-dist-c427176b2-BQn2Bm7I.css",
+      "sha256": "2e0d24a61b3d17b9a87b2c4994dd6c4bd0ac8e32be5fa1c78d17559dfc4abdbc"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c49d37e5f-Cp6cqivK.css",
+      "local_file": "ion-dist-c49d37e5f-Cp6cqivK.css",
+      "sha256": "0d144ba889b0c12670d7092f52345da66d98acf37cbfd05a71071015e9ff8f59"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c4a9ee384-Br-fzuOs.css",
+      "local_file": "ion-dist-c4a9ee384-Br-fzuOs.css",
+      "sha256": "07780e8b57c4e886b8193b3356db0d96329871431ed36b1ebffca5dd9285b3dd"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c4b7ce3b5-BMzG8Bd0.css",
+      "local_file": "ion-dist-c4b7ce3b5-BMzG8Bd0.css",
+      "sha256": "fff9165359c2c30ef363c740570e9597809df606a3eee38658db03d44099bdb9"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c5aee9dbd-B55U_qvj.css",
+      "local_file": "ion-dist-c5aee9dbd-B55U_qvj.css",
+      "sha256": "07454e207418834f50ff5f3bca84097a3102c98e9da4fb1f90a28b4c4c718e28"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c5aee9dbd-cvLUb2-y.css",
+      "local_file": "ion-dist-c5aee9dbd-cvLUb2-y.css",
+      "sha256": "e98a9a5b356c5cdc15ebedd7a5b2f88858ad2c804b31f799dab7a6894af796fd"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c6059c89c-6KZBy_tz.css",
+      "local_file": "ion-dist-c6059c89c-6KZBy_tz.css",
+      "sha256": "f944a6a429d71635db1a4b870b9383cbe8590e63e26fd4b68057c6e3f9659e25"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c673fe961-MKLcklnj.css",
+      "local_file": "ion-dist-c673fe961-MKLcklnj.css",
+      "sha256": "643c04eef0bfa06670a05e73bd90a248f7a6d3edb8b2dd8111df39f8c8202254"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c6a73f447-LaXKuzWp.css",
+      "local_file": "ion-dist-c6a73f447-LaXKuzWp.css",
+      "sha256": "907138704b6adab867c94a82108f291595d33a71dfeda9a4e60ffc9c9a913e19"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c6a992d55-k2XF_vDB.css",
+      "local_file": "ion-dist-c6a992d55-k2XF_vDB.css",
+      "sha256": "41a56501982cf728276f43670aaf4ac301665076bdcc7fde402c1f22524d0923"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c71860c77-BpQBAViZ.css",
+      "local_file": "ion-dist-c71860c77-BpQBAViZ.css",
+      "sha256": "449113430c063240f054315327baa3c3c8af35dae4d4e6054d79c8604c02a5ed"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c7bcb7751-BC69Y1DY.css",
+      "local_file": "ion-dist-c7bcb7751-BC69Y1DY.css",
+      "sha256": "6ad551d57a5e437ace96a8800201651bbb5ef5dc5b1263a1ca3b74ca66a9d45b"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c8688ed97-DO1cQWAl.css",
+      "local_file": "ion-dist-c8688ed97-DO1cQWAl.css",
+      "sha256": "3369b5b8e0d1cf1aa06b2aaf8364b4e21e8f8345c35fc0996f7997d9fcad7a9d"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c8d0615c8-DwS7PAng.css",
+      "local_file": "ion-dist-c8d0615c8-DwS7PAng.css",
+      "sha256": "b661c8310af202c8b7f405d29d72dd93dae43f814b3553b3ae4b6499b4b5d074"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c8d25b7c4-B4eLIhHR.css",
+      "local_file": "ion-dist-c8d25b7c4-B4eLIhHR.css",
+      "sha256": "f46d12e0e6092f01d65a28d2fc679b8b7ae25c49a776274c71da51998372604f"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/c8e31bf58-C7gq8dUF.css",
+      "local_file": "ion-dist-c8e31bf58-C7gq8dUF.css",
+      "sha256": "0ccba0932c352ddc088837007b8403b0bbe565e3f9f78f99f2f47a896356368f"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/cbd6c85c8-DrFf115z.css",
+      "local_file": "ion-dist-cbd6c85c8-DrFf115z.css",
+      "sha256": "14b3acccf607798acadcf5507d32637a966476462ef6c69df2514431ca19788b"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/cf1a02a1a-Bzv8x2Cs.css",
+      "local_file": "ion-dist-cf1a02a1a-Bzv8x2Cs.css",
+      "sha256": "20321b63a4ddf6a7a62684d1d05350fe687020c09738f8c13fda17bbda016e6b"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/frame-window-BEI3vR8Q.css",
+      "local_file": "ion-dist-frame-window-BEI3vR8Q.css",
+      "sha256": "c05412fd1bb02b39cc0ef7c96f48bd4e09d32cd5743116f41397baaf925b160c"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/shared-frame-CLTXRMg8.css",
+      "local_file": "ion-dist-shared-frame-CLTXRMg8.css",
+      "sha256": "a672760af50498fbf81e920134605da020bca05f486a92cfac22f705c4926e3d"
+    },
+    {
+      "archive": "ion-dist.asar",
+      "path": "/assets/v1/shared-styles-BQ7vERZ2.css",
+      "local_file": "ion-dist-shared-styles-BQ7vERZ2.css",
+      "sha256": "d655d24e0517a978882fbd4d015074e9bfd1453ffbac048df5a5b75ee3772142"
+    }
+  ]
+}

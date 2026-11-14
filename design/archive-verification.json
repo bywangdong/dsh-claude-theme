@@ -1,0 +1,19 @@
+{
+  "copied_files_verified": 71,
+  "updater_manifest_hashes_verified": 29,
+  "json_files_parsed": 8,
+  "local_links_checked": 87,
+  "html_scripts_syntax": "passed",
+  "entry_pages_use_local_resources": true,
+  "browser_visual_check": "Not performed: in-app browser policy rejects file: URLs. No alternative browser route attempted.",
+  "original_reference_fragment": "byte-for-byte preserved",
+  "raw_archive_bytes": 8650708,
+  "package_dry_run": {
+    "version": "0.1.2",
+    "file_count": 5,
+    "sha1": "37d5cd32e120009dd76c17848d89b030f99746ae",
+    "design_and_verification_excluded": true,
+    "unchanged_from_installed_package": true
+  },
+  "image_files_verified": 7
+}

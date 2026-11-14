@@ -1,0 +1,826 @@
+[
+  {
+    "selector": ":root[data-dyslexic-font][data-font=system],:root[data-dyslexic-font] .cds-root[data-font=system]",
+    "values": {
+      "--cds-font-sans": "var(--font-ui-dyslexic)",
+      "--cds-font-voice": "var(--font-ui-dyslexic)"
+    }
+  },
+  {
+    "selector": ":root.cds-root.cds-root[data-dyslexic-font],:root:root[data-dyslexic-font] .cds-root,:root.cds-root.cds-root[data-atkinson-font],:root:root[data-atkinson-font] .cds-root",
+    "values": {
+      "--cds-font-weight-body": "initial",
+      "--cds-font-weight-control": "initial",
+      "--cds-font-weight-header": "initial",
+      "--cds-font-weight-badge": "initial"
+    }
+  },
+  {
+    "selector": ".cds-root .font-serif,.cds-root .font-voice,.cds-root .font-mono,.cds-root .font-mono-ui,.cds-root .text-code.font-medium,.cds-root .text-code.font-semibold,.cds-root .text-code-regular,.cds-root .text-code-medium,.cds-root .text-code-semibold",
+    "values": {
+      "--cds-font-weight-body": "initial",
+      "--cds-font-weight-control": "initial",
+      "--cds-font-weight-header": "initial",
+      "--cds-font-weight-badge": "initial"
+    }
+  },
+  {
+    "selector": ".cds-root [data-cds=DataTable] tr[data-dimmed]",
+    "values": {
+      "--cds-text-primary": "var(--cds-undimmed-text-stays-secondary)",
+      "--cds-text-secondary": "var(--cds-text-disabled)",
+      "--cds-text-muted": "var(--cds-text-disabled)"
+    }
+  },
+  {
+    "selector": ".cds-root [data-cds=DataTable] tr[data-dimmed] :is(button,input,select,textarea,[role=button],[role=checkbox],[role=combobox],[role=menuitem],[role=radio],[role=slider],[role=switch],[role=tab])",
+    "values": {
+      "--cds-text-primary": "var(--cds-undimmed-text-primary)",
+      "--cds-text-secondary": "var(--cds-undimmed-text-secondary)",
+      "--cds-text-muted": "var(--cds-undimmed-text-muted)"
+    }
+  },
+  {
+    "selector": ".cds-root [data-cds=ChatComposerChin] [data-touch-size]",
+    "values": {
+      "--cds-radius": "inherit",
+      "--cds-h-control": "inherit",
+      "--cds-h-control-nested": "inherit",
+      "--cds-icon": "inherit",
+      "--cds-pad-xs": "inherit",
+      "--cds-pad-sm": "inherit",
+      "--cds-pad-md": "inherit",
+      "--cds-pad-lg": "inherit",
+      "--cds-pad-xl": "inherit"
+    }
+  },
+  {
+    "selector": ":root",
+    "values": {
+      "--cds-radius": ".25rem",
+      "--cds-font-sans": "var(--cds-font-system)",
+      "--cds-font-sans-display": "var(--cds-font-sans)",
+      "--cds-font-weight-regular": "400",
+      "--cds-font-weight-medium": "500",
+      "--cds-font-weight-semibold": "580",
+      "--cds-font-weight-bold": "600"
+    }
+  },
+  {
+    "selector": ".cds-root",
+    "values": {
+      "--cds-radius": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-radius-composer": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-h-control": "calc(1.5rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested": "calc(1.125rem * var(--cds-rem-scale,1))",
+      "--cds-icon": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs": "calc(.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-gap-xs": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-gap-sm": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-gap-md": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-gap-lg": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-gap-xl": "calc(2rem * var(--cds-rem-scale,1))",
+      "--cds-font-sans": "var(--font-anthropic-sans,var(--cds-font-system)), var(--cds-font-system)",
+      "--cds-font-sans-display": "var(--font-anthropic-sans-display,var(--cds-font-sans)), var(--cds-font-sans)",
+      "--cds-font-voice": "var(--font-anthropic-serif,ui-serif), ui-serif, Georgia, \"Times New Roman\", serif",
+      "--cds-neutral-0": "var(--cds-gray-0)",
+      "--cds-neutral-900": "var(--cds-gray-900)",
+      "--cds-surface-0": "var(--cds-gray-20)",
+      "--cds-surface-1": "var(--cds-gray-10)",
+      "--cds-surface-2": "var(--cds-gray-0)",
+      "--cds-surface-3": "var(--cds-gray-0)",
+      "--cds-surface-popover": "var(--cds-surface-3)",
+      "--cds-surface-panel": "var(--cds-surface-2)",
+      "--cds-page-bg": "var(--cds-surface-0)",
+      "--cds-text-primary": "var(--cds-neutral-900)",
+      "--cds-text-secondary": "var(--cds-neutral-600)",
+      "--cds-text-muted": "var(--cds-neutral-400)",
+      "--cds-font-size-caption": "calc(.6875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-footnote": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-code": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body": "calc(.8125rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose": ".875rem",
+      "--cds-font-size-heading": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-title": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-font-weight-regular": "400",
+      "--cds-font-weight-medium": "500",
+      "--cds-font-weight-semibold": "580",
+      "--cds-font-weight-bold": "600",
+      "--cds-font-weight-body": "initial",
+      "--cds-font-weight-control": "initial",
+      "--cds-font-weight-header": "initial",
+      "--cds-font-weight-badge": "initial",
+      "--cds-leading-caption": "calc(1.0625rem * var(--cds-rem-scale,1))",
+      "--cds-leading-footnote": "calc(.9375rem * var(--cds-rem-scale,1))",
+      "--cds-leading-code": "calc(1.0625rem * var(--cds-rem-scale,1))",
+      "--cds-leading-body": "calc(1.1875rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose": "1.25rem",
+      "--cds-leading-heading": "calc(1.125rem * var(--cds-rem-scale,1))",
+      "--cds-leading-title": "calc(1.5625rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": "[data-mode=dark] .cds-root:not([data-mode=light]):not([data-mode=system]),.cds-root[data-mode=dark]",
+    "values": {
+      "--cds-neutral-0": "var(--cds-gray-900)",
+      "--cds-neutral-900": "var(--cds-gray-0)",
+      "--cds-surface-0": "var(--cds-gray-900)",
+      "--cds-surface-1": "var(--cds-gray-850)",
+      "--cds-surface-2": "var(--cds-gray-830)",
+      "--cds-surface-3": "var(--cds-gray-800)",
+      "--cds-text-primary": "var(--cds-gray-50)",
+      "--cds-text-secondary": "var(--cds-gray-200)",
+      "--cds-text-muted": "var(--cds-gray-400)"
+    }
+  },
+  {
+    "selector": "[data-mode=system] .cds-root:not([data-mode=light]):not([data-mode=dark]),.cds-root[data-mode=system],.cds-root:not([data-mode]):not([data-mode] *)",
+    "values": {
+      "--cds-neutral-0": "var(--cds-gray-900)",
+      "--cds-neutral-900": "var(--cds-gray-0)",
+      "--cds-surface-0": "var(--cds-gray-900)",
+      "--cds-surface-1": "var(--cds-gray-850)",
+      "--cds-surface-2": "var(--cds-gray-830)",
+      "--cds-surface-3": "var(--cds-gray-800)",
+      "--cds-text-primary": "var(--cds-gray-50)",
+      "--cds-text-secondary": "var(--cds-gray-200)",
+      "--cds-text-muted": "var(--cds-gray-400)"
+    }
+  },
+  {
+    "selector": ".cds-root[data-font=system]",
+    "values": {
+      "--cds-font-sans": "var(--cds-font-system)",
+      "--cds-font-sans-display": "var(--cds-font-sans)",
+      "--cds-leading-footnote": "calc(1rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root[data-density=comfortable]",
+    "values": {
+      "--cds-radius": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-radius-composer": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-h-control": "calc(2rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested": "calc(1.375rem * var(--cds-rem-scale,1))",
+      "--cds-icon": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl": "calc(1.5rem * var(--cds-rem-scale,1))",
+      "--cds-gap-xs": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-gap-sm": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-gap-md": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-gap-lg": "calc(1.75rem * var(--cds-rem-scale,1))",
+      "--cds-gap-xl": "calc(2.5rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-footnote": "calc(.8125rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-code": "calc(.8125rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose": "1rem",
+      "--cds-font-size-heading": "calc(.9375rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-title": "calc(1.375rem * var(--cds-rem-scale,1))",
+      "--cds-leading-caption": "calc(1.0625rem * var(--cds-rem-scale,1))",
+      "--cds-leading-footnote": "calc(1.0625rem * var(--cds-rem-scale,1))",
+      "--cds-leading-code": "calc(1.1875rem * var(--cds-rem-scale,1))",
+      "--cds-leading-body": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose": "1.5rem",
+      "--cds-leading-heading": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-leading-title": "calc(1.75rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root [data-step=\"1\"]",
+    "values": {
+      "--cds-radius": "calc(.3125rem * var(--cds-rem-scale,1))",
+      "--cds-h-control": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-icon": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs": "calc(.125rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm": "calc(.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose": ".8125rem",
+      "--cds-leading-body": "calc(1.0625rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose": "1.1875rem"
+    }
+  },
+  {
+    "selector": ".cds-root [data-step=\"2\"]",
+    "values": {
+      "--cds-radius": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-h-control": "calc(1.5rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested": "calc(1.125rem * var(--cds-rem-scale,1))",
+      "--cds-icon": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs": "calc(.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption": "calc(.6875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body": "calc(.8125rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose": ".875rem",
+      "--cds-leading-body": "calc(1.1875rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose": "1.25rem"
+    }
+  },
+  {
+    "selector": ".cds-root [data-step=\"3\"]",
+    "values": {
+      "--cds-radius": "calc(.4375rem * var(--cds-rem-scale,1))",
+      "--cds-h-control": "calc(1.75rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-icon": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl": "calc(1.375rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose": ".9375rem",
+      "--cds-leading-body": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose": "1.375rem"
+    }
+  },
+  {
+    "selector": ".cds-root [data-step=\"4\"]",
+    "values": {
+      "--cds-radius": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-h-control": "calc(2rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested": "calc(1.375rem * var(--cds-rem-scale,1))",
+      "--cds-icon": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl": "calc(1.5rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose": "1rem",
+      "--cds-leading-body": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose": "1.5rem"
+    }
+  },
+  {
+    "selector": ".cds-root [data-step=\"5\"]",
+    "values": {
+      "--cds-radius": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-h-control": "calc(2.5rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested": "calc(1.75rem * var(--cds-rem-scale,1))",
+      "--cds-icon": "calc(1.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl": "calc(1.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption": "calc(.8125rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body": "calc(.9375rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose": "1.125rem",
+      "--cds-leading-body": "calc(1.375rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose": "1.6875rem"
+    }
+  },
+  {
+    "selector": ".cds-root",
+    "values": {
+      "--cds-radius--xs": "calc(.3125rem * var(--cds-rem-scale,1))",
+      "--cds-radius--sm": "calc(.3125rem * var(--cds-rem-scale,1))",
+      "--cds-radius--lg": "calc(.4375rem * var(--cds-rem-scale,1))",
+      "--cds-h-control--xs": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-h-control--sm": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-h-control--lg": "calc(1.75rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested--xs": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested--sm": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested--lg": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-icon--xs": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-icon--sm": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-icon--lg": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs--xs": "calc(.125rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs--sm": "calc(.125rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs--lg": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm--xs": "calc(.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm--sm": "calc(.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm--lg": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md--xs": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md--sm": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md--lg": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg--xs": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg--sm": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg--lg": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl--xs": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl--sm": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl--lg": "calc(1.375rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption--xs": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption--sm": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption--lg": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body--xs": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body--sm": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body--lg": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose--xs": ".8125rem",
+      "--cds-font-size-prose--sm": ".8125rem",
+      "--cds-font-size-prose--lg": ".9375rem",
+      "--cds-leading-body--xs": "calc(1.0625rem * var(--cds-rem-scale,1))",
+      "--cds-leading-body--sm": "calc(1.0625rem * var(--cds-rem-scale,1))",
+      "--cds-leading-body--lg": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose--xs": "1.1875rem",
+      "--cds-leading-prose--sm": "1.1875rem",
+      "--cds-leading-prose--lg": "1.375rem"
+    }
+  },
+  {
+    "selector": ".cds-root[data-density=comfortable]",
+    "values": {
+      "--cds-radius--xs": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-radius--sm": "calc(.4375rem * var(--cds-rem-scale,1))",
+      "--cds-radius--lg": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-h-control--xs": "calc(1.5rem * var(--cds-rem-scale,1))",
+      "--cds-h-control--sm": "calc(1.75rem * var(--cds-rem-scale,1))",
+      "--cds-h-control--lg": "calc(2.5rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested--xs": "calc(1.125rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested--sm": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-h-control-nested--lg": "calc(1.75rem * var(--cds-rem-scale,1))",
+      "--cds-icon--xs": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-icon--sm": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-icon--lg": "calc(1.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs--xs": "calc(.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs--sm": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xs--lg": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm--xs": "calc(.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm--sm": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-sm--lg": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md--xs": "calc(.5rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md--sm": "calc(.625rem * var(--cds-rem-scale,1))",
+      "--cds-pad-md--lg": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg--xs": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg--sm": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-pad-lg--lg": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl--xs": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl--sm": "calc(1.375rem * var(--cds-rem-scale,1))",
+      "--cds-pad-xl--lg": "calc(1.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption--xs": "calc(.6875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption--sm": "calc(.75rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-caption--lg": "calc(.8125rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body--xs": "calc(.8125rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body--sm": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-body--lg": "calc(.9375rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose--xs": ".875rem",
+      "--cds-font-size-prose--sm": ".9375rem",
+      "--cds-font-size-prose--lg": "1.125rem",
+      "--cds-leading-body--xs": "calc(1.1875rem * var(--cds-rem-scale,1))",
+      "--cds-leading-body--sm": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-leading-body--lg": "calc(1.375rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose--xs": "1.25rem",
+      "--cds-leading-prose--sm": "1.375rem",
+      "--cds-leading-prose--lg": "1.6875rem"
+    }
+  },
+  {
+    "selector": ".cds-root",
+    "values": {
+      "--cds-font-size-body--own": "calc(.8125rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose--textsm": ".8125rem",
+      "--cds-font-size-prose--xs--textsm": ".8125rem",
+      "--cds-font-size-prose--sm--textsm": ".8125rem",
+      "--cds-font-size-prose--lg--textsm": ".875rem",
+      "--cds-font-size-prose--textlg": ".9375rem",
+      "--cds-font-size-prose--xs--textlg": ".875rem",
+      "--cds-font-size-prose--sm--textlg": ".875rem",
+      "--cds-font-size-prose--lg--textlg": "1rem",
+      "--cds-font-size-heading--textsm": "calc(.8125rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-heading--textlg": "calc(.9375rem * var(--cds-rem-scale,1))",
+      "--cds-leading-body--own": "calc(1.1875rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose--textsm": "1.1875rem",
+      "--cds-leading-prose--xs--textsm": "1.1875rem",
+      "--cds-leading-prose--sm--textsm": "1.1875rem",
+      "--cds-leading-prose--lg--textsm": "1.25rem",
+      "--cds-leading-prose--textlg": "1.375rem",
+      "--cds-leading-prose--xs--textlg": "1.25rem",
+      "--cds-leading-prose--sm--textlg": "1.25rem",
+      "--cds-leading-prose--lg--textlg": "1.5rem",
+      "--cds-leading-heading--textsm": "calc(1.125rem * var(--cds-rem-scale,1))",
+      "--cds-leading-heading--textlg": "calc(1.375rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root[data-density=comfortable]",
+    "values": {
+      "--cds-font-size-body--own": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose--textsm": ".9375rem",
+      "--cds-font-size-prose--xs--textsm": ".8125rem",
+      "--cds-font-size-prose--sm--textsm": ".875rem",
+      "--cds-font-size-prose--lg--textsm": "1rem",
+      "--cds-font-size-prose--textlg": "1.125rem",
+      "--cds-font-size-prose--xs--textlg": ".9375rem",
+      "--cds-font-size-prose--sm--textlg": "1rem",
+      "--cds-font-size-prose--lg--textlg": "1.125rem",
+      "--cds-font-size-heading--textsm": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-heading--textlg": "calc(1rem * var(--cds-rem-scale,1))",
+      "--cds-leading-body--own": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose--textsm": "1.375rem",
+      "--cds-leading-prose--xs--textsm": "1.1875rem",
+      "--cds-leading-prose--sm--textsm": "1.25rem",
+      "--cds-leading-prose--lg--textsm": "1.5rem",
+      "--cds-leading-prose--textlg": "1.6875rem",
+      "--cds-leading-prose--xs--textlg": "1.375rem",
+      "--cds-leading-prose--sm--textlg": "1.5rem",
+      "--cds-leading-prose--lg--textlg": "1.6875rem",
+      "--cds-leading-heading--textsm": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-leading-heading--textlg": "calc(1.5rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root :where([data-cds=AssistantMessage],[data-cds=UserMessage],[data-cds=ChatComposerQueuedMessages])[data-text-size=sm]",
+    "values": {
+      "--cds-font-size-body": "calc(.8125rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose": "var(--cds-font-size-prose--textsm)",
+      "--cds-font-size-prose--xs": "var(--cds-font-size-prose--xs--textsm)",
+      "--cds-font-size-prose--sm": "var(--cds-font-size-prose--sm--textsm)",
+      "--cds-font-size-prose--lg": "var(--cds-font-size-prose--lg--textsm)",
+      "--cds-font-size-heading": "var(--cds-font-size-heading--textsm)",
+      "--cds-leading-body": "calc(1.1875rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose": "var(--cds-leading-prose--textsm)",
+      "--cds-leading-prose--xs": "var(--cds-leading-prose--xs--textsm)",
+      "--cds-leading-prose--sm": "var(--cds-leading-prose--sm--textsm)",
+      "--cds-leading-prose--lg": "var(--cds-leading-prose--lg--textsm)",
+      "--cds-leading-heading": "var(--cds-leading-heading--textsm)"
+    }
+  },
+  {
+    "selector": ".cds-root :where([data-cds=AssistantMessage],[data-cds=UserMessage],[data-cds=ChatComposerQueuedMessages])[data-text-size=md]",
+    "values": {
+      "--cds-font-size-body": "calc(.875rem * var(--cds-rem-scale,1))",
+      "--cds-leading-body": "calc(1.25rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root :where([data-cds=AssistantMessage],[data-cds=UserMessage],[data-cds=ChatComposerQueuedMessages])[data-text-size=lg]",
+    "values": {
+      "--cds-font-size-body": "calc(.9375rem * var(--cds-rem-scale,1))",
+      "--cds-font-size-prose": "var(--cds-font-size-prose--textlg)",
+      "--cds-font-size-prose--xs": "var(--cds-font-size-prose--xs--textlg)",
+      "--cds-font-size-prose--sm": "var(--cds-font-size-prose--sm--textlg)",
+      "--cds-font-size-prose--lg": "var(--cds-font-size-prose--lg--textlg)",
+      "--cds-font-size-heading": "var(--cds-font-size-heading--textlg)",
+      "--cds-leading-body": "calc(1.375rem * var(--cds-rem-scale,1))",
+      "--cds-leading-prose": "var(--cds-leading-prose--textlg)",
+      "--cds-leading-prose--xs": "var(--cds-leading-prose--xs--textlg)",
+      "--cds-leading-prose--sm": "var(--cds-leading-prose--sm--textlg)",
+      "--cds-leading-prose--lg": "var(--cds-leading-prose--lg--textlg)",
+      "--cds-leading-heading": "var(--cds-leading-heading--textlg)"
+    }
+  },
+  {
+    "selector": ":not(:where([data-size],[data-step],[data-text-size] [data-size] *,[data-text-size] [data-step] *,[data-cds=TurnStatusStep]>*)),.cds-root :where([data-cds=AssistantMessage],[data-cds=UserMessage],[data-cds=ChatComposerQueuedMessages])[data-text-size] :where([role=toolbar]):not(:where([data-size],[data-step],[data-text-size] [data-size] *,[data-text-size] [data-step] *,[data-cds=TurnStatusStep]>*))",
+    "values": {
+      "--cds-font-size-body": "var(--cds-font-size-body--own)",
+      "--cds-leading-body": "var(--cds-leading-body--own)"
+    }
+  },
+  {
+    "selector": ".cds-root [data-size=xs]",
+    "values": {
+      "--cds-radius": "var(--cds-radius--xs)",
+      "--cds-h-control": "var(--cds-h-control--xs)",
+      "--cds-h-control-nested": "var(--cds-h-control-nested--xs)",
+      "--cds-icon": "var(--cds-icon--xs)",
+      "--cds-pad-xs": "var(--cds-pad-xs--xs)",
+      "--cds-pad-sm": "var(--cds-pad-sm--xs)",
+      "--cds-pad-md": "var(--cds-pad-md--xs)",
+      "--cds-pad-lg": "var(--cds-pad-lg--xs)",
+      "--cds-pad-xl": "var(--cds-pad-xl--xs)",
+      "--cds-font-size-caption": "var(--cds-font-size-caption--xs)",
+      "--cds-font-size-body": "var(--cds-font-size-body--xs)",
+      "--cds-font-size-prose": "var(--cds-font-size-prose--xs)",
+      "--cds-leading-body": "var(--cds-leading-body--xs)",
+      "--cds-leading-prose": "var(--cds-leading-prose--xs)"
+    }
+  },
+  {
+    "selector": ".cds-root [data-size=sm]",
+    "values": {
+      "--cds-radius": "var(--cds-radius--sm)",
+      "--cds-h-control": "var(--cds-h-control--sm)",
+      "--cds-h-control-nested": "var(--cds-h-control-nested--sm)",
+      "--cds-icon": "var(--cds-icon--sm)",
+      "--cds-pad-xs": "var(--cds-pad-xs--sm)",
+      "--cds-pad-sm": "var(--cds-pad-sm--sm)",
+      "--cds-pad-md": "var(--cds-pad-md--sm)",
+      "--cds-pad-lg": "var(--cds-pad-lg--sm)",
+      "--cds-pad-xl": "var(--cds-pad-xl--sm)",
+      "--cds-font-size-caption": "var(--cds-font-size-caption--sm)",
+      "--cds-font-size-body": "var(--cds-font-size-body--sm)",
+      "--cds-font-size-prose": "var(--cds-font-size-prose--sm)",
+      "--cds-leading-body": "var(--cds-leading-body--sm)",
+      "--cds-leading-prose": "var(--cds-leading-prose--sm)"
+    }
+  },
+  {
+    "selector": ".cds-root [data-size=lg]",
+    "values": {
+      "--cds-radius": "var(--cds-radius--lg)",
+      "--cds-h-control": "var(--cds-h-control--lg)",
+      "--cds-h-control-nested": "var(--cds-h-control-nested--lg)",
+      "--cds-icon": "var(--cds-icon--lg)",
+      "--cds-pad-xs": "var(--cds-pad-xs--lg)",
+      "--cds-pad-sm": "var(--cds-pad-sm--lg)",
+      "--cds-pad-md": "var(--cds-pad-md--lg)",
+      "--cds-pad-lg": "var(--cds-pad-lg--lg)",
+      "--cds-pad-xl": "var(--cds-pad-xl--lg)",
+      "--cds-font-size-caption": "var(--cds-font-size-caption--lg)",
+      "--cds-font-size-body": "var(--cds-font-size-body--lg)",
+      "--cds-font-size-prose": "var(--cds-font-size-prose--lg)",
+      "--cds-leading-body": "var(--cds-leading-body--lg)",
+      "--cds-leading-prose": "var(--cds-leading-prose--lg)"
+    }
+  },
+  {
+    "selector": ".cds-root",
+    "values": {
+      "--cds-h-control": "calc(1.5rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root[data-density=comfortable]",
+    "values": {
+      "--cds-h-control": "calc(1.75rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root [data-step=\"1\"]",
+    "values": {
+      "--cds-h-control": "calc(1.25rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root [data-step=\"2\"]",
+    "values": {
+      "--cds-h-control": "calc(1.5rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root [data-step=\"3\"]",
+    "values": {
+      "--cds-h-control": "calc(1.75rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root [data-step=\"4\"]",
+    "values": {
+      "--cds-h-control": "calc(1.75rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root [data-step=\"5\"]",
+    "values": {
+      "--cds-h-control": "calc(2.5rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root",
+    "values": {
+      "--cds-h-control--xs": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-h-control--sm": "calc(1.25rem * var(--cds-rem-scale,1))",
+      "--cds-h-control--lg": "calc(1.75rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root[data-density=comfortable]",
+    "values": {
+      "--cds-h-control--xs": "calc(1.5rem * var(--cds-rem-scale,1))",
+      "--cds-h-control--sm": "calc(1.75rem * var(--cds-rem-scale,1))",
+      "--cds-h-control--lg": "calc(2.5rem * var(--cds-rem-scale,1))"
+    }
+  },
+  {
+    "selector": ".cds-root [data-size=xs]",
+    "values": {
+      "--cds-h-control": "var(--cds-h-control--xs)"
+    }
+  },
+  {
+    "selector": ".cds-root [data-size=sm]",
+    "values": {
+      "--cds-h-control": "var(--cds-h-control--sm)"
+    }
+  },
+  {
+    "selector": ".cds-root [data-size=lg]",
+    "values": {
+      "--cds-h-control": "var(--cds-h-control--lg)"
+    }
+  },
+  {
+    "selector": ".cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *))",
+    "values": {
+      "--cds-surface-1": "#fff",
+      "--cds-surface-2": "#fff",
+      "--cds-surface-3": "#fff",
+      "--cds-surface-popover": "#fff",
+      "--cds-surface-panel": "var(--cds-surface-2)",
+      "--cds-text-primary": "#000000e6",
+      "--cds-text-secondary": "#0009",
+      "--cds-text-muted": "#0007"
+    }
+  },
+  {
+    "selector": "[data-mode=dark] .cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not([data-mode=light]):not([data-mode=system]),.cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *))[data-mode=dark]",
+    "values": {
+      "--cds-surface-1": "#191919",
+      "--cds-surface-2": "#1f1f1f",
+      "--cds-surface-3": "#1f1f1f",
+      "--cds-surface-popover": "#303030",
+      "--cds-text-primary": "#ffffffed",
+      "--cds-text-secondary": "#ffffff91",
+      "--cds-text-muted": "#fff6"
+    }
+  },
+  {
+    "selector": "or] *):not(:where([data-cds-theme],[data-cds-theme] *)):not([data-mode=light]):not([data-mode=dark]),.cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *))[data-mode=system],.cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not([data-mode]):not([data-mode] *)",
+    "values": {
+      "--cds-surface-1": "#191919",
+      "--cds-surface-2": "#1f1f1f",
+      "--cds-surface-3": "#1f1f1f",
+      "--cds-surface-popover": "#303030",
+      "--cds-text-primary": "#ffffffed",
+      "--cds-text-secondary": "#ffffff91",
+      "--cds-text-muted": "#fff6"
+    }
+  },
+  {
+    "selector": ".cds-dark-scope:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *))[data-mode=dark]",
+    "values": {
+      "--cds-surface-1": "#191919",
+      "--cds-surface-2": "#1f1f1f",
+      "--cds-surface-3": "#1f1f1f",
+      "--cds-surface-popover": "#303030",
+      "--cds-text-primary": "#ffffffed",
+      "--cds-text-secondary": "#ffffff91",
+      "--cds-text-muted": "#fff6",
+      "--cds-surface-panel": "var(--cds-surface-2)"
+    }
+  },
+  {
+    "selector": ".cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *))",
+    "values": {
+      "--cds-text-primary": "#000",
+      "--cds-text-secondary": "#000000bf",
+      "--cds-text-muted": "#0009"
+    }
+  },
+  {
+    "selector": "[data-mode=dark] .cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not([data-mode=light]):not([data-mode=system]),.cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *))[data-mode=dark]",
+    "values": {
+      "--cds-text-primary": "#fff",
+      "--cds-text-secondary": "#ffffffbf",
+      "--cds-text-muted": "#ffffff91"
+    }
+  },
+  {
+    "selector": "or] *):not(:where([data-cds-theme],[data-cds-theme] *)):not([data-mode=light]):not([data-mode=dark]),.cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *))[data-mode=system],.cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not([data-mode]):not([data-mode] *)",
+    "values": {
+      "--cds-text-primary": "#fff",
+      "--cds-text-secondary": "#ffffffbf",
+      "--cds-text-muted": "#ffffff91"
+    }
+  },
+  {
+    "selector": ".cds-dark-scope:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *))[data-mode=dark]",
+    "values": {
+      "--cds-text-primary": "#fff",
+      "--cds-text-secondary": "#ffffffbf",
+      "--cds-text-muted": "#ffffff91"
+    }
+  },
+  {
+    "selector": "e~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not(#_),.cds-pane-ground .cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not(#_),.cds-pane-ground .cds-dark-scope:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not(#_)",
+    "values": {
+      "--cds-surface-2": "var(--cds-surface-1)",
+      "--cds-surface-3": "var(--cds-surface-1)",
+      "--cds-surface-panel": "var(--cds-surface-1)"
+    }
+  },
+  {
+    "selector": ",[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not(#_),[data-cds=NavigationTabs] a:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not(#_),[data-cds=SegmentedControl] [role=radio]:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not(#_)",
+    "values": {
+      "--cds-text-secondary": "var(--cds-fizzy-lake-color-control-ink)",
+      "--cds-text-muted": "var(--cds-fizzy-lake-color-control-ink)"
+    }
+  },
+  {
+    "selector": "] a:not([data-cds-icon-only]):is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not(#_)>:not(:where([data-cds-theme])),[data-cds=SegmentedControl] [role=radio]:not([data-cds-icon-only]):is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not(#_)>:not(:where([data-cds-theme]))",
+    "values": {
+      "--cds-text-secondary": "var(--cds-fizzy-lake-color-plain-secondary)",
+      "--cds-text-muted": "var(--cds-fizzy-lake-color-plain-muted)"
+    }
+  },
+  {
+    "selector": "html[data-cds-fizzy-lake~=color]:not([data-cds-theme]) .df-chrome-btn:hover",
+    "values": {
+      "--cds-text-primary": "inherit"
+    }
+  },
+  {
+    "selector": ".cds-root:is([data-cds-fizzy-lake~=type],[data-cds-fizzy-lake~=type] *)",
+    "values": {
+      "--cds-font-weight-body": "400",
+      "--cds-font-weight-control": "435",
+      "--cds-font-weight-header": "520",
+      "--cds-font-weight-badge": "500"
+    }
+  },
+  {
+    "selector": ".cds-root:is([data-cds-fizzy-lake~=type],[data-cds-fizzy-lake~=type] *)[data-font=system]",
+    "values": {
+      "--cds-font-weight-body": "400",
+      "--cds-font-weight-control": "435",
+      "--cds-font-weight-header": "520",
+      "--cds-font-weight-badge": "500"
+    }
+  },
+  {
+    "selector": ".cds-root:is([data-cds-fizzy-lake~=type],[data-cds-fizzy-lake~=type] *):not([data-font=system]):where([data-cds-windows],[data-cds-windows] *)",
+    "values": {
+      "--cds-font-weight-header": "580"
+    }
+  },
+  {
+    "selector": ".cds-root.cds-root [data-cds=UserMessage],.cds-root.cds-root [data-cds=ChatComposerQueuedMessages]",
+    "values": {
+      "--cds-font-size-heading": "var(--cds-font-size-prose)",
+      "--cds-leading-heading": "var(--cds-leading-prose)"
+    }
+  },
+  {
+    "selector": ".cds-root.cds-root[data-density=comfortable]",
+    "values": {
+      "--cds-font-size-prose": ".9375rem",
+      "--cds-font-size-prose--xs": ".8125rem",
+      "--cds-font-size-prose--sm": ".875rem",
+      "--cds-font-size-prose--lg": "1rem",
+      "--cds-font-size-prose--textsm": ".875rem",
+      "--cds-font-size-prose--sm--textsm": ".8125rem",
+      "--cds-font-size-prose--lg--textsm": ".9375rem",
+      "--cds-font-size-prose--textlg": "1rem",
+      "--cds-font-size-prose--xs--textlg": ".875rem",
+      "--cds-font-size-prose--sm--textlg": ".9375rem",
+      "--cds-leading-prose": "1.3125rem",
+      "--cds-leading-prose--xs": "1.1875rem",
+      "--cds-leading-prose--sm": "1.25rem",
+      "--cds-leading-prose--lg": "1.375rem",
+      "--cds-leading-prose--textsm": "1.25rem",
+      "--cds-leading-prose--sm--textsm": "1.1875rem",
+      "--cds-leading-prose--lg--textsm": "1.3125rem",
+      "--cds-leading-prose--textlg": "1.375rem",
+      "--cds-leading-prose--xs--textlg": "1.25rem",
+      "--cds-leading-prose--sm--textlg": "1.3125rem",
+      "--cds-leading-prose--lg--textlg": "1.5625rem"
+    }
+  },
+  {
+    "selector": ".cds-root.cds-root[data-density=comfortable]:lang(zh),.cds-root.cds-root[data-density=comfortable]:lang(ja),.cds-root.cds-root[data-density=comfortable]:lang(ko)",
+    "values": {
+      "--cds-leading-prose": "1.5rem",
+      "--cds-leading-prose--xs": "1.3125rem",
+      "--cds-leading-prose--sm": "1.375rem",
+      "--cds-leading-prose--lg": "1.625rem",
+      "--cds-leading-prose--textsm": "1.375rem",
+      "--cds-leading-prose--textlg": "1.625rem",
+      "--cds-leading-prose--xs--textsm": "1.3125rem",
+      "--cds-leading-prose--sm--textsm": "1.3125rem",
+      "--cds-leading-prose--lg--textsm": "1.5rem",
+      "--cds-leading-prose--xs--textlg": "1.375rem",
+      "--cds-leading-prose--sm--textlg": "1.5rem",
+      "--cds-leading-prose--lg--textlg": "1.8125rem"
+    }
+  },
+  {
+    "selector": "t([data-atkinson-font],[data-dyslexic-font]) .font-heading,html[data-cds-fizzy-lake~=type]:not([data-atkinson-font],[data-dyslexic-font]) .font-title,html[data-cds-fizzy-lake~=type]:not([data-atkinson-font],[data-dyslexic-font]) [data-prose-font=serif],html[data-cds-fizzy-lake~=type][data-system-font]:not([data-reply-face=interface]) :is([class*=font-claude-response],.prose:not([data-prose-font]))",
+    "values": {
+      "--cds-font-weight-body": "initial",
+      "--cds-font-weight-control": "initial",
+      "--cds-font-weight-header": "initial",
+      "--cds-font-weight-badge": "initial"
+    }
+  },
+  {
+    "selector": "html[data-cds-fizzy-lake~=type]:not([data-atkinson-font],[data-dyslexic-font]):not([data-reply-face=interface]) .prose:not([data-prose-font])",
+    "values": {
+      "--cds-font-weight-header": "initial"
+    }
+  },
+  {
+    "selector": "ic-font]):not([data-reply-face=interface]) [class*=\\ font-claude-response].font-medium,html[data-cds-fizzy-lake~=type]:not([data-atkinson-font],[data-dyslexic-font]):not([data-reply-face=interface]) [class^=font-claude-response].font-semibold,html[data-cds-fizzy-lake~=type]:not([data-atkinson-font],[data-dyslexic-font]):not([data-reply-face=interface]) [class*=\\ font-claude-response].font-semibold",
+    "values": {
+      "--cds-font-weight-control": "initial",
+      "--cds-font-weight-header": "initial"
+    }
+  }
+]

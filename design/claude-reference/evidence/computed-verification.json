@@ -1,0 +1,41 @@
+{
+  "method": "Read-only computed styles from latest package stylesheet in browser",
+  "rem_css_px": 16,
+  "comfortable": {
+    "prose_en": [
+      15,
+      21
+    ],
+    "prose_zh": [
+      15,
+      24
+    ],
+    "control_height": 28,
+    "control_radius": 8
+  },
+  "compact": {
+    "prose_en": [
+      14,
+      20
+    ],
+    "prose_zh": [
+      14,
+      20
+    ],
+    "control_height": 24,
+    "control_radius": 6
+  },
+  "visual_reference_verified": [
+    "light palette",
+    "dark typography",
+    "font selection",
+    "density switch",
+    "spacing view"
+  ],
+  "native_screenshots_accepted": [
+    "01-home-verified.png",
+    "02-settings-verified.png"
+  ],
+  "native_screenshot_version": "5.1231.2",
+  "source_package_version": "5.11492.5"
+}

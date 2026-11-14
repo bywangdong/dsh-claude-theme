@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Claude → DSH · 设计资料</title>
+  <style>
+    :root{color-scheme:light;--ink:#242424;--muted:#666;--line:#00000014;--clay:#a64f34}
+    *{box-sizing:border-box}body{margin:0;background:#fafafa;color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+    main{max-width:1180px;margin:0 auto;padding:64px 32px 48px}a{color:inherit;text-underline-offset:4px}a:hover{color:var(--clay)}a:focus-visible,summary:focus-visible{outline:2px solid var(--clay);outline-offset:5px}
+    .eyebrow{font-size:12px;color:var(--muted);letter-spacing:.06em}h1{font:400 clamp(36px,4.4vw,52px)/1.16 Charter,"Iowan Old Style","Songti SC",Georgia,serif;letter-spacing:-.025em;margin:16px 0 20px}h1 span{color:#d97757}
+    .intro{max-width:720px;color:var(--muted);margin:0}nav{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;margin:28px 0 48px;font-size:14px}.primary{display:inline-block;background:#191919;color:#fff;border:1px solid #191919;border-radius:8px;padding:10px 18px;text-decoration:none}.primary:hover{background:#3c3c3c;color:#fff}
+    section{margin:44px 0}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:baseline;margin-bottom:16px}h2{font-size:19px;font-weight:520;line-height:1.4;margin:0}h3{font-size:15px;font-weight:520;margin:0 0 6px}.section-head>a{font-size:13px;color:var(--muted)}
+    figure{margin:0}figure>a{display:block;background:#f2f2f2;border:1px solid var(--line);border-radius:12px;overflow:hidden}img{display:block;width:100%;height:auto}figcaption{color:var(--muted);font-size:12px;margin-top:10px}figure>a:hover{border-color:#00000040}
+    .gallery{display:grid;grid-template-columns:1fr 1fr;gap:24px}.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}.sample{height:72px;border-radius:8px;border:1px solid var(--line);margin-bottom:10px}.swatch-label{font-size:13px}code,.value{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--muted)}
+    .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;border-block:1px solid var(--line);padding:24px 0}.specs p{color:var(--muted);margin:8px 0 0;font-size:14px}.specs .number{font:400 28px/1.3 Charter,Georgia,serif;margin-bottom:12px}
+    .resources{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}.resource{padding:20px 0;border-bottom:1px solid var(--line)}.resource>a{font-size:15px;font-weight:500}.resource p{font-size:13px;color:var(--muted);margin:6px 0 0}.resource .links{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;margin-top:10px}
+    details{border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-top:32px;font-size:13px}summary{cursor:pointer;font-size:14px}details p{color:var(--muted);margin:14px 0 0}footer{border-top:1px solid var(--line);padding-top:24px;margin-top:48px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media(max-width:720px){main{padding:32px 20px}.gallery,.resources{grid-template-columns:1fr}.swatches{grid-template-columns:repeat(3,1fr)}.specs{grid-template-columns:1fr;gap:24px}.section-head{align-items:flex-start}.section-head>a{max-width:130px;text-align:right}nav{margin-bottom:32px}.sample{height:60px}}
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">DESIGN ARCHIVE · 2026.11.14 · macOS</div>
+      <h1>Claude <span>→</span> DSH</h1>
+      <p class="intro">中性灰阶、衬线标题、克制的边界，以及留给内容的空间。这里收录前期设计研究、配色与排版规范，以及主题在 DSH 中的实际效果。</p>
+      <nav aria-label="主要资料">
+        <a class="primary" href="claude-reference/index.html">打开交互设计稿 ↗</a>
+        <a href="claude-reference/research.md">Claude 完整研究</a>
+        <a href="dsh-theme/design-spec.md">DSH 设计规范</a>
+        <a href="README.md">资料目录</a>
+      </nav>
+    </header>
+
+    <section aria-labelledby="result-heading">
+      <div class="section-head"><h2 id="result-heading">主题实机效果</h2><a href="../design-qa.md">查看验收记录 ↗</a></div>
+      <figure><a href="../verification/claude-theme-preview.png"><img src="../verification/claude-theme-preview.png" alt="DSH Claude 主题浅色与深色真实桌面窗口合览" width="1760" height="528"></a><figcaption>DeepSeek Harness 0.2.2-rc.3 · Claude for DSH 0.1.2 · 点击图片查看原图。</figcaption></figure>
+    </section>
+
+    <section aria-labelledby="palette-heading">
+      <div class="section-head"><h2 id="palette-heading">配色的基调</h2><a href="claude-reference/index.html">完整配色卡与明暗切换 ↗</a></div>
+      <div class="swatches">
+        <div><div class="sample" style="background:#fff"></div><div class="swatch-label">浅色画布</div><code>#FFFFFF</code></div>
+        <div><div class="sample" style="background:#fafafa"></div><div class="swatch-label">浅色侧栏</div><code>#FAFAFA</code></div>
+        <div><div class="sample" style="background:#191919"></div><div class="swatch-label">深色画布</div><code>#191919</code></div>
+        <div><div class="sample" style="background:#1f1f1f"></div><div class="swatch-label">深色侧栏</div><code>#1F1F1F</code></div>
+        <div><div class="sample" style="background:#303030"></div><div class="swatch-label">深色浮层</div><code>#303030</code></div>
+        <div><div class="sample" style="background:#d97757"></div><div class="swatch-label">陶土点缀</div><code>#D97757</code></div>
+      </div>
+    </section>
+
+    <section class="specs" aria-label="DSH 核心规格">
+      <div><div class="number">38 / 45.6</div><h3>欢迎标题</h3><p>DSH 使用本机 Charter 等衬线字体近似呈现；界面与中文正文沿用系统字体。</p></div>
+      <div><div class="number">15 / 24</div><h3>正文节奏</h3><p>默认正文字号与行高。代码为 13 / 19px，均继续跟随用户的字号设置。</p></div>
+      <div><div class="number">672 · 20 · 8</div><h3>输入与控件</h3><p>首页输入卡最大宽度 672px、圆角 20px，普通控件圆角 8px。</p></div>
+    </section>
+
+    <section aria-labelledby="reference-heading">
+      <div class="section-head"><h2 id="reference-heading">从参考到实际界面</h2><a href="../verification/comparison-final.png">同尺度全景对比 ↗</a></div>
+      <div class="gallery">
+        <figure><a href="claude-reference/evidence/01-home-verified.png"><img src="claude-reference/evidence/01-home-verified.png" alt="Claude 5.1231.2 原生首页参考截图" loading="lazy"></a><figcaption>Claude 原生参考 · 运行版本 5.1231.2。</figcaption></figure>
+        <figure><a href="../verification/final-light.png"><img src="../verification/final-light-preview.png" alt="DSH 0.1.2 Claude 浅色主题实机截图" loading="lazy"></a><figcaption>DSH 浅色主题 · 保留工作区、模式与权限入口。</figcaption></figure>
+        <figure><a href="../verification/final-dark.png"><img src="../verification/final-dark-preview.png" alt="DSH 0.1.2 Claude 深色主题实机截图" loading="lazy"></a><figcaption>DSH 深色主题 · 炭黑画布与稍亮的侧栏。</figcaption></figure>
+        <figure><a href="../verification/comparison-details.png"><img src="../verification/comparison-details.png" alt="Claude 与 DSH 的欢迎标题和输入卡细节对比" loading="lazy"></a><figcaption>标题与输入卡细节 · 查看字体、行宽、圆角和空间节奏。</figcaption></figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="files-heading">
+      <div class="section-head"><h2 id="files-heading">设计数据与原始依据</h2><a href="archive-manifest.json">原件校验清单 ↗</a></div>
+      <div class="resources">
+        <div class="resource"><a href="claude-reference/research.md">Claude 研究说明</a><p>完整明暗配色、字体与字号、舒适 / 紧凑密度、几何尺寸、阴影及动效，注明源码值与测量值。</p><div class="links"><a href="claude-reference/tokens.json">整理后的 JSON</a><a href="claude-reference/evidence/source-excerpts.css">CSS 规则摘录</a></div></div>
+        <div class="resource"><a href="dsh-theme/design-spec.md">DSH 适配规范</a><p>记录字体替代、功能文字对比度、组件尺寸和交互状态；JSON 从当前主题源码导出。</p><div class="links"><a href="dsh-theme/tokens.json">108 个明暗 token</a><a href="../src/theme.css">实现样式</a></div></div>
+        <div class="resource"><a href="claude-reference/evidence/computed-verification.json">计算样式验证</a><p>保留最终级联结果：舒适密度英文 15 / 21、中文 15 / 24px，通用控件 28px。</p><div class="links"><a href="claude-reference/evidence/verified-design-tokens.json">原始抽取规则</a><a href="claude-reference/evidence/latest/manifest.json">更新包文件清单</a></div></div>
+        <div class="resource"><a href="../design-qa.md">真实界面与验收</a><p>浅色、深色、窄窗口、中文多行、键盘焦点和侧栏状态，以及三轮实现修正。</p><div class="links"><a href="../verification/narrow-dark-input.png">窄窗口输入</a><a href="../verification/comparison-sidebar.png">侧栏细节</a><a href="../verification/plugin-settings-final.png">主题设置</a></div></div>
+      </div>
+      <details><summary>版本、归档范围与使用说明</summary><p>研究日期为 2026-11-14。Claude 实机截图来自正在运行的 5.1231.2；源码和字体规则来自当时已交付本机、尚未启动的 5.11492.5 更新包。“最新”限定为本机收到的更新。DSH 实现版本为 0.2.2-rc.3，主题为 0.1.2。</p><p>交互设计稿保留原字体样张，可离线打开。DSH 插件使用本机字体。原研究文件逐字节复制并保存 SHA-256；临时目录仅作为来源记录，浏览本资料不依赖它。详细说明见 <a href="README.md">归档目录</a>。</p></details>
+    </section>
+    <footer><span>Claude for DSH · 本地设计资料</span><span>设计参考 → 适配规范 → 源码 → 实机验收</span></footer>
+  </main>
+</body>
+</html>

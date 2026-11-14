@@ -1,0 +1,444 @@
+{
+  "schema_version": 1,
+  "archived_on": "2026-11-14",
+  "purpose": "Exact copies of the original Claude design research. Project-authored documentation and current DSH verification artifacts are indexed separately in README.md.",
+  "source_root": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c",
+  "files": [
+    {
+      "path": "design/claude-reference/claude-desktop-design.html",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-desktop-design.html",
+      "bytes": 683870,
+      "sha256": "6da817d9afa5e6766c8477cf2c874a94bd13c558e480d654699567f05600104d"
+    },
+    {
+      "path": "design/claude-reference/evidence/01-home-verified.png",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/01-home-verified.png",
+      "bytes": 794936,
+      "sha256": "e7eada7114a1932cb1489c52ef454a8fe521fbc360cfd8afeef829c5788e0e4f"
+    },
+    {
+      "path": "design/claude-reference/evidence/02-settings-verified.png",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/02-settings-verified.png",
+      "bytes": 933036,
+      "sha256": "4a309121ea4b87ca64561e014293695dfe0512b4a0e4555c3b27bff274b5c867"
+    },
+    {
+      "path": "design/claude-reference/evidence/app-MainWindowPage-CinbABxl.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/app-MainWindowPage-CinbABxl.css",
+      "bytes": 246160,
+      "sha256": "1be41faf06028ae594f077095575181d3d34008183e1492caedd27a28d9e9fbf"
+    },
+    {
+      "path": "design/claude-reference/evidence/app-clawdQuestEngine-C2Z1JudX.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/app-clawdQuestEngine-C2Z1JudX.css",
+      "bytes": 10425,
+      "sha256": "fcf88d1f2d53ed9785594de48a18138234296571a1bc13fb83fd37dab99b4ac3"
+    },
+    {
+      "path": "design/claude-reference/evidence/cds-rules.json",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/cds-rules.json",
+      "bytes": 40554,
+      "sha256": "0f98987a47abaaee570d1939d0e2ab39c6965afcca062543e0e1190099d3b374"
+    },
+    {
+      "path": "design/claude-reference/evidence/computed-verification.json",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/computed-verification.json",
+      "bytes": 753,
+      "sha256": "4734d46d02992659972e85517f8f3548cbbb7d48cc51032b3be11dd4dd1b3e28"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c05b96c7f-B2fCCOZ2.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c05b96c7f-B2fCCOZ2.css",
+      "bytes": 2074,
+      "sha256": "1efd973355346c65b6f7b456c81174db909ee6259b3f25de49321d290754980b"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c06b83fb1-B8XBMJv5.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c06b83fb1-B8XBMJv5.css",
+      "bytes": 289,
+      "sha256": "9a3106a1bdd7d806a6ce2e1763cc0ee1978f541361c062fd67be83dcf1b3ec9a"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c0ab037d8-CwG_XIxe.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c0ab037d8-CwG_XIxe.css",
+      "bytes": 2363,
+      "sha256": "70302118b2d2ce3e5c19d7349330048eeda7e59ebfa6adece5375bd30eac0d58"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c19e90103-CHrE4_DT.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c19e90103-CHrE4_DT.css",
+      "bytes": 9677,
+      "sha256": "c239899f8f4ab16fc7c33c4b27bc7b77437f2f9646fd99960083656d0f2db3f4"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c3fde7009-DNpK1wma.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c3fde7009-DNpK1wma.css",
+      "bytes": 22708,
+      "sha256": "67f5a220750179027f72d610ac01bf141509ccf2bab0c72b096a35dc036276a6"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c403c4b83-yqAXiELG.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c403c4b83-yqAXiELG.css",
+      "bytes": 8411,
+      "sha256": "b7d08f51e8a7082ddad036014897afc0d020e62a800b1b6347312a0afffa89ba"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c427176b2-BQn2Bm7I.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c427176b2-BQn2Bm7I.css",
+      "bytes": 1092,
+      "sha256": "2e0d24a61b3d17b9a87b2c4994dd6c4bd0ac8e32be5fa1c78d17559dfc4abdbc"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c49d37e5f-BoLaj3Gr.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c49d37e5f-BoLaj3Gr.css",
+      "bytes": 6539,
+      "sha256": "ac41416cb708209a3d0474cf55c48862b09deb5a224e6f66247c14732b4449e9"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c4a9ee384-Br-fzuOs.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c4a9ee384-Br-fzuOs.css",
+      "bytes": 8295,
+      "sha256": "07780e8b57c4e886b8193b3356db0d96329871431ed36b1ebffca5dd9285b3dd"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c4b7ce3b5-BMzG8Bd0.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c4b7ce3b5-BMzG8Bd0.css",
+      "bytes": 226,
+      "sha256": "fff9165359c2c30ef363c740570e9597809df606a3eee38658db03d44099bdb9"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c5aee9dbd-B55U_qvj.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c5aee9dbd-B55U_qvj.css",
+      "bytes": 68519,
+      "sha256": "07454e207418834f50ff5f3bca84097a3102c98e9da4fb1f90a28b4c4c718e28"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c5aee9dbd-cvLUb2-y.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c5aee9dbd-cvLUb2-y.css",
+      "bytes": 63966,
+      "sha256": "e98a9a5b356c5cdc15ebedd7a5b2f88858ad2c804b31f799dab7a6894af796fd"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c6059c89c-mOe_E_rK.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c6059c89c-mOe_E_rK.css",
+      "bytes": 12840,
+      "sha256": "3b6c0744ee6489f7fde08f6f3d19f514aeda71febe792fa8a38f9f6caa080fca"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c673fe961-BukMK5rd.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c673fe961-BukMK5rd.css",
+      "bytes": 53958,
+      "sha256": "fd96621d6bc0f3a1e221ab375cf2fbd1aa0ce81fcc12ec572df01dcfda851b4e"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c6a73f447-LaXKuzWp.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c6a73f447-LaXKuzWp.css",
+      "bytes": 8058,
+      "sha256": "907138704b6adab867c94a82108f291595d33a71dfeda9a4e60ffc9c9a913e19"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c6a992d55-aw-bvVUz.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c6a992d55-aw-bvVUz.css",
+      "bytes": 1865803,
+      "sha256": "693abd8946b814360b419903608f279d4a63ba14f7083bbcbe9946348e10c3bf"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c71860c77-BpQBAViZ.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c71860c77-BpQBAViZ.css",
+      "bytes": 369,
+      "sha256": "449113430c063240f054315327baa3c3c8af35dae4d4e6054d79c8604c02a5ed"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c7bcb7751-CRp4I0CH.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c7bcb7751-CRp4I0CH.css",
+      "bytes": 21262,
+      "sha256": "1efae16d534fe17233ce5de5e42dee22040c33bef9571989ce025d1555b49600"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c8688ed97-DO1cQWAl.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c8688ed97-DO1cQWAl.css",
+      "bytes": 1081,
+      "sha256": "3369b5b8e0d1cf1aa06b2aaf8364b4e21e8f8345c35fc0996f7997d9fcad7a9d"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c8d0615c8-Cpm35TEQ.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c8d0615c8-Cpm35TEQ.css",
+      "bytes": 9693,
+      "sha256": "a8b7fa0eb1e8a496942f15c0ced4832d06651f83c251797633eea484a0a8ff53"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c8d25b7c4-B4eLIhHR.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c8d25b7c4-B4eLIhHR.css",
+      "bytes": 1466,
+      "sha256": "f46d12e0e6092f01d65a28d2fc679b8b7ae25c49a776274c71da51998372604f"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-c8e31bf58-C7gq8dUF.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-c8e31bf58-C7gq8dUF.css",
+      "bytes": 1067,
+      "sha256": "0ccba0932c352ddc088837007b8403b0bbe565e3f9f78f99f2f47a896356368f"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-cbd6c85c8-DrFf115z.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-cbd6c85c8-DrFf115z.css",
+      "bytes": 5330,
+      "sha256": "14b3acccf607798acadcf5507d32637a966476462ef6c69df2514431ca19788b"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-cf1a02a1a-Bzv8x2Cs.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-cf1a02a1a-Bzv8x2Cs.css",
+      "bytes": 23552,
+      "sha256": "20321b63a4ddf6a7a62684d1d05350fe687020c09738f8c13fda17bbda016e6b"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-frame-window-BEI3vR8Q.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-frame-window-BEI3vR8Q.css",
+      "bytes": 502,
+      "sha256": "c05412fd1bb02b39cc0ef7c96f48bd4e09d32cd5743116f41397baaf925b160c"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-shared-frame-Dq4za4r9.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-shared-frame-Dq4za4r9.css",
+      "bytes": 156,
+      "sha256": "57ae4003dbe4f8b35f20912e4674b70e4666528f49993ff771d48157caeb04e0"
+    },
+    {
+      "path": "design/claude-reference/evidence/ion-dist-shared-styles-HB_ROSgF.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/ion-dist-shared-styles-HB_ROSgF.css",
+      "bytes": 127784,
+      "sha256": "361adca0260989a2faabfda6c016255f6d08b7d9e64fb4287f70211b96aa1125"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/app-MainWindowPage-lhEHjHfd.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/app-MainWindowPage-lhEHjHfd.css",
+      "bytes": 251161,
+      "sha256": "d28063ca960037bb1f25e652085f450bba0e5fb9bf11418827926c3aa9a1aaf3"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/app-clawdQuestEngine-C2Z1JudX.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/app-clawdQuestEngine-C2Z1JudX.css",
+      "bytes": 10425,
+      "sha256": "fcf88d1f2d53ed9785594de48a18138234296571a1bc13fb83fd37dab99b4ac3"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/design-rules.json",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/design-rules.json",
+      "bytes": 135985,
+      "sha256": "94cddc8761fd50ae1407e7b6fd4bcb68dba16cf9b01f277ce3674b54434217a7"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c05b96c7f-B2fCCOZ2.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c05b96c7f-B2fCCOZ2.css",
+      "bytes": 2074,
+      "sha256": "1efd973355346c65b6f7b456c81174db909ee6259b3f25de49321d290754980b"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c06b83fb1-B8XBMJv5.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c06b83fb1-B8XBMJv5.css",
+      "bytes": 289,
+      "sha256": "9a3106a1bdd7d806a6ce2e1763cc0ee1978f541361c062fd67be83dcf1b3ec9a"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c0ab037d8-CwG_XIxe.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c0ab037d8-CwG_XIxe.css",
+      "bytes": 2363,
+      "sha256": "70302118b2d2ce3e5c19d7349330048eeda7e59ebfa6adece5375bd30eac0d58"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c19e90103-j3gbSTi6.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c19e90103-j3gbSTi6.css",
+      "bytes": 12159,
+      "sha256": "bc13e24828c091c5fb81a85005d15793aa859663da8a162ec4025b78196c373d"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c3fde7009-BPpn3-7v.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c3fde7009-BPpn3-7v.css",
+      "bytes": 23101,
+      "sha256": "b3c867cd2511fdd0803819e3975e9f5a470870778498c45e63e2d04efab6cda4"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c403c4b83-yqAXiELG.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c403c4b83-yqAXiELG.css",
+      "bytes": 8411,
+      "sha256": "b7d08f51e8a7082ddad036014897afc0d020e62a800b1b6347312a0afffa89ba"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c427176b2-BQn2Bm7I.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c427176b2-BQn2Bm7I.css",
+      "bytes": 1092,
+      "sha256": "2e0d24a61b3d17b9a87b2c4994dd6c4bd0ac8e32be5fa1c78d17559dfc4abdbc"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c49d37e5f-Cp6cqivK.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c49d37e5f-Cp6cqivK.css",
+      "bytes": 6627,
+      "sha256": "0d144ba889b0c12670d7092f52345da66d98acf37cbfd05a71071015e9ff8f59"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c4a9ee384-Br-fzuOs.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c4a9ee384-Br-fzuOs.css",
+      "bytes": 8295,
+      "sha256": "07780e8b57c4e886b8193b3356db0d96329871431ed36b1ebffca5dd9285b3dd"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c4b7ce3b5-BMzG8Bd0.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c4b7ce3b5-BMzG8Bd0.css",
+      "bytes": 226,
+      "sha256": "fff9165359c2c30ef363c740570e9597809df606a3eee38658db03d44099bdb9"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c5aee9dbd-B55U_qvj.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c5aee9dbd-B55U_qvj.css",
+      "bytes": 68519,
+      "sha256": "07454e207418834f50ff5f3bca84097a3102c98e9da4fb1f90a28b4c4c718e28"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c5aee9dbd-cvLUb2-y.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c5aee9dbd-cvLUb2-y.css",
+      "bytes": 63966,
+      "sha256": "e98a9a5b356c5cdc15ebedd7a5b2f88858ad2c804b31f799dab7a6894af796fd"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c6059c89c-6KZBy_tz.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c6059c89c-6KZBy_tz.css",
+      "bytes": 12927,
+      "sha256": "f944a6a429d71635db1a4b870b9383cbe8590e63e26fd4b68057c6e3f9659e25"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c673fe961-MKLcklnj.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c673fe961-MKLcklnj.css",
+      "bytes": 56280,
+      "sha256": "643c04eef0bfa06670a05e73bd90a248f7a6d3edb8b2dd8111df39f8c8202254"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c6a73f447-LaXKuzWp.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c6a73f447-LaXKuzWp.css",
+      "bytes": 8058,
+      "sha256": "907138704b6adab867c94a82108f291595d33a71dfeda9a4e60ffc9c9a913e19"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c6a992d55-k2XF_vDB.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c6a992d55-k2XF_vDB.css",
+      "bytes": 1903926,
+      "sha256": "41a56501982cf728276f43670aaf4ac301665076bdcc7fde402c1f22524d0923"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c71860c77-BpQBAViZ.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c71860c77-BpQBAViZ.css",
+      "bytes": 369,
+      "sha256": "449113430c063240f054315327baa3c3c8af35dae4d4e6054d79c8604c02a5ed"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c7bcb7751-BC69Y1DY.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c7bcb7751-BC69Y1DY.css",
+      "bytes": 23683,
+      "sha256": "6ad551d57a5e437ace96a8800201651bbb5ef5dc5b1263a1ca3b74ca66a9d45b"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c8688ed97-DO1cQWAl.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c8688ed97-DO1cQWAl.css",
+      "bytes": 1081,
+      "sha256": "3369b5b8e0d1cf1aa06b2aaf8364b4e21e8f8345c35fc0996f7997d9fcad7a9d"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c8d0615c8-DwS7PAng.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c8d0615c8-DwS7PAng.css",
+      "bytes": 9926,
+      "sha256": "b661c8310af202c8b7f405d29d72dd93dae43f814b3553b3ae4b6499b4b5d074"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c8d25b7c4-B4eLIhHR.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c8d25b7c4-B4eLIhHR.css",
+      "bytes": 1466,
+      "sha256": "f46d12e0e6092f01d65a28d2fc679b8b7ae25c49a776274c71da51998372604f"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-c8e31bf58-C7gq8dUF.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-c8e31bf58-C7gq8dUF.css",
+      "bytes": 1067,
+      "sha256": "0ccba0932c352ddc088837007b8403b0bbe565e3f9f78f99f2f47a896356368f"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-cbd6c85c8-DrFf115z.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-cbd6c85c8-DrFf115z.css",
+      "bytes": 5330,
+      "sha256": "14b3acccf607798acadcf5507d32637a966476462ef6c69df2514431ca19788b"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-cf1a02a1a-Bzv8x2Cs.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-cf1a02a1a-Bzv8x2Cs.css",
+      "bytes": 23552,
+      "sha256": "20321b63a4ddf6a7a62684d1d05350fe687020c09738f8c13fda17bbda016e6b"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-frame-window-BEI3vR8Q.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-frame-window-BEI3vR8Q.css",
+      "bytes": 502,
+      "sha256": "c05412fd1bb02b39cc0ef7c96f48bd4e09d32cd5743116f41397baaf925b160c"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-shared-frame-CLTXRMg8.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-shared-frame-CLTXRMg8.css",
+      "bytes": 156,
+      "sha256": "a672760af50498fbf81e920134605da020bca05f486a92cfac22f705c4926e3d"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ion-dist-shared-styles-BQ7vERZ2.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ion-dist-shared-styles-BQ7vERZ2.css",
+      "bytes": 125705,
+      "sha256": "d655d24e0517a978882fbd4d015074e9bfd1453ffbac048df5a5b75ee3772142"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/manifest.json",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/manifest.json",
+      "bytes": 7069,
+      "sha256": "baf8e7c3cdff8bcc66bac8cb6538a5cbf11a86ec3974b7fe33af5ebfd2887d46"
+    },
+    {
+      "path": "design/claude-reference/evidence/latest/ui-source-excerpts.txt",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/latest/ui-source-excerpts.txt",
+      "bytes": 21634,
+      "sha256": "b6249d4f7b914606bb1d5ad0c2ad3546b030cac1472377643b63ffdaba389901"
+    },
+    {
+      "path": "design/claude-reference/evidence/prepare_reference.py",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/prepare_reference.py",
+      "bytes": 4199,
+      "sha256": "f26629e4102e67582ded27d1bd6a33172225947e780a1211ef069c8c0fc5ac1f"
+    },
+    {
+      "path": "design/claude-reference/evidence/preview.html",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/preview.html",
+      "bytes": 771636,
+      "sha256": "66846d488d07d101f7bad9ed20722f24ceafb8f944c3e9cd63138433d7934fc5"
+    },
+    {
+      "path": "design/claude-reference/evidence/source-excerpts.css",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/source-excerpts.css",
+      "bytes": 16940,
+      "sha256": "fbf3b115325039cff2e59daa377ab1776689de2b5cf70cba198eb7cf32d9f12a"
+    },
+    {
+      "path": "design/claude-reference/evidence/token-probe.html",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/token-probe.html",
+      "bytes": 1145,
+      "sha256": "6957527850d854932e57dc9ad9df51aba42a930bffd24dbbdab08dfbe7ae8452"
+    },
+    {
+      "path": "design/claude-reference/evidence/verified-design-tokens.json",
+      "original_source": "/Users/nick/.codex/visualizations/2026/11/14/01a1d844-899c-71e0-b093-f7927cb1949c/claude-research/verified-design-tokens.json",
+      "bytes": 22550,
+      "sha256": "888fb8174f4f235fec67afaae81ed3bef66113d172416b7ecff40b3256260de5"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "claude-research/rejected-01-code-desktop.png",
+      "reason": "Stage Manager perspective thumbnail; invalid visual reference."
+    },
+    {
+      "path": "claude-research/rejected-02-claude-home.png",
+      "reason": "Stage Manager perspective thumbnail; invalid visual reference."
+    }
+  ]
+}

@@ -1,0 +1,378 @@
+/* Claude 5.11492.5: selected source declarations. See verified-design-tokens.json for scope. */
+.h-list-row {
+  height:calc(2rem * var(--cds-rem-scale,1));
+}
+
+.font-display {
+  font-family:var(--font-ui-serif);
+  font-variation-settings:"opsz" 48;
+  font-size:2.375rem;
+  font-weight:330;
+  line-height:1.2;
+}
+
+.font-heading {
+  font-family:var(--font-ui-serif);
+  font-variation-settings:"opsz" 24;
+  font-size:1.5rem;
+  font-weight:500;
+  line-height:1.3;
+}
+
+.font-title {
+  font-family:var(--font-ui-serif);
+  font-variation-settings:"opsz" 28;
+  font-size:1.75rem;
+  font-weight:500;
+  line-height:1.3;
+}
+
+.cds-root {
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  font-synthesis:none;
+}
+
+.cds-root {
+  --cds-font-size-text-entry-floor: 16px;
+}
+
+.cds-root {
+  --cds-radius: calc(.375rem * var(--cds-rem-scale,1));
+  --cds-radius-composer: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-h-control: calc(1.5rem * var(--cds-rem-scale,1));
+  --cds-h-control-nested: calc(1.125rem * var(--cds-rem-scale,1));
+  --cds-icon: calc(1rem * var(--cds-rem-scale,1));
+  --cds-pad-xs: calc(.25rem * var(--cds-rem-scale,1));
+  --cds-pad-sm: calc(.375rem * var(--cds-rem-scale,1));
+  --cds-pad-md: calc(.5rem * var(--cds-rem-scale,1));
+  --cds-pad-lg: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-pad-xl: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-gap-xs: calc(.375rem * var(--cds-rem-scale,1));
+  --cds-gap-sm: calc(.5rem * var(--cds-rem-scale,1));
+  --cds-gap-md: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-gap-lg: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-gap-xl: calc(2rem * var(--cds-rem-scale,1));
+  --cds-shadow-popover: 0 8px 24px #0000001f, 0 2px 6px #00000014;
+  --cds-font-sans: var(--font-anthropic-sans,var(--cds-font-system)), var(--cds-font-system);
+  --cds-font-sans-display: var(--font-anthropic-sans-display,var(--cds-font-sans)), var(--cds-font-sans);
+  --cds-font-voice: var(--font-anthropic-serif,ui-serif), ui-serif, Georgia, "Times New Roman", serif;
+  --cds-ease-out: cubic-bezier(.165, .84, .44, 1);
+  --cds-ease-snap: cubic-bezier(.32, .72, 0, 1);
+  --cds-ease-overshoot: cubic-bezier(.34, 1.3, .64, 1);
+  --cds-dur-fast: 60ms;
+  --cds-dur-snap: .12s;
+  --cds-dur-base: .2s;
+  --cds-dur-sheet: .3s;
+  --cds-dur-slow: .45s;
+  --cds-clay: #d97757;
+  --cds-clay-emphasized: #c6613f;
+  --cds-font-size-caption: calc(.6875rem * var(--cds-rem-scale,1));
+  --cds-font-size-footnote: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-font-size-code: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-font-size-body: calc(.8125rem * var(--cds-rem-scale,1));
+  --cds-font-size-prose: .875rem;
+  --cds-font-size-heading: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-font-size-title: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-font-weight-regular: 400;
+  --cds-font-weight-medium: 500;
+  --cds-font-weight-semibold: 580;
+  --cds-font-weight-bold: 600;
+  --cds-font-weight-body: initial;
+  --cds-font-weight-control: initial;
+  --cds-font-weight-header: initial;
+  --cds-font-weight-badge: initial;
+  --cds-leading-caption: calc(1.0625rem * var(--cds-rem-scale,1));
+  --cds-leading-footnote: calc(.9375rem * var(--cds-rem-scale,1));
+  --cds-leading-code: calc(1.0625rem * var(--cds-rem-scale,1));
+  --cds-leading-body: calc(1.1875rem * var(--cds-rem-scale,1));
+  --cds-leading-prose: 1.25rem;
+  --cds-leading-heading: calc(1.125rem * var(--cds-rem-scale,1));
+  --cds-leading-title: calc(1.5625rem * var(--cds-rem-scale,1));
+}
+
+.cds-root[data-density=comfortable] {
+  --cds-radius: calc(.5rem * var(--cds-rem-scale,1));
+  --cds-radius-composer: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-h-control: calc(2rem * var(--cds-rem-scale,1));
+  --cds-h-control-nested: calc(1.375rem * var(--cds-rem-scale,1));
+  --cds-icon: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-pad-xs: calc(.375rem * var(--cds-rem-scale,1));
+  --cds-pad-sm: calc(.5rem * var(--cds-rem-scale,1));
+  --cds-pad-md: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-pad-lg: calc(1rem * var(--cds-rem-scale,1));
+  --cds-pad-xl: calc(1.5rem * var(--cds-rem-scale,1));
+  --cds-gap-xs: calc(.5rem * var(--cds-rem-scale,1));
+  --cds-gap-sm: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-gap-md: calc(1rem * var(--cds-rem-scale,1));
+  --cds-gap-lg: calc(1.75rem * var(--cds-rem-scale,1));
+  --cds-gap-xl: calc(2.5rem * var(--cds-rem-scale,1));
+  --cds-font-size-caption: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-font-size-footnote: calc(.8125rem * var(--cds-rem-scale,1));
+  --cds-font-size-code: calc(.8125rem * var(--cds-rem-scale,1));
+  --cds-font-size-body: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-font-size-prose: 1rem;
+  --cds-font-size-heading: calc(.9375rem * var(--cds-rem-scale,1));
+  --cds-font-size-title: calc(1.375rem * var(--cds-rem-scale,1));
+  --cds-leading-caption: calc(1.0625rem * var(--cds-rem-scale,1));
+  --cds-leading-footnote: calc(1.0625rem * var(--cds-rem-scale,1));
+  --cds-leading-code: calc(1.1875rem * var(--cds-rem-scale,1));
+  --cds-leading-body: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-leading-prose: 1.5rem;
+  --cds-leading-heading: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-leading-title: calc(1.75rem * var(--cds-rem-scale,1));
+}
+
+.cds-root {
+  --cds-radius--xs: calc(.3125rem * var(--cds-rem-scale,1));
+  --cds-radius--sm: calc(.3125rem * var(--cds-rem-scale,1));
+  --cds-radius--lg: calc(.4375rem * var(--cds-rem-scale,1));
+  --cds-h-control--xs: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-h-control--sm: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-h-control--lg: calc(1.75rem * var(--cds-rem-scale,1));
+  --cds-h-control-nested--xs: calc(1rem * var(--cds-rem-scale,1));
+  --cds-h-control-nested--sm: calc(1rem * var(--cds-rem-scale,1));
+  --cds-h-control-nested--lg: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-icon--xs: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-icon--sm: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-icon--lg: calc(1rem * var(--cds-rem-scale,1));
+  --cds-pad-xs--xs: calc(.125rem * var(--cds-rem-scale,1));
+  --cds-pad-xs--sm: calc(.125rem * var(--cds-rem-scale,1));
+  --cds-pad-xs--lg: calc(.375rem * var(--cds-rem-scale,1));
+  --cds-pad-sm--xs: calc(.25rem * var(--cds-rem-scale,1));
+  --cds-pad-sm--sm: calc(.25rem * var(--cds-rem-scale,1));
+  --cds-pad-sm--lg: calc(.5rem * var(--cds-rem-scale,1));
+  --cds-pad-md--xs: calc(.375rem * var(--cds-rem-scale,1));
+  --cds-pad-md--sm: calc(.375rem * var(--cds-rem-scale,1));
+  --cds-pad-md--lg: calc(.625rem * var(--cds-rem-scale,1));
+  --cds-pad-lg--xs: calc(.625rem * var(--cds-rem-scale,1));
+  --cds-pad-lg--sm: calc(.625rem * var(--cds-rem-scale,1));
+  --cds-pad-lg--lg: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-pad-xl--xs: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-pad-xl--sm: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-pad-xl--lg: calc(1.375rem * var(--cds-rem-scale,1));
+  --cds-font-size-caption--xs: calc(.625rem * var(--cds-rem-scale,1));
+  --cds-font-size-caption--sm: calc(.625rem * var(--cds-rem-scale,1));
+  --cds-font-size-caption--lg: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-font-size-body--xs: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-font-size-body--sm: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-font-size-body--lg: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-font-size-prose--xs: .8125rem;
+  --cds-font-size-prose--sm: .8125rem;
+  --cds-font-size-prose--lg: .9375rem;
+  --cds-leading-body--xs: calc(1.0625rem * var(--cds-rem-scale,1));
+  --cds-leading-body--sm: calc(1.0625rem * var(--cds-rem-scale,1));
+  --cds-leading-body--lg: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-leading-prose--xs: 1.1875rem;
+  --cds-leading-prose--sm: 1.1875rem;
+  --cds-leading-prose--lg: 1.375rem;
+}
+
+.cds-root[data-density=comfortable] {
+  --cds-radius--xs: calc(.375rem * var(--cds-rem-scale,1));
+  --cds-radius--sm: calc(.4375rem * var(--cds-rem-scale,1));
+  --cds-radius--lg: calc(.625rem * var(--cds-rem-scale,1));
+  --cds-h-control--xs: calc(1.5rem * var(--cds-rem-scale,1));
+  --cds-h-control--sm: calc(1.75rem * var(--cds-rem-scale,1));
+  --cds-h-control--lg: calc(2.5rem * var(--cds-rem-scale,1));
+  --cds-h-control-nested--xs: calc(1.125rem * var(--cds-rem-scale,1));
+  --cds-h-control-nested--sm: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-h-control-nested--lg: calc(1.75rem * var(--cds-rem-scale,1));
+  --cds-icon--xs: calc(1rem * var(--cds-rem-scale,1));
+  --cds-icon--sm: calc(1rem * var(--cds-rem-scale,1));
+  --cds-icon--lg: calc(1.5rem * var(--cds-rem-scale,1));
+  --cds-pad-xs--xs: calc(.25rem * var(--cds-rem-scale,1));
+  --cds-pad-xs--sm: calc(.375rem * var(--cds-rem-scale,1));
+  --cds-pad-xs--lg: calc(.5rem * var(--cds-rem-scale,1));
+  --cds-pad-sm--xs: calc(.375rem * var(--cds-rem-scale,1));
+  --cds-pad-sm--sm: calc(.5rem * var(--cds-rem-scale,1));
+  --cds-pad-sm--lg: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-pad-md--xs: calc(.5rem * var(--cds-rem-scale,1));
+  --cds-pad-md--sm: calc(.625rem * var(--cds-rem-scale,1));
+  --cds-pad-md--lg: calc(1rem * var(--cds-rem-scale,1));
+  --cds-pad-lg--xs: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-pad-lg--sm: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-pad-lg--lg: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-pad-xl--xs: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-pad-xl--sm: calc(1.375rem * var(--cds-rem-scale,1));
+  --cds-pad-xl--lg: calc(1.75rem * var(--cds-rem-scale,1));
+  --cds-font-size-caption--xs: calc(.6875rem * var(--cds-rem-scale,1));
+  --cds-font-size-caption--sm: calc(.75rem * var(--cds-rem-scale,1));
+  --cds-font-size-caption--lg: calc(.8125rem * var(--cds-rem-scale,1));
+  --cds-font-size-body--xs: calc(.8125rem * var(--cds-rem-scale,1));
+  --cds-font-size-body--sm: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-font-size-body--lg: calc(.9375rem * var(--cds-rem-scale,1));
+  --cds-font-size-prose--xs: .875rem;
+  --cds-font-size-prose--sm: .9375rem;
+  --cds-font-size-prose--lg: 1.125rem;
+  --cds-leading-body--xs: calc(1.1875rem * var(--cds-rem-scale,1));
+  --cds-leading-body--sm: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-leading-body--lg: calc(1.375rem * var(--cds-rem-scale,1));
+  --cds-leading-prose--xs: 1.25rem;
+  --cds-leading-prose--sm: 1.375rem;
+  --cds-leading-prose--lg: 1.6875rem;
+}
+
+.cds-root {
+  --cds-font-size-body--own: calc(.8125rem * var(--cds-rem-scale,1));
+  --cds-font-size-prose--textsm: .8125rem;
+  --cds-font-size-prose--xs--textsm: .8125rem;
+  --cds-font-size-prose--sm--textsm: .8125rem;
+  --cds-font-size-prose--lg--textsm: .875rem;
+  --cds-font-size-prose--textlg: .9375rem;
+  --cds-font-size-prose--xs--textlg: .875rem;
+  --cds-font-size-prose--sm--textlg: .875rem;
+  --cds-font-size-prose--lg--textlg: 1rem;
+  --cds-font-size-heading--textsm: calc(.8125rem * var(--cds-rem-scale,1));
+  --cds-font-size-heading--textlg: calc(.9375rem * var(--cds-rem-scale,1));
+  --cds-leading-body--own: calc(1.1875rem * var(--cds-rem-scale,1));
+  --cds-leading-prose--textsm: 1.1875rem;
+  --cds-leading-prose--xs--textsm: 1.1875rem;
+  --cds-leading-prose--sm--textsm: 1.1875rem;
+  --cds-leading-prose--lg--textsm: 1.25rem;
+  --cds-leading-prose--textlg: 1.375rem;
+  --cds-leading-prose--xs--textlg: 1.25rem;
+  --cds-leading-prose--sm--textlg: 1.25rem;
+  --cds-leading-prose--lg--textlg: 1.5rem;
+  --cds-leading-heading--textsm: calc(1.125rem * var(--cds-rem-scale,1));
+  --cds-leading-heading--textlg: calc(1.375rem * var(--cds-rem-scale,1));
+}
+
+.cds-root[data-density=comfortable] {
+  --cds-font-size-body--own: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-font-size-prose--textsm: .9375rem;
+  --cds-font-size-prose--xs--textsm: .8125rem;
+  --cds-font-size-prose--sm--textsm: .875rem;
+  --cds-font-size-prose--lg--textsm: 1rem;
+  --cds-font-size-prose--textlg: 1.125rem;
+  --cds-font-size-prose--xs--textlg: .9375rem;
+  --cds-font-size-prose--sm--textlg: 1rem;
+  --cds-font-size-prose--lg--textlg: 1.125rem;
+  --cds-font-size-heading--textsm: calc(.875rem * var(--cds-rem-scale,1));
+  --cds-font-size-heading--textlg: calc(1rem * var(--cds-rem-scale,1));
+  --cds-leading-body--own: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-leading-prose--textsm: 1.375rem;
+  --cds-leading-prose--xs--textsm: 1.1875rem;
+  --cds-leading-prose--sm--textsm: 1.25rem;
+  --cds-leading-prose--lg--textsm: 1.5rem;
+  --cds-leading-prose--textlg: 1.6875rem;
+  --cds-leading-prose--xs--textlg: 1.375rem;
+  --cds-leading-prose--sm--textlg: 1.5rem;
+  --cds-leading-prose--lg--textlg: 1.6875rem;
+  --cds-leading-heading--textsm: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-leading-heading--textlg: calc(1.5rem * var(--cds-rem-scale,1));
+}
+
+.cds-root {
+  --cds-h-control: calc(1.5rem * var(--cds-rem-scale,1));
+}
+
+.cds-root[data-density=comfortable] {
+  --cds-h-control: calc(1.75rem * var(--cds-rem-scale,1));
+}
+
+.cds-root {
+  --cds-h-control--xs: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-h-control--sm: calc(1.25rem * var(--cds-rem-scale,1));
+  --cds-h-control--lg: calc(1.75rem * var(--cds-rem-scale,1));
+}
+
+.cds-root[data-density=comfortable] {
+  --cds-h-control--xs: calc(1.5rem * var(--cds-rem-scale,1));
+  --cds-h-control--sm: calc(1.75rem * var(--cds-rem-scale,1));
+  --cds-h-control--lg: calc(2.5rem * var(--cds-rem-scale,1));
+}
+
+.cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)) {
+  --cds-border: #00000014;
+  --cds-border-line: #0000001f;
+  --cds-surface-1: #fff;
+  --cds-surface-2: #fff;
+  --cds-surface-3: #fff;
+  --cds-surface-popover: #fff;
+  --cds-surface-panel: var(--cds-surface-2);
+  --cds-fill-primary: #191919;
+  --cds-fill-primary-hover: #3c3c3c;
+  --cds-fill-primary-layer: #ffffff26;
+  --cds-fill-secondary: #0000000d;
+  --cds-fill-secondary-hover: #00000013;
+  --cds-fill-secondary-layer: #00000006;
+  --cds-fill-secondary-ring: var(--cds-alpha-2);
+  --cds-fill-secondary-pressed-ring: var(--cds-alpha-2);
+  --cds-fill-ghost-hover: #0000000d;
+  --cds-fill-ghost-selected: #0000001a;
+  --cds-text-primary: #000000e6;
+  --cds-text-secondary: #0009;
+  --cds-text-muted: #0007;
+  --cds-fizzy-lake-color-sidebar: #fafafa;
+  --cds-fizzy-lake-color-composer-ring: #0000001f;
+}
+
+[data-mode=dark] .cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *)):not([data-mode=light]):not([data-mode=system]),.cds-root:is([data-cds-fizzy-lake~=color],[data-cds-fizzy-lake~=color] *):not(:where([data-cds-theme],[data-cds-theme] *))[data-mode=dark] {
+  --cds-border: #ffffff0a;
+  --cds-border-line: #ffffff1f;
+  --cds-surface-1: #191919;
+  --cds-surface-2: #1f1f1f;
+  --cds-surface-3: #1f1f1f;
+  --cds-surface-popover: #303030;
+  --cds-fill-primary: #efefef;
+  --cds-fill-primary-hover: #d7d7d7;
+  --cds-fill-primary-layer: #0000001a;
+  --cds-fill-secondary: #ffffff26;
+  --cds-fill-secondary-hover: #ffffff37;
+  --cds-fill-secondary-layer: #ffffff13;
+  --cds-fill-secondary-ring: transparent;
+  --cds-fill-ghost-hover: #ffffff13;
+  --cds-fill-ghost-selected: #ffffff26;
+  --cds-text-primary: #ffffffed;
+  --cds-text-secondary: #ffffff91;
+  --cds-text-muted: #fff6;
+  --cds-fizzy-lake-color-sidebar: #1f1f1f;
+  --cds-fizzy-lake-color-composer-ring: #ffffff14;
+}
+
+.cds-root:is([data-cds-fizzy-lake~=type],[data-cds-fizzy-lake~=type] *) {
+  --cds-font-weight-body: 400;
+  --cds-font-weight-control: 435;
+  --cds-font-weight-header: 520;
+  --cds-font-weight-badge: 500;
+}
+
+.cds-root.cds-root[data-density=comfortable] {
+  --cds-font-size-prose: .9375rem;
+  --cds-font-size-prose--xs: .8125rem;
+  --cds-font-size-prose--sm: .875rem;
+  --cds-font-size-prose--lg: 1rem;
+  --cds-font-size-prose--textsm: .875rem;
+  --cds-font-size-prose--sm--textsm: .8125rem;
+  --cds-font-size-prose--lg--textsm: .9375rem;
+  --cds-font-size-prose--textlg: 1rem;
+  --cds-font-size-prose--xs--textlg: .875rem;
+  --cds-font-size-prose--sm--textlg: .9375rem;
+  --cds-leading-prose: 1.3125rem;
+  --cds-leading-prose--xs: 1.1875rem;
+  --cds-leading-prose--sm: 1.25rem;
+  --cds-leading-prose--lg: 1.375rem;
+  --cds-leading-prose--textsm: 1.25rem;
+  --cds-leading-prose--sm--textsm: 1.1875rem;
+  --cds-leading-prose--lg--textsm: 1.3125rem;
+  --cds-leading-prose--textlg: 1.375rem;
+  --cds-leading-prose--xs--textlg: 1.25rem;
+  --cds-leading-prose--sm--textlg: 1.3125rem;
+  --cds-leading-prose--lg--textlg: 1.5625rem;
+}
+
+.cds-root.cds-root[data-density=comfortable]:lang(zh),.cds-root.cds-root[data-density=comfortable]:lang(ja),.cds-root.cds-root[data-density=comfortable]:lang(ko) {
+  --cds-leading-prose: 1.5rem;
+  --cds-leading-prose--xs: 1.3125rem;
+  --cds-leading-prose--sm: 1.375rem;
+  --cds-leading-prose--lg: 1.625rem;
+  --cds-leading-prose--textsm: 1.375rem;
+  --cds-leading-prose--textlg: 1.625rem;
+  --cds-leading-prose--xs--textsm: 1.3125rem;
+  --cds-leading-prose--sm--textsm: 1.3125rem;
+  --cds-leading-prose--lg--textsm: 1.5rem;
+  --cds-leading-prose--xs--textlg: 1.375rem;
+  --cds-leading-prose--sm--textlg: 1.5rem;
+  --cds-leading-prose--lg--textlg: 1.8125rem;
+}
