@@ -1,8 +1,8 @@
 # Claude for DSH
 
-面向 DeepSeek Harness `0.2.2-rc.3` 的 Claude Desktop（Code 模式）质感主题插件（`0.8.0`）。
+面向 DeepSeek Harness `0.2.2-rc.3` 的 Claude Desktop（Code 模式）质感主题插件（`0.9.0`）。
 
-围绕 Claude Desktop（`@ant/cds` `fizzy-lake` + `.dframe-sidebar` + `.epitaxy-markdown`）核心视觉体验打磨九个维度：**1:1 原生 `PingFang SC` 中英文排版与字阶、深色 `#1F1F1F` 侧栏 / `#191919` 画布表面校准、窗口失焦侧栏柔和降噪、全量 102 组 `dsw-icon-*` + 64 处内联/`FileTypeIcon` SVG + 实验性插件图标体系、右侧 `Start` 工具启动台与 `Files` 单色文件树、建筑感浅/深双模式设置页（`Settings`）与陶土胶囊开关、槽位安全（Slot-Safe）精确选择器、贴底输入卡与中心星芒新会话主页、以及双色温自适应 Token 与 100% 纯前端可逆架构**。
+围绕 Claude Desktop（`@ant/cds` `fizzy-lake` + `.dframe-sidebar` + `.epitaxy-markdown`）核心视觉体验打磨九个维度：**1:1 原生 `PingFang SC` 中英文排版与字阶、深色 `#1F1F1F` 侧栏 / `#191919` 画布表面校准、窗口失焦侧栏柔和降噪、全量 102 组 `dsw-icon-*` + 64 处内联/`FileTypeIcon` SVG + 实验性插件图标体系、右侧 `Start` 工具启动台与 `Files` 单色文件树、1:1 原生通栏顶栏 + 分层表面设置页（`Settings`）与 `@ant/cds` 蓝胶囊开关、槽位安全（Slot-Safe）精确选择器、贴底输入卡与中心星芒新会话主页、以及双色温自适应 Token 与 100% 纯前端可逆架构**。
 
 ## 构建与本地打包
 
@@ -15,16 +15,16 @@ npm run pack:local
 
 以上命令均在 `dsh-claude-theme/` 仓库根目录执行。构建产物写入 `lib/`，本地安装包写入被 Git 忽略的 `dist/`。仓库目录名与插件包名 `dsh-theme-claude` 不同，插件标识及已有设置保持原样。
 
-桌面版 `0.2.2-rc.3` 由运行中的应用管理 `/Users/nick/.dsh/profiles/desktop`。请通过桌面内置 CLI（`/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh plugin --profile desktop`）或在应用 **Plugins → Add plugin → Install a third-party plugin** 中安装 `dist/dsh-theme-claude-0.8.0.tgz`。
+桌面版 `0.2.2-rc.3` 由运行中的应用管理 `/Users/nick/.dsh/profiles/desktop`。请通过桌面内置 CLI（`/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh plugin --profile desktop`）或在应用 **Plugins → Add plugin → Install a third-party plugin** 中安装 `dist/dsh-theme-claude-0.9.0.tgz`。
 
 插件详情页内置实时开关与分段控件：
-- **启用开关**：采用 Claude 陶土赤褐 `role="switch"` 胶囊，即时挂载/卸载 `ctx.theme.overrideTokens()`、`conversation.hero.brand.mark` 插槽、窗口焦点监听、全量图标遮罩层与样式层
+- **启用开关**：采用 Claude `@ant/cds` 原生蓝 `role="switch"` 胶囊（`#2A78D6` / `#3987E5`），即时挂载/卸载 `ctx.theme.overrideTokens()`、`conversation.hero.brand.mark` 插槽、窗口焦点监听、全量图标遮罩层与样式层
 - **明暗外观**：跟随系统 / 浅色 / 深色
 - **纸张色温**：现代浅灰（默认 `#FAFAFA` 侧栏 / `#FFFFFF` 画布；深色 `#1F1F1F` 侧栏 / `#191919` 画布，`dsh-theme-claude.palette.v2`） / 经典暖纸（`#FAF9F5` / `#F3F1E9`）
 - **回复正文字体**：无衬线 `Sans`（默认，对齐 Claude Desktop `PingFang SC` `14px / 20px`，`dsh-theme-claude.prose.v2`） / 书卷衬线 `Serif`
 - **宿主工作区与品牌元素**：纯粹克制（默认 Claude Code Desktop 侧栏、右侧工具台、全套 Claude 图标与贴底主页） / 保留 DSH（恢复原生图标、鲸鱼水印、居中主页与文件夹树）
 
-## 核心质感设计（`0.8.0`）
+## 核心质感设计（`0.9.0`）
 
 ### 1. 原生 Claude Desktop 中文字体、字阶与深色字重校准（`src/theme.css`、`src/tokens.mjs`）
 
@@ -37,16 +37,17 @@ npm run pack:local
 
 | 层级 | 现代浅灰（浅 / 深） | 经典暖纸（浅 / 深） | 说明 |
 | --- | --- | --- | --- |
-| 左右侧栏与设置导航栏 | `#FAFAFA` / `#1F1F1F` | `#F3F1E9` / `#222120` | 对齐 Claude `fizzy-lake` `--cds-fizzy-lake-color-sidebar` |
-| 主画布与设置内容区 | `#FFFFFF` / `#191919` | `#FAF9F5` / `#1C1C1A` | 对齐 Claude `--cds-surface-1`（深色画布比侧栏更深沉） |
-| 侧栏选中胶囊 | `#E4E4E4` / `#3F3F3F` | `#E3E0D5` / `#3E3D39` | 对齐 `--cds-fill-ghost-selected`（`8px` 圆角） |
-| 侧栏与画布分割线 | `#EAEAEA` / `#2B2B2B` | `#E4E1D6` / `#2E2D2A` | `1px` 清晰物理接缝 |
+| 主窗口左右侧栏 | `#FAFAFA` / `#1F1F1F` | `#F3F1E9` / `#222120` | 对齐 Claude `fizzy-lake` `--cds-fizzy-lake-color-sidebar` |
+| 主窗口对话画布 | `#FFFFFF` / `#191919` | `#FAF9F5` / `#1C1C1A` | 对齐 Claude `--cds-surface-1`（深色画布沉于侧栏之后） |
+| 设置弹窗悬浮主面板与通栏顶栏 | `#FFFFFF` / `#1F1F1F` | `#FAF9F5` / `#21201E` | 对齐 Claude Settings 悬浮面板面（`--cds-surface-2`） |
+| 设置弹窗下沉左导航栏 | `#F6F6F6` / `#191919` | `#F2F0E8` / `#1A1918` | 弹窗内左栏比右主区更深沉（左 `#191919` / 右 `#1F1F1F`），配 `#393939` 选中胶囊 |
+| 设置内凹输入/下拉与分段控件 | `#F1F1F0` / `#2B2B2B` · `#EDEDEC` / `#282828` | `#ECE9DF` / `#2B2A27` · `#E9E6DB` / `#292825` | `34px` 哑光无硬框内凹胶囊 + `#404040` 选中分段滑块 |
 | 正文墨色 / 强调墨色 | `#1A1A1A` / `#DFDFDF` · `#111111` / `#F0F0F0` | `#191918` / `#E1DFD6` · `#111110` / `#F2F0E8` | 柔和耐读正文对比与清晰标题/加粗层级 |
 
-### 3. 全量 Claude 线性矢量图标与建筑感设置页（`src/icons.mjs`）
+### 3. 全量 Claude 线性矢量图标与 1:1 设置页架构（`src/icons.mjs`、`src/theme.css`）
 
 - 覆盖 DSH 全部 **102 个 `dsw-icon-*` 图标族**（204 个 symbol）、**64 处内联与 `FileTypeIcon` `<svg>`** 及 `@deepseek-ai/*` 实验性插件图标，统一为 `1.35px` 圆角细线单色图标。
-- 重构 `[data-shortcut-modal="settings"]` 双栏建筑感设置弹窗、紧凑型 `Appearance` 预览卡、`32px` 细描边控件与 `34×20px` 陶土赤褐胶囊开关。
+- 重构 `[data-shortcut-modal="settings"]` 为 `920×740` 弹窗：零 DOM 改动实现 `48px` 全宽通栏标题栏（`Settings` 无衬线标题 + 右侧内嵌动作胶囊与 `×` + `1px` 通栏底边）、`204px` 下沉左导航栏、`15px` 无衬线分组标题、`14px` Regular 设置项标题与 `13px` 柔和说明、`34px` 哑光填充控件、`36×20px` `@ant/cds` 蓝胶囊开关（`#2A78D6` / `#3987E5`），并同步精修 `Account` 卡片与 `Shortcutter` 偏好页。
 
 ## 边界
 

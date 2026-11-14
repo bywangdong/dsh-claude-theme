@@ -1,7 +1,7 @@
-// Dual Claude palettes for DeepSeek Harness (0.8.0):
-// 1. neutral (default): Verbatim Claude Desktop @ant/cds fizzy-lake surfaces & ink hierarchy
-//    - Light: #FAFAFA sidebar | #EAEAEA 1px seam | #FFFFFF canvas | #E4E4E4 selected pill
-//    - Dark:  #1F1F1F sidebar | #2B2B2B 1px seam | #191919 canvas | #3F3F3F selected pill
+// Dual Claude palettes for DeepSeek Harness (0.9.0):
+// 1. neutral (default): Verbatim Claude Desktop @ant/cds fizzy-lake surfaces, settings modal & ink hierarchy
+//    - Light: #FAFAFA sidebar | #EAEAEA 1px seam | #FFFFFF canvas | #E4E4E4 selected pill | #FFFFFF/#F6F6F6 settings modal
+//    - Dark:  #1F1F1F sidebar | #2B2B2B 1px seam | #191919 canvas | #3F3F3F selected pill | #1F1F1F/#191919 settings modal
 // 2. warm: Classic Claude warm parchment (#FAF9F5 canvas / #F3F1E9 sidebar) & warm charcoal (#1C1C1A canvas / #222120 sidebar).
 
 function createPalette(spec) {
@@ -69,9 +69,9 @@ export const WARM_TOKENS = createPalette(({ pair, alias, specific }) => {
   alias('card-fill', '#F5F4ED', '#242321');
   alias('card-fill-hover', '#ECEAE0', '#2E2D2A');
   alias('card-tile-fill', '#FFFFFF', '#242321');
-  alias('settings-card-fill', '#F7F6F0', '#242321');
-  alias('settings-card-stroke', '#E4E1D6', '#33322F');
-  alias('switch-thumb', '#FFFFFF', '#FAF9F5');
+  alias('settings-card-fill', '#F5F3EC', '#272623');
+  alias('settings-card-stroke', '#E3E0D5', '#353430');
+  alias('switch-thumb', '#FFFFFF', '#FFFFFF');
   alias('menu-icon', '#5E5C57', '#CFCBC0');
   alias('menu-group-header-fill', '#FFFFFF', '#302F2C');
   alias('link', '#2168BA', '#85B8F2');
@@ -127,8 +127,9 @@ export const WARM_TOKENS = createPalette(({ pair, alias, specific }) => {
 
   pair('--dsw-menu-surface-fill', '#FFFFFF', '#302F2C');
   pair('--dsw-menu-backdrop-filter', 'none');
-  pair('--dsw-focus-ring-color', '#C6613F', '#E5A58D');
+  pair('--dsw-focus-ring-color', '#2A78D6', '#3987E5');
   pair('--claude-clay', '#D97757');
+  pair('--claude-accent-blue', '#2A78D6', '#3987E5');
   pair('--claude-send-fill', '#C6613F', '#CE6846');
   pair('--claude-send-hover', '#B25334', '#DB7553');
   pair('--claude-send-ink', '#FFFFFF', '#FFFFFF');
@@ -151,11 +152,30 @@ export const WARM_TOKENS = createPalette(({ pair, alias, specific }) => {
   pair('--claude-composer-shadow', '0 1px 6px -1px #14141308, 0 1px 2px 0 #14141304', '0 6px 20px -2px #0000003B, 0 1px 3px 0 #00000024');
   pair('--claude-composer-shadow-focus', '0 3px 14px -2px #14141310, 0 1px 3px 0 #14141308', '0 8px 24px -2px #00000050, 0 2px 6px 0 #00000030');
   pair('--claude-popover-shadow', '0 10px 28px -4px #1414131C, 0 2px 6px 0 #1414130F', '0 12px 32px -4px #00000054, 0 2px 8px 0 #00000033');
-  pair('--claude-modal-shadow', '0 22px 56px -12px #1414132E, 0 4px 16px -2px #14141312', '0 24px 64px -10px #0000007A, 0 6px 20px -2px #0000004D');
-  pair('--claude-settings-backdrop', '#14141347', '#0000008C');
+  pair('--claude-modal-shadow', '0 24px 64px -12px #14141333, 0 4px 16px -2px #14141314', '0 28px 72px -10px #0000008C, 0 6px 24px -2px #00000059');
+  pair('--claude-settings-backdrop', '#1414134A', '#0000009E');
+  pair('--claude-settings-panel-bg', '#FAF9F5', '#21201E');
+  pair('--claude-settings-nav-bg', '#F2F0E8', '#1A1918');
+  pair('--claude-settings-divider', '#E3E0D5', '#2E2D2A');
+  pair('--claude-settings-row-divider', '#1414130D', '#FAF9F50D');
+  pair('--claude-settings-nav-ink', '#353430', '#CECCC3');
+  pair('--claude-settings-nav-icon', '#63615C', '#A8A69D');
+  pair('--claude-settings-nav-hover', '#1414130A', '#FAF9F50F');
+  pair('--claude-settings-nav-active-bg', '#E2DFD3', '#383733');
+  pair('--claude-settings-desc-ink', '#696760', '#98968D');
+  pair('--claude-settings-field-bg', '#ECE9DF', '#2B2A27');
+  pair('--claude-settings-field-hover', '#E4E0D4', '#34332F');
+  pair('--claude-settings-field-border', '#14141306', '#FAF9F506');
+  pair('--claude-settings-seg-track', '#E9E6DB', '#292825');
+  pair('--claude-settings-seg-thumb', '#FFFFFF', '#413F3B');
+  pair('--claude-settings-card-bg', '#F5F3EC', '#272623');
+  pair('--claude-settings-card-border', '#E3E0D5', '#353430');
+  pair('--claude-settings-selected-border', '#C4BFB1', '#54524C');
+  pair('--claude-settings-card-btn-bg', '#EAE7DC', '#34332F');
+  pair('--claude-settings-card-btn-hover', '#E1DDD0', '#3D3C37');
   pair('--claude-control-shadow', '0 1px 2px #1414130A', '0 1px 2px #0000002E');
-  pair('--claude-switch-off', '#D3D0C5', '#403F3B');
-  pair('--claude-switch-on', '#C6613F', '#D97757');
+  pair('--claude-switch-off', '#CFCBC0', '#403F3B');
+  pair('--claude-switch-on', '#2A78D6', '#3987E5');
 });
 
 export const NEUTRAL_TOKENS = createPalette(({ pair, alias, specific }) => {
@@ -214,9 +234,9 @@ export const NEUTRAL_TOKENS = createPalette(({ pair, alias, specific }) => {
   alias('card-fill', '#F7F7F7', '#222222');
   alias('card-fill-hover', '#EFEFEF', '#2B2B2B');
   alias('card-tile-fill', '#FFFFFF', '#222222');
-  alias('settings-card-fill', '#FAFAFA', '#222222');
-  alias('settings-card-stroke', '#EAEAEA', '#303030');
-  alias('switch-thumb', '#FFFFFF', '#F5F5F5');
+  alias('settings-card-fill', '#FAFAFA', '#262626');
+  alias('settings-card-stroke', '#E8E8E8', '#333333');
+  alias('switch-thumb', '#FFFFFF', '#FFFFFF');
   alias('menu-icon', '#5C5C5C', '#CCCCCC');
   alias('menu-group-header-fill', '#FFFFFF', '#2E2E2E');
   alias('link', '#2171CA', '#82B7F4');
@@ -272,8 +292,9 @@ export const NEUTRAL_TOKENS = createPalette(({ pair, alias, specific }) => {
 
   pair('--dsw-menu-surface-fill', '#FFFFFF', '#2E2E2E');
   pair('--dsw-menu-backdrop-filter', 'none');
-  pair('--dsw-focus-ring-color', '#C6613F', '#E5A58D');
+  pair('--dsw-focus-ring-color', '#2A78D6', '#3987E5');
   pair('--claude-clay', '#D97757');
+  pair('--claude-accent-blue', '#2A78D6', '#3987E5');
   pair('--claude-send-fill', '#171717', '#EDEDED');
   pair('--claude-send-hover', '#383838', '#D6D6D6');
   pair('--claude-send-ink', '#FFFFFF', '#171717');
@@ -296,11 +317,30 @@ export const NEUTRAL_TOKENS = createPalette(({ pair, alias, specific }) => {
   pair('--claude-composer-shadow', '0 1px 6px -1px #00000008, 0 1px 2px 0 #00000004', '0 6px 20px -2px #0000003B, 0 1px 3px 0 #00000024');
   pair('--claude-composer-shadow-focus', '0 3px 14px -2px #00000010, 0 1px 3px 0 #00000006', '0 8px 24px -2px #00000050, 0 2px 6px 0 #00000030');
   pair('--claude-popover-shadow', '0 8px 24px #00000018, 0 2px 6px #0000000F', '0 12px 32px #00000050, 0 2px 6px #0000002B');
-  pair('--claude-modal-shadow', '0 22px 56px -12px #00000029, 0 4px 16px -2px #0000000F', '0 24px 64px -10px #0000007A, 0 6px 20px -2px #0000004D');
-  pair('--claude-settings-backdrop', '#0F0F0E42', '#0000008C');
+  pair('--claude-modal-shadow', '0 24px 64px -12px #0000002E, 0 4px 16px -2px #00000012', '0 28px 72px -10px #0000008C, 0 6px 24px -2px #00000059');
+  pair('--claude-settings-backdrop', '#0F0F0E45', '#0000009E');
+  pair('--claude-settings-panel-bg', '#FFFFFF', '#1F1F1F');
+  pair('--claude-settings-nav-bg', '#F6F6F6', '#191919');
+  pair('--claude-settings-divider', '#EAEAEA', '#2B2B2B');
+  pair('--claude-settings-row-divider', '#0000000D', '#FFFFFF0D');
+  pair('--claude-settings-nav-ink', '#383838', '#CCCCCC');
+  pair('--claude-settings-nav-icon', '#666666', '#A8A8A8');
+  pair('--claude-settings-nav-hover', '#00000009', '#FFFFFF0E');
+  pair('--claude-settings-nav-active-bg', '#E5E5E5', '#393939');
+  pair('--claude-settings-desc-ink', '#6B6B6B', '#969696');
+  pair('--claude-settings-field-bg', '#F1F1F0', '#2B2B2B');
+  pair('--claude-settings-field-hover', '#E8E8E7', '#333333');
+  pair('--claude-settings-field-border', '#00000006', '#FFFFFF06');
+  pair('--claude-settings-seg-track', '#EDEDEC', '#282828');
+  pair('--claude-settings-seg-thumb', '#FFFFFF', '#404040');
+  pair('--claude-settings-card-bg', '#FAFAFA', '#262626');
+  pair('--claude-settings-card-border', '#E8E8E8', '#333333');
+  pair('--claude-settings-selected-border', '#CCCCCC', '#525252');
+  pair('--claude-settings-card-btn-bg', '#EFEFEE', '#323232');
+  pair('--claude-settings-card-btn-hover', '#E5E5E4', '#3B3B3B');
   pair('--claude-control-shadow', '0 1px 2px #00000008', '0 1px 2px #0000002E');
-  pair('--claude-switch-off', '#D6D6D4', '#3D3D3D');
-  pair('--claude-switch-on', '#C6613F', '#D97757');
+  pair('--claude-switch-off', '#CECECC', '#3D3D3D');
+  pair('--claude-switch-on', '#2A78D6', '#3987E5');
 });
 
 export const PALETTES = Object.freeze({

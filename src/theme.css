@@ -1149,7 +1149,7 @@ body[data-dsh-claude-theme] [data-conversation-content] [class*="_banner_"] {
   color: var(--dsw-alias-label-secondary);
 }
 
-/* 16. Menus, Companion Switcher, Claude Terracotta Toggle Switches & Dialogs */
+/* 16. Menus, Companion Switcher, Claude @ant/cds Accent-Blue Toggle Switches & Dialogs */
 body[data-dsh-claude-theme] [data-menu-material] {
   box-shadow: 0 0 0 1px var(--dsw-alias-border-l2), var(--claude-popover-shadow);
 }
@@ -1159,7 +1159,7 @@ body[data-dsh-claude-theme] .dsh-switcher {
   --sw-faint: var(--dsw-alias-label-tertiary);
 }
 body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"] {
-  width: 34px;
+  width: 36px;
   height: 20px;
   padding: 2px;
   border-radius: 999px;
@@ -1174,52 +1174,113 @@ body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"] [class*="_t
   height: 16px;
   border-radius: 50%;
   background: #FFFFFF;
-  box-shadow: 0 1px 2.5px #00000029;
+  box-shadow: 0 1px 2.5px #00000033;
   transition: transform 140ms var(--ds-ease-in-out);
 }
 body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"][aria-checked="true"] [class*="_thumb_"] {
   background: #FFFFFF;
-  transform: translateX(14px);
+  transform: translateX(16px);
 }
 body[data-dsh-claude-theme] [class*="_dialog_"] {
   border-radius: 14px;
-  border: 1px solid var(--claude-sidebar-divider);
-  background: var(--dsw-alias-bg-base);
+  border: 1px solid var(--claude-settings-divider);
+  background: var(--claude-settings-panel-bg);
   box-shadow: var(--claude-modal-shadow);
 }
 
-/* 17. Claude Desktop Architectural Settings Modal (`[data-shortcut-modal="settings"]`) — Light & Dark */
+/* 17. Claude Desktop Verbatim Settings Modal (`[data-shortcut-modal="settings"]`) — Light & Dark */
 body[data-dsh-claude-theme] :is([class$="_overlay"], [class*="_overlay "]):has(> [data-shortcut-modal="settings"]) > :is([class$="_mask"], [class*="_mask "]) {
   background: var(--claude-settings-backdrop);
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] {
-  width: min(840px, calc(100vw - 48px));
-  height: min(680px, calc(100vh - 2 * max(24px, var(--dsh-frame-overlay-top, 24px))));
-  grid-template-columns: 208px minmax(0, 1fr);
+  width: min(920px, calc(100vw - 48px));
+  height: min(740px, calc(100vh - 2 * max(24px, var(--dsh-frame-overlay-top, 24px))));
+  grid-template-columns: 204px minmax(0, 1fr);
+  grid-template-rows: 48px minmax(0, 1fr);
   border-radius: 14px;
-  border: 1px solid var(--claude-sidebar-divider);
-  background: var(--dsw-alias-bg-base);
+  border: 1px solid var(--claude-settings-divider);
+  background: var(--claude-settings-panel-bg);
   box-shadow: var(--claude-modal-shadow);
   font-family: var(--claude-ui-sans);
 }
+
+/* Unified Full-Width 48px Top Header Bar (`Settings` on left + actions & `×` on right) */
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_navTitle"], [class*="_navTitle "]) {
-  background: var(--dsw-specific-sidebar-fill);
-  border-right: 1px solid var(--claude-sidebar-divider);
-  padding: 20px 16px 10px 20px;
-  font-family: var(--claude-display-font);
-  font-size: 20px;
-  line-height: 26px;
-  font-weight: 400;
-  font-synthesis: none;
-  letter-spacing: -.015em;
-  color: var(--dsw-alias-label-primary);
+  box-sizing: border-box;
+  height: 48px;
+  padding: 0 16px 0 20px;
+  display: flex;
+  align-items: center;
+  background: var(--claude-settings-panel-bg);
+  border-right: 0;
+  border-bottom: 1px solid var(--claude-settings-divider);
+  font-family: var(--claude-ui-sans);
+  font-size: 14.5px;
+  line-height: 20px;
+  font-weight: var(--claude-prose-strong-weight);
+  letter-spacing: -.01em;
+  color: var(--claude-prose-strong-ink);
 }
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_header"], [class*="_header "]) {
+  box-sizing: border-box;
+  height: 48px;
+  padding: 0 12px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  background: var(--claude-settings-panel-bg);
+  border-bottom: 1px solid var(--claude-settings-divider);
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_header"], [class*="_header "]) :is([class$="_actions"], [class*="_actions "]) {
+  gap: 8px;
+  align-items: center;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_header"], [class*="_header "]) :is([class$="_actions"], [class*="_actions "]) button:not(:is([class$="_close"], [class*="_close "])) {
+  height: 28px;
+  padding: 0 10px;
+  gap: 6px;
+  border-radius: 7px;
+  border: 1px solid var(--claude-settings-field-border);
+  background: var(--claude-settings-field-bg);
+  box-shadow: none;
+  color: var(--dsw-alias-label-secondary);
+  font-size: 12.5px;
+  line-height: 18px;
+  font-weight: 400;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_header"], [class*="_header "]) :is([class$="_actions"], [class*="_actions "]) button:not(:is([class$="_close"], [class*="_close "])):hover:not(:disabled) {
+    background: var(--claude-settings-field-hover);
+    color: var(--dsw-alias-label-primary);
+  }
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_close"], [class*="_close "]) {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  color: var(--dsw-alias-label-secondary);
+  transition: background-color 120ms ease, color 120ms ease;
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_close"], [class*="_close "]):hover {
+    background: var(--claude-settings-field-bg);
+    color: var(--dsw-alias-label-primary);
+  }
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_close"], [class*="_close "]) svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Recessed Left Sidebar Navigation (`#191919` dark / `#F6F6F6` light) */
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > nav:is([class$="_nav"], [class*="_nav "]) {
-  background: var(--dsw-specific-sidebar-fill);
-  border-right: 1px solid var(--claude-sidebar-divider);
-  padding: 4px 10px 16px;
+  background: var(--claude-settings-nav-bg);
+  border-right: 1px solid var(--claude-settings-divider);
+  padding: 12px 10px 16px;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_navList"], [class*="_navList "]) {
   gap: 2px;
@@ -1227,88 +1288,98 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_navLi
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_navCell"], [class*="_navCell "]) {
   height: 32px;
   padding: 0 10px;
-  gap: 9px;
+  gap: 10px;
   border-radius: 7px;
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 20px;
   font-weight: 400;
-  color: var(--claude-session-ink);
+  color: var(--claude-settings-nav-ink);
   transition: background-color 120ms ease, color 120ms ease;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_navIcon"], [class*="_navIcon "]) {
-  color: var(--dsw-alias-label-secondary);
+  color: var(--claude-settings-nav-icon);
+  transition: color 120ms ease;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_navIcon"], [class*="_navIcon "]) svg {
-  width: 15px;
-  height: 15px;
-}
-body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_navCell"], [class*="_navCell "]):is([aria-current="true"], [class$="_active"], [class*="_active "]) {
-  background: var(--claude-nav-active-bg);
-  color: var(--dsw-alias-label-primary);
-  font-weight: 460;
-}
-body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_navCell"], [class*="_navCell "]):is([aria-current="true"], [class$="_active"], [class*="_active "]) :is([class$="_navIcon"], [class*="_navIcon "]) {
-  color: var(--dsw-alias-label-primary);
-}
-body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_header"], [class*="_header "]) {
-  height: 48px;
-  padding: 14px 16px 0 24px;
-  align-items: center;
-  background: var(--dsw-alias-bg-base);
-}
-body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_close"], [class*="_close "]) {
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
-  color: var(--dsw-alias-label-tertiary);
+  width: 16px;
+  height: 16px;
 }
 @media (hover: hover) {
-  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_close"], [class*="_close "]):hover {
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_navCell"], [class*="_navCell "]):hover:not([aria-current="true"]):not(:is([class$="_active"], [class*="_active "])) {
+    background: var(--claude-settings-nav-hover);
     color: var(--dsw-alias-label-primary);
   }
 }
-body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_close"], [class*="_close "]) svg {
-  width: 15px;
-  height: 15px;
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_navCell"], [class*="_navCell "]):is([aria-current="true"], [class$="_active"], [class*="_active "]) {
+  background: var(--claude-settings-nav-active-bg);
+  color: var(--claude-prose-strong-ink);
+  font-weight: 400;
 }
-body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) {
-  padding: 2px 36px 32px;
-  background: var(--dsw-alias-bg-base);
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_navCell"], [class*="_navCell "]):is([aria-current="true"], [class$="_active"], [class*="_active "]) :is([class$="_navIcon"], [class*="_navIcon "]) {
+  color: var(--claude-prose-strong-ink);
 }
 
-/* Settings Editorial Section Headings & Row Hairlines */
-body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(h1, h2):is([class$="_title"], [class*="_title "], [class$="_heading"], [class*="_heading "]) {
-  font-family: var(--claude-display-font);
-  font-size: 20px;
-  line-height: 26px;
-  font-weight: 400;
-  font-synthesis: none;
-  letter-spacing: -.014em;
-  color: var(--dsw-alias-label-primary);
+/* Elevated Right Content Pane (`#1F1F1F` dark / `#FFFFFF` light) */
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) {
+  padding: 24px 36px 36px;
+  background: var(--claude-settings-panel-bg);
+}
+
+/* Sans-Serif Section Headings (`Code appearance` / `Appearance` / `Account` 1:1 Cadence) */
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(h1, h2, h3):is([class$="_title"], [class*="_title "], [class$="_heading"], [class*="_heading "]),
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_group"], [class*="_group "]):has(> :is([class$="_cubeRow"], [class*="_cubeRow "])) > :is([class$="_title"], [class*="_title "]) {
+  font-family: var(--claude-ui-sans);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: var(--claude-prose-strong-weight);
+  letter-spacing: -.01em;
+  color: var(--claude-prose-strong-ink);
+  margin: 0;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "]))::before {
+  content: "Account";
+  display: block;
+  font-family: var(--claude-ui-sans);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: var(--claude-prose-strong-weight);
+  letter-spacing: -.01em;
+  color: var(--claude-prose-strong-ink);
+  margin-bottom: 2px;
+}
+html[lang^="zh"] body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "]))::before {
+  content: "账户";
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_intro"], [class*="_intro "]) {
   font-size: 13px;
   line-height: 19px;
-  color: var(--dsw-alias-label-tertiary);
+  color: var(--claude-settings-desc-ink);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]) :is(
   [class$="_group"], [class*="_group "],
   [class$="_row"], [class*="_row "],
   [class$="_setting"], [class*="_setting "]
 ) {
-  border-bottom-color: var(--claude-canvas-divider);
+  border-bottom-color: var(--claude-settings-row-divider);
   border-bottom-width: 1px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_group"], [class*="_group "]):has(> :is([class$="_cubeRow"], [class*="_cubeRow "])) {
+  padding: 0 0 18px;
+  gap: 12px;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_setting"], [class*="_setting "]) {
   min-height: 0;
-  padding: 14px 0;
+  padding: 16px 0;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   [class$="_row"], [class*="_row "]
-):not(:is([class$="_card"], [class*="_card "])) {
-  padding-block: 14px;
+):not(:is([class$="_card"], [class*="_card "])):not(:is([class$="_balanceCard"], [class*="_balanceCard "]) *) {
+  padding-block: 16px;
 }
-body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]) > :last-child:is(
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
+  :is([class$="_section"], [class*="_section "]) > :last-child,
+  :is([class$="_section"], [class*="_section "]) > [data-slot] > :last-child
+):is(
   [class$="_row"], [class*="_row "],
   [class$="_setting"], [class*="_setting "]
 ) {
@@ -1318,45 +1389,56 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   [class$="_rowText"], [class*="_rowText "],
   [class$="_settingText"], [class*="_settingText "]
 ) {
-  gap: 2px;
+  gap: 3px;
   padding-right: 28px;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   span, div, label
 ):is([class$="_title"], [class*="_title "]),
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_settingTitle"], [class*="_settingTitle "]) {
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 20px;
-  font-weight: 450;
+  font-weight: 400;
   color: var(--dsw-alias-label-primary);
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_group"], [class*="_group "]):has(> :is([class$="_cubeRow"], [class*="_cubeRow "])) > :is([class$="_title"], [class*="_title "]) {
+  font-family: var(--claude-ui-sans);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: var(--claude-prose-strong-weight);
+  letter-spacing: -.01em;
+  color: var(--claude-prose-strong-ink);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   [class$="_desc"], [class*="_desc "],
   [class$="_description"], [class*="_description "],
   [class$="_settingDescription"], [class*="_settingDescription "]
 ) {
-  font-size: 12px;
-  line-height: 17.5px;
-  color: var(--dsw-alias-label-tertiary);
+  font-size: 13px;
+  line-height: 19px;
+  font-weight: 400;
+  color: var(--claude-settings-desc-ink);
 }
 
-/* Appearance Theme Cubes (Light / Dark / System) */
+/* Appearance Theme Selector Cubes (Light / Dark / System) */
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_cubeRow"], [class*="_cubeRow "]) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  margin-top: 2px;
+  margin-top: 0;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_themeCube"], [class*="_themeCube "]) {
-  flex: 1 1 120px;
-  min-height: 58px;
+  flex: 1 1 0;
+  min-height: 56px;
   padding: 10px 14px;
   gap: 5px;
   border-radius: 10px;
-  border: 1px solid var(--claude-sidebar-divider);
-  background: var(--dsw-alias-settings-card-fill);
+  border: 1px solid var(--claude-settings-card-border);
+  background: var(--claude-settings-card-bg);
   color: var(--dsw-alias-label-secondary);
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 18px;
-  font-weight: 430;
+  font-weight: 400;
   transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease, box-shadow 120ms ease;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_themeCube"], [class*="_themeCube "]) svg {
@@ -1365,72 +1447,99 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="
 }
 @media (hover: hover) {
   body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_themeCube"], [class*="_themeCube "]):hover:not([aria-pressed="true"]):not(:is([class$="_selected"], [class*="_selected "])) {
-    background: var(--dsw-alias-card-fill-hover);
+    background: var(--claude-settings-field-hover);
     border-color: var(--claude-composer-border-focus);
     color: var(--dsw-alias-label-primary);
   }
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_themeCube"], [class*="_themeCube "]):is([aria-pressed="true"], [class$="_selected"], [class*="_selected "]) {
-  background: var(--dsw-specific-input-major);
-  border-color: var(--claude-session-active-ink);
-  box-shadow: inset 0 0 0 .5px var(--claude-session-active-ink), var(--claude-control-shadow);
-  color: var(--dsw-alias-label-primary);
-  font-weight: 500;
+  background: var(--claude-settings-field-hover);
+  border-color: var(--claude-settings-selected-border);
+  box-shadow: 0 1px 2px #00000018;
+  color: var(--claude-prose-strong-ink);
+  font-weight: 400;
 }
 
-/* Taut 32px Bordered Selectors, Steppers, Action Pills & Text Inputs */
-body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
+/* Filled Recessed 34px Controls (`e.g. JetBrains Mono` / `Default · 13 px` Material) */
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) :is(
   button:is([class$="_selector"], [class*="_selector "]),
   button:is([class$="_switcher"], [class*="_switcher "]),
-  :is([class$="_setting"], [class*="_setting "]) > button:is([class$="_button"], [class*="_button "])
+  :is([class$="_setting"], [class*="_setting "]) > button:is([class$="_button"], [class*="_button "]),
+  button[class*="_button_"][class*="_outline_"]
 ) {
-  height: 32px;
+  height: 34px;
   min-width: 0;
-  padding: 0 11px;
+  padding: 0 12px;
   gap: 8px;
   border-radius: 8px;
-  border: 1px solid var(--claude-composer-border);
-  background: var(--dsw-specific-input-major);
-  box-shadow: var(--claude-control-shadow);
+  border: 1px solid var(--claude-settings-field-border);
+  background: var(--claude-settings-field-bg);
+  box-shadow: none;
   color: var(--dsw-alias-label-primary);
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 20px;
-  font-weight: 430;
+  font-weight: 400;
   transition: background-color 120ms ease, border-color 120ms ease;
 }
 @media (hover: hover) {
-  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) :is(
     button:is([class$="_selector"], [class*="_selector "]),
     button:is([class$="_switcher"], [class*="_switcher "]),
-    :is([class$="_setting"], [class*="_setting "]) > button:is([class$="_button"], [class*="_button "])
+    :is([class$="_setting"], [class*="_setting "]) > button:is([class$="_button"], [class*="_button "]),
+    button[class*="_button_"][class*="_outline_"]
   ):hover:not(:disabled) {
-    background: var(--dsw-alias-card-fill-hover);
-    border-color: var(--claude-composer-border-focus);
+    background: var(--claude-settings-field-hover);
+    border-color: var(--claude-settings-card-border);
   }
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_stepper"], [class*="_stepper "]) {
-  height: 32px;
-  min-width: 68px;
+  height: 34px;
+  min-width: 74px;
+  padding: 0 10px;
   border-radius: 8px;
-  border: 1px solid var(--claude-composer-border);
-  background: var(--dsw-specific-input-major);
-  box-shadow: var(--claude-control-shadow);
+  border: 1px solid var(--claude-settings-field-border);
+  background: var(--claude-settings-field-bg);
+  box-shadow: none;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_stepper"], [class*="_stepper "]) :is([class$="_value"], [class*="_value "], [class$="_unit"], [class*="_unit "]) {
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 20px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_field"], [class*="_field "]) > :is(input, select) {
+  box-sizing: border-box;
+  width: 100%;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   :is([class$="_input"], [class*="_input "]),
   :is([class$="_search"], [class*="_search "]) input,
   :is([class$="_field"], [class*="_field "]) > :is(input, select)
 ) {
-  height: 32px;
+  height: 34px;
+  padding: 0 12px;
   border-radius: 8px;
-  border: 1px solid var(--claude-composer-border);
-  background-color: var(--dsw-specific-input-major);
-  font-size: 13px;
+  border: 1px solid var(--claude-settings-field-border);
+  background-color: var(--claude-settings-field-bg);
+  box-shadow: none;
+  font-size: 13.5px;
+  font-weight: 400;
   color: var(--dsw-alias-label-primary);
+  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
+  :is([class$="_input"], [class*="_input "]),
+  :is([class$="_search"], [class*="_search "]) input,
+  :is([class$="_field"], [class*="_field "]) > input
+)::placeholder {
+  color: var(--dsw-alias-label-tertiary);
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
+    :is([class$="_input"], [class*="_input "]),
+    :is([class$="_search"], [class*="_search "]) input,
+    :is([class$="_field"], [class*="_field "]) > :is(input, select)
+  ):hover:not(:disabled):not(:focus) {
+    background-color: var(--claude-settings-field-hover);
+  }
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] select {
   -webkit-appearance: none !important;
@@ -1442,14 +1551,15 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] select {
   background-size: 12px 12px;
 }
 html[data-theme="dark"] body[data-dsh-claude-theme] [data-shortcut-modal="settings"] select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%23969696' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%239E9E9E' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   :is([class$="_input"], [class*="_input "]),
   :is([class$="_search"], [class*="_search "]) input,
   :is([class$="_field"], [class*="_field "]) > :is(input, select)
 ):focus {
-  border-color: var(--dsw-focus-ring-color);
+  border-color: var(--claude-accent-blue);
+  box-shadow: 0 0 0 1px var(--claude-accent-blue);
   outline: none;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
@@ -1459,20 +1569,27 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   button:is([class$="_dangerButton"], [class*="_dangerButton "])
 ) {
   height: 32px;
-  border-radius: 8px;
+  border-radius: 7px;
   font-size: 13px;
   line-height: 20px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
+  button:is([class$="_secondaryButton"], [class*="_secondaryButton "]),
+  button:is([class$="_addButton"], [class*="_addButton "])
+) {
+  background: var(--claude-settings-card-btn-bg);
+  border-color: var(--claude-settings-field-border);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_rowActions"], [class*="_rowActions "]) :is(
   button:is([class$="_secondaryButton"], [class*="_secondaryButton "]),
   button:is([class$="_dangerButton"], [class*="_dangerButton "])
 ) {
-  height: 27px;
+  height: 28px;
   border-radius: 7px;
-  font-size: 12px;
+  font-size: 12.5px;
 }
 
-/* Settings Cards (Account, Models, Agent Presets, Plugins & Inventory) */
+/* Settings Cards (Account, Models, Agent Presets, Built-in Plugins & Inventory) */
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   [class$="_card"], [class*="_card "],
   [class$="_balanceCard"], [class*="_balanceCard "],
@@ -1480,72 +1597,209 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   [class$="_setupCard"], [class*="_setupCard "],
   [class$="_addCard"], [class*="_addCard "]
 ) {
-  border-radius: 11px;
-  border: 1px solid var(--dsw-alias-settings-card-stroke);
-  background: var(--dsw-alias-settings-card-fill);
+  border-radius: 10px;
+  border: 1px solid var(--claude-settings-card-border);
+  background: var(--claude-settings-card-bg);
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) {
+  max-width: 680px;
+  gap: 14px;
+  padding: 0;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) > :is([class$="_card"], [class*="_card "]) {
+  padding: 14px 20px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_balanceCard"], [class*="_balanceCard "]) {
+  padding: 14px 20px 16px;
+  gap: 10px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) :is([class$="_avatar"], [class*="_avatar "]) {
+  width: 36px;
+  height: 36px;
+  box-shadow: inset 0 0 0 1px var(--claude-settings-card-border);
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) :is([class$="_name"], [class*="_name "]) {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var(--claude-prose-strong-weight);
+  color: var(--claude-prose-strong-ink);
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) :is(
+  [class$="_secondary"], [class*="_secondary "],
+  [class$="_status"], [class*="_status "]
+) {
+  font-size: 12.5px;
+  line-height: 18px;
+  font-variant-numeric: tabular-nums;
+  color: var(--claude-settings-desc-ink);
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_accountInfo"], [class*="_accountInfo "]) {
+  height: 30px;
+  padding: 0 10px;
+  gap: 4px;
+  border-radius: 7px;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--dsw-alias-label-secondary);
+  transition: background-color 120ms ease, color 120ms ease;
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_accountInfo"], [class*="_accountInfo "]):hover {
+    background: var(--claude-settings-card-btn-bg);
+    color: var(--dsw-alias-label-primary);
+  }
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_balanceCard"], [class*="_balanceCard "]) :is([class$="_row"], [class*="_row "]) {
+  min-height: 36px;
+  padding: 2px 0;
+  font-size: 13.5px;
+  line-height: 20px;
+  color: var(--dsw-alias-label-secondary);
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_amount"], [class*="_amount "]) {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  font-variant-numeric: tabular-nums;
+  color: var(--claude-prose-strong-ink);
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_balanceCard"], [class*="_balanceCard "]) :is([class$="_divider"], [class*="_divider "]) {
+  border-top: 1px solid var(--claude-settings-row-divider);
+  margin: 2px 0;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_linkButton"], [class*="_linkButton "]) {
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 7px;
+  border: 1px solid var(--claude-settings-field-border);
+  background: var(--claude-settings-card-btn-bg);
+  color: var(--dsw-alias-label-primary);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_linkButton"], [class*="_linkButton "]):not(:is([class$="_primary"], [class*="_primary "])):hover {
+    background: var(--claude-settings-card-btn-hover);
+  }
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_linkButton"], [class*="_linkButton "]):is([class$="_primary"], [class*="_primary "]) {
+  padding: 0 14px;
+  border-color: transparent;
+  background: var(--dsw-alias-button-primary-fill);
+  color: var(--dsw-alias-label-primary-foreground);
+  font-weight: 500;
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_linkButton"], [class*="_linkButton "]):is([class$="_primary"], [class*="_primary "]):hover {
+    background: var(--dsw-alias-button-primary-hover);
+  }
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   [class$="_cardActive"], [class*="_cardActive "]
 ) {
-  background: var(--dsw-specific-input-major);
-  border-color: var(--dsw-alias-label-primary);
-  box-shadow: 0 0 0 .5px var(--dsw-alias-label-primary), var(--claude-control-shadow);
+  background: var(--claude-settings-seg-thumb);
+  border-color: var(--dsw-alias-border-selected);
+  box-shadow: 0 1px 3px #0000001F;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   [class$="_editor"], [class*="_editor "],
   [class$="_modelEntry"], [class*="_modelEntry "]
 ) {
   border-radius: 9px;
-  border: 1px solid var(--claude-sidebar-divider);
-  background: var(--dsw-specific-input-major);
+  border: 1px solid var(--claude-settings-row-divider);
+  background: var(--claude-settings-panel-bg);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_tabs"], [class*="_tabs "]) {
-  border-bottom: 1px solid var(--claude-canvas-divider);
+  border-bottom: 1px solid var(--claude-settings-row-divider);
 }
 
-/* 18. Claude-Style Plugin Settings Card */
+/* Companion `dsh-shortcutter` Settings Tab Harmonization */
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences {
+  --sc-fg: var(--dsw-alias-label-primary);
+  --sc-muted: var(--claude-settings-desc-ink);
+  --sc-line: var(--claude-settings-row-divider);
+  --sc-key: var(--claude-settings-field-bg);
+  --sc-accent: var(--claude-accent-blue);
+  --sc-hover: var(--claude-settings-field-hover);
+  font-family: var(--claude-ui-sans);
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences h2 {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: var(--claude-prose-strong-weight);
+  letter-spacing: -.01em;
+  color: var(--claude-prose-strong-ink);
+  margin: 0 0 16px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences button:not(.sc-primary) {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 7px;
+  border: 1px solid var(--claude-settings-field-border);
+  background: var(--claude-settings-field-bg);
+  font-size: 13px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences .sc-native-row button[aria-pressed="true"] {
+  background: var(--claude-settings-seg-thumb);
+  border-color: var(--dsw-alias-border-selected);
+  color: var(--claude-prose-strong-ink);
+  font-weight: 400;
+  box-shadow: 0 1px 2px #00000024;
+}
+
+/* 18. Claude-Style Plugin Settings Card (`Normal | Thinking | Verbose` Segmented + Accent-Blue Switch) */
 .claude-theme-settings {
-  font: 13.5px/1.5 var(--claude-ui-sans);
+  font: 14px/1.5 var(--claude-ui-sans);
   color: var(--dsw-alias-label-primary);
   padding: 6px 0 12px;
-  max-width: 640px;
+  max-width: 680px;
 }
 .claude-theme-settings h3 {
-  font: 400 20px/1.3 Charter, "Iowan Old Style", Palatino, Georgia, serif;
+  font-family: var(--claude-ui-sans);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: var(--claude-prose-strong-weight, 600);
+  color: var(--claude-prose-strong-ink, var(--dsw-alias-label-primary));
   margin: 0 0 4px;
-  letter-spacing: -.014em;
+  letter-spacing: -.01em;
 }
 .claude-theme-settings > p {
-  color: var(--dsw-alias-label-tertiary);
-  font-size: 12.5px;
+  color: var(--claude-settings-desc-ink, var(--dsw-alias-label-tertiary));
+  font-size: 13px;
+  line-height: 19px;
   margin: 0 0 14px;
 }
 .claude-theme-rows {
-  border-top: 1px solid var(--claude-canvas-divider, var(--dsw-alias-border-l2));
+  border-top: 1px solid var(--claude-settings-row-divider, var(--dsw-alias-border-l2));
 }
 .claude-theme-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 13px 0;
-  border-bottom: 1px solid var(--claude-canvas-divider, var(--dsw-alias-border-l2));
+  gap: 14px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--claude-settings-row-divider, var(--dsw-alias-border-l2));
 }
 .claude-theme-row-meta {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   min-width: 180px;
 }
 .claude-theme-row-title {
-  font-size: 13.5px;
-  font-weight: 450;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
   color: var(--dsw-alias-label-primary);
 }
 .claude-theme-row-desc {
-  font-size: 12px;
-  color: var(--dsw-alias-label-tertiary);
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--claude-settings-desc-ink, var(--dsw-alias-label-tertiary));
 }
 .claude-theme-segmented {
   display: inline-flex;
@@ -1553,31 +1807,31 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_tabs"
   gap: 2px;
   padding: 2px;
   border-radius: 8px;
-  border: 1px solid var(--claude-sidebar-divider, var(--dsw-alias-border-l2));
-  background: var(--dsw-alias-settings-card-fill, var(--dsw-alias-interactive-bg-hover));
+  border: 1px solid var(--claude-settings-field-border, var(--dsw-alias-border-l2));
+  background: var(--claude-settings-seg-track, var(--dsw-alias-interactive-bg-hover));
 }
 .claude-theme-segmented button {
-  font: 440 12.5px/18px var(--claude-ui-sans);
+  font: 400 13px/18px var(--claude-ui-sans);
   color: var(--dsw-alias-label-secondary);
   background: transparent;
   border: 0;
   border-radius: 6px;
-  padding: 4px 11px;
+  padding: 5px 12px;
   cursor: pointer;
   transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease;
 }
 .claude-theme-segmented button[aria-pressed="true"] {
-  color: var(--dsw-alias-label-primary);
-  font-weight: 500;
-  background: var(--dsw-specific-input-major, var(--dsw-alias-bg-layer-2));
-  box-shadow: 0 1px 2px #00000014, 0 0 0 .5px var(--claude-composer-border, var(--dsw-alias-border-l2));
+  color: var(--claude-prose-strong-ink, var(--dsw-alias-label-primary));
+  font-weight: 400;
+  background: var(--claude-settings-seg-thumb, var(--dsw-alias-bg-layer-2));
+  box-shadow: 0 1px 2px #00000024;
 }
 .claude-theme-segmented button:disabled {
   opacity: .45;
   cursor: default;
 }
 .claude-theme-segmented button:focus-visible {
-  outline: 2px solid var(--dsw-focus-ring-color);
+  outline: 2px solid var(--claude-accent-blue, #2A78D6);
   outline-offset: 1px;
 }
 .claude-theme-switch {
@@ -1585,31 +1839,31 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_tabs"
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 34px;
+  width: 36px;
   height: 20px;
   padding: 2px;
   border: 0;
   border-radius: 999px;
-  background: var(--claude-switch-off, #D6D6D4);
+  background: var(--claude-switch-off, #CECECC);
   cursor: pointer;
   transition: background-color 140ms ease;
 }
 .claude-theme-switch[aria-checked="true"] {
-  background: var(--claude-switch-on, #C6613F);
+  background: var(--claude-switch-on, #2A78D6);
 }
 .claude-theme-switch-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
   background: #FFFFFF;
-  box-shadow: 0 1px 2.5px #00000029;
+  box-shadow: 0 1px 2.5px #00000033;
   transition: transform 140ms cubic-bezier(.165, .84, .44, 1);
 }
 .claude-theme-switch[aria-checked="true"] .claude-theme-switch-thumb {
-  transform: translateX(14px);
+  transform: translateX(16px);
 }
 .claude-theme-switch:focus-visible {
-  outline: 2px solid var(--dsw-focus-ring-color, #C6613F);
+  outline: 2px solid var(--claude-accent-blue, #2A78D6);
   outline-offset: 2px;
 }
 
@@ -1622,16 +1876,14 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_tabs"
     border-radius: 0;
     border: 0;
     grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 48px auto minmax(0, 1fr);
   }
-  html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is(
-    [class$="_navTitle"], [class*="_navTitle "],
-    nav:is([class$="_nav"], [class*="_nav "])
-  ) {
+  html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > nav:is([class$="_nav"], [class*="_nav "]) {
     border-right: 0;
-    background: transparent;
+    border-bottom: 1px solid var(--claude-settings-divider);
   }
   html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) {
-    padding: 4px 20px 24px;
+    padding: 18px 20px 28px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

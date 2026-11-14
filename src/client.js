@@ -4,7 +4,7 @@ window.__ModuleLoader__.load({
     const React = require('react');
     /* BUILD_TOKENS */
     /* BUILD_CSS */
-    const VERSION = '0.8.0';
+    const VERSION = '0.9.0';
     const KEYS = {
       enabled: 'dsh-theme-claude.enabled.v1',
       palette: 'dsh-theme-claude.palette.v2',
