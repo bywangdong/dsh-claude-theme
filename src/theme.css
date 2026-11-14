@@ -1188,50 +1188,57 @@ body[data-dsh-claude-theme] [class*="_dialog_"] {
   box-shadow: var(--claude-modal-shadow);
 }
 
-/* 17. Claude Desktop Verbatim Settings Modal (`[data-shortcut-modal="settings"]`) — Light & Dark */
+/* 17. Settings — measured against the supplied Claude General screenshot (2×).
+   1024×800 shell, 44px header, 212px rail, 16px insets, SF 14/20 body. */
 body[data-dsh-claude-theme] :is([class$="_overlay"], [class*="_overlay "]):has(> [data-shortcut-modal="settings"]) > :is([class$="_mask"], [class*="_mask "]) {
   background: var(--claude-settings-backdrop);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] {
-  width: min(920px, calc(100vw - 48px));
-  height: min(740px, calc(100vh - 2 * max(24px, var(--dsh-frame-overlay-top, 24px))));
-  grid-template-columns: 204px minmax(0, 1fr);
-  grid-template-rows: 48px minmax(0, 1fr);
-  border-radius: 14px;
+  box-sizing: border-box;
+  width: min(1024px, calc(100vw - 48px));
+  height: min(800px, calc(100vh - 2 * max(24px, var(--dsh-frame-overlay-top, 24px))));
+  grid-template-columns: 212px minmax(0, 1fr);
+  grid-template-rows: 44px minmax(0, 1fr);
+  border-radius: 12px;
   border: 1px solid var(--claude-settings-divider);
   background: var(--claude-settings-panel-bg);
-  box-shadow: var(--claude-modal-shadow);
+  box-shadow: var(--claude-settings-shadow);
   font-family: var(--claude-ui-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--claude-settings-ink);
 }
 
-/* Unified Full-Width 48px Top Header Bar (`Settings` on left + actions & `×` on right) */
+/* Continuous 44px header. Keep the host configuration-file action available. */
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_navTitle"], [class*="_navTitle "]) {
   box-sizing: border-box;
-  height: 48px;
-  padding: 0 16px 0 20px;
+  height: 44px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
-  background: var(--claude-settings-panel-bg);
+  background: var(--claude-settings-header-bg);
   border-right: 0;
   border-bottom: 1px solid var(--claude-settings-divider);
   font-family: var(--claude-ui-sans);
-  font-size: 14.5px;
+  font-size: 15px;
   line-height: 20px;
-  font-weight: var(--claude-prose-strong-weight);
-  letter-spacing: -.01em;
-  color: var(--claude-prose-strong-ink);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--claude-settings-ink);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_header"], [class*="_header "]) {
   box-sizing: border-box;
-  height: 48px;
-  padding: 0 12px 0 20px;
+  height: 44px;
+  padding: 0 8px 0 16px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
-  background: var(--claude-settings-panel-bg);
+  background: var(--claude-settings-header-bg);
   border-bottom: 1px solid var(--claude-settings-divider);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_header"], [class*="_header "]) :is([class$="_actions"], [class*="_actions "]) {
@@ -1242,11 +1249,11 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_hea
   height: 28px;
   padding: 0 10px;
   gap: 6px;
-  border-radius: 7px;
-  border: 1px solid var(--claude-settings-field-border);
-  background: var(--claude-settings-field-bg);
+  border-radius: 8px;
+  border: 1px solid var(--claude-settings-card-border);
+  background: transparent;
   box-shadow: none;
-  color: var(--dsw-alias-label-secondary);
+  color: var(--claude-settings-desc-ink);
   font-size: 12.5px;
   line-height: 18px;
   font-weight: 400;
@@ -1255,42 +1262,47 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_hea
 @media (hover: hover) {
   body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_header"], [class*="_header "]) :is([class$="_actions"], [class*="_actions "]) button:not(:is([class$="_close"], [class*="_close "])):hover:not(:disabled) {
     background: var(--claude-settings-field-hover);
-    color: var(--dsw-alias-label-primary);
+    color: var(--claude-settings-ink);
   }
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_close"], [class*="_close "]) {
   width: 28px;
   height: 28px;
-  border-radius: 7px;
+  border-radius: 8px;
   color: var(--dsw-alias-label-secondary);
   transition: background-color 120ms ease, color 120ms ease;
 }
 @media (hover: hover) {
   body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_close"], [class*="_close "]):hover {
     background: var(--claude-settings-field-bg);
-    color: var(--dsw-alias-label-primary);
+    color: var(--claude-settings-ink);
   }
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_close"], [class*="_close "]) svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
-/* Recessed Left Sidebar Navigation (`#191919` dark / `#F6F6F6` light) */
+/* Settings rail: 28px search, 24px breathing room, 12/18 group captions.
+   Host entries remain in their original order; groups follow the real pages. */
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > nav:is([class$="_nav"], [class*="_nav "]) {
   background: var(--claude-settings-nav-bg);
   border-right: 1px solid var(--claude-settings-divider);
-  padding: 12px 10px 16px;
+  padding: 16px;
+  overflow-y: auto;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_navList"], [class*="_navList "]) {
-  gap: 2px;
+  gap: 1px;
+  flex: none;
+  overflow: visible;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_navCell"], [class*="_navCell "]) {
   height: 32px;
-  padding: 0 10px;
-  gap: 10px;
-  border-radius: 7px;
-  font-size: 13.5px;
+  flex: none;
+  padding: 0 8px;
+  gap: 12px;
+  border-radius: 8px;
+  font-size: 14px;
   line-height: 20px;
   font-weight: 400;
   color: var(--claude-settings-nav-ink);
@@ -1307,22 +1319,146 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_navIc
 @media (hover: hover) {
   body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_navCell"], [class*="_navCell "]):hover:not([aria-current="true"]):not(:is([class$="_active"], [class*="_active "])) {
     background: var(--claude-settings-nav-hover);
-    color: var(--dsw-alias-label-primary);
+    color: var(--claude-settings-ink);
   }
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_navCell"], [class*="_navCell "]):is([aria-current="true"], [class$="_active"], [class*="_active "]) {
   background: var(--claude-settings-nav-active-bg);
-  color: var(--claude-prose-strong-ink);
+  color: var(--claude-settings-nav-selected-ink);
   font-weight: 400;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_navCell"], [class*="_navCell "]):is([aria-current="true"], [class$="_active"], [class*="_active "]) :is([class$="_navIcon"], [class*="_navIcon "]) {
-  color: var(--claude-prose-strong-ink);
+  color: var(--claude-settings-nav-selected-ink);
 }
 
-/* Elevated Right Content Pane (`#1F1F1F` dark / `#FFFFFF` light) */
+body[data-dsh-claude-theme] .claude-settings-search {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 12px;
+  height: 28px;
+  padding: 0 7px;
+  margin-bottom: 24px;
+  border: 1px solid var(--claude-settings-search-border);
+  border-radius: 8px;
+  background: var(--claude-settings-search-bg);
+  color: var(--claude-settings-desc-ink);
+}
+body[data-dsh-claude-theme] .claude-settings-search:focus-within {
+  border-color: var(--claude-settings-desc-ink);
+  box-shadow: 0 0 0 2px var(--claude-settings-row-divider);
+}
+body[data-dsh-claude-theme] .claude-settings-search input {
+  appearance: none;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--claude-settings-ink);
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+body[data-dsh-claude-theme] .claude-settings-search input::placeholder {
+  color: var(--claude-settings-desc-ink);
+  opacity: .85;
+}
+body[data-dsh-claude-theme] .claude-settings-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+body[data-dsh-claude-theme] .claude-settings-search-icon,
+body[data-dsh-claude-theme] .claude-settings-search-clear > span {
+  display: block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  -webkit-mask: var(--claude-settings-search-icon) center / contain no-repeat;
+  mask: var(--claude-settings-search-icon) center / contain no-repeat;
+}
+body[data-dsh-claude-theme] .claude-settings-search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--claude-settings-desc-ink);
+  cursor: pointer;
+}
+body[data-dsh-claude-theme] .claude-settings-search-clear > span {
+  width: 12px;
+  height: 12px;
+  -webkit-mask-image: var(--claude-settings-close-icon);
+  mask-image: var(--claude-settings-close-icon);
+}
+body[data-dsh-claude-theme] .claude-settings-search-clear:hover {
+  background: var(--claude-settings-nav-hover);
+  color: var(--claude-settings-ink);
+}
+body[data-dsh-claude-theme] .claude-settings-nav-heading {
+  flex: none;
+  height: 18px;
+  margin: 23px 0 11px;
+  color: var(--claude-settings-desc-ink);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+body[data-dsh-claude-theme] .claude-settings-nav-heading[data-claude-first-group] {
+  margin-top: 0;
+}
+body[data-dsh-claude-theme] .claude-settings-search-empty {
+  color: var(--claude-settings-desc-ink);
+  font-size: 12px;
+  line-height: 18px;
+}
+body[data-dsh-claude-theme] :is(.claude-settings-nav-heading, .claude-settings-search-clear, .claude-settings-search-empty)[hidden],
+body[data-dsh-claude-theme] [data-claude-search-hidden] {
+  display: none !important;
+}
+
+/* Library glyphs override the earlier approximations only in Settings. */
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-claude-settings-id] :is([class$="_navIcon"], [class*="_navIcon "]) {
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  -webkit-mask: var(--claude-settings-icon) center / contain no-repeat;
+  mask: var(--claude-settings-icon) center / contain no-repeat;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-claude-settings-id] :is([class$="_navIcon"], [class*="_navIcon "]) > * {
+  display: none;
+}
+
+/* Content starts 16px from the rail seam, matching the reference. */
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) {
-  padding: 24px 36px 36px;
+  padding: 16px 16px 40px;
   background: var(--claude-settings-panel-bg);
+}
+
+/* Host General items are contributed through slots; never reach across them with `>`. */
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] [data-slot="settings.section"] :is([class$="_section"], [class*="_section "]):has(> [data-slot="settings.general.item"])::before {
+  content: "General";
+  display: block;
+  margin: 0 0 24px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--claude-settings-ink);
+}
+html[lang^="zh"] body[data-dsh-claude-theme] [data-shortcut-modal="settings"] [data-slot="settings.section"] :is([class$="_section"], [class*="_section "]):has(> [data-slot="settings.general.item"])::before {
+  content: "通用";
 }
 
 /* Sans-Serif Section Headings (`Code appearance` / `Appearance` / `Account` 1:1 Cadence) */
@@ -1330,10 +1466,10 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(h1, h2, h3):is(
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_group"], [class*="_group "]):has(> :is([class$="_cubeRow"], [class*="_cubeRow "])) > :is([class$="_title"], [class*="_title "]) {
   font-family: var(--claude-ui-sans);
   font-size: 15px;
-  line-height: 22px;
-  font-weight: var(--claude-prose-strong-weight);
-  letter-spacing: -.01em;
-  color: var(--claude-prose-strong-ink);
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--claude-settings-ink);
   margin: 0;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "]))::before {
@@ -1341,18 +1477,18 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_secti
   display: block;
   font-family: var(--claude-ui-sans);
   font-size: 15px;
-  line-height: 22px;
-  font-weight: var(--claude-prose-strong-weight);
-  letter-spacing: -.01em;
-  color: var(--claude-prose-strong-ink);
-  margin-bottom: 2px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--claude-settings-ink);
+  margin-bottom: 24px;
 }
 html[lang^="zh"] body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "]))::before {
   content: "账户";
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_intro"], [class*="_intro "]) {
-  font-size: 13px;
-  line-height: 19px;
+  font-size: 14px;
+  line-height: 20px;
   color: var(--claude-settings-desc-ink);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]) :is(
@@ -1369,12 +1505,12 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_group
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_setting"], [class*="_setting "]) {
   min-height: 0;
-  padding: 16px 0;
+  padding: 12px 0;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   [class$="_row"], [class*="_row "]
 ):not(:is([class$="_card"], [class*="_card "])):not(:is([class$="_balanceCard"], [class*="_balanceCard "]) *) {
-  padding-block: 16px;
+  padding-block: 12px;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   :is([class$="_section"], [class*="_section "]) > :last-child,
@@ -1389,8 +1525,8 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   [class$="_rowText"], [class*="_rowText "],
   [class$="_settingText"], [class*="_settingText "]
 ) {
-  gap: 3px;
-  padding-right: 28px;
+  gap: 4px;
+  padding-right: 24px;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   span, div, label
@@ -1399,71 +1535,87 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_setti
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
-  color: var(--dsw-alias-label-primary);
+  color: var(--claude-settings-ink);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_group"], [class*="_group "]):has(> :is([class$="_cubeRow"], [class*="_cubeRow "])) > :is([class$="_title"], [class*="_title "]) {
   font-family: var(--claude-ui-sans);
   font-size: 15px;
-  line-height: 22px;
-  font-weight: var(--claude-prose-strong-weight);
-  letter-spacing: -.01em;
-  color: var(--claude-prose-strong-ink);
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--claude-settings-ink);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   [class$="_desc"], [class*="_desc "],
   [class$="_description"], [class*="_description "],
   [class$="_settingDescription"], [class*="_settingDescription "]
 ) {
-  font-size: 13px;
-  line-height: 19px;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 400;
   color: var(--claude-settings-desc-ink);
 }
 
-/* Appearance Theme Selector Cubes (Light / Dark / System) */
+/* Compact appearance selector: the existing native buttons retain their names and state. */
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_group"], [class*="_group "]):has(> :is([class$="_cubeRow"], [class*="_cubeRow "])) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 53px;
+  padding: 12px 0;
+  gap: 24px;
+  box-sizing: border-box;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_group"], [class*="_group "]):has(> :is([class$="_cubeRow"], [class*="_cubeRow "])) > :is([class$="_title"], [class*="_title "]) {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_cubeRow"], [class*="_cubeRow "]) {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 0;
+  display: flex;
+  flex: none;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 1px;
+  border-radius: 9px;
+  background: var(--claude-settings-seg-track);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_themeCube"], [class*="_themeCube "]) {
-  flex: 1 1 0;
-  min-height: 56px;
-  padding: 10px 14px;
-  gap: 5px;
-  border-radius: 10px;
-  border: 1px solid var(--claude-settings-card-border);
-  background: var(--claude-settings-card-bg);
-  color: var(--dsw-alias-label-secondary);
-  font-size: 13px;
-  line-height: 18px;
-  font-weight: 400;
-  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease, box-shadow 120ms ease;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  min-height: 26px;
+  padding: 4px;
+  gap: 0;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--claude-settings-ink);
+  font-size: 0;
+  line-height: 0;
+  transition: background-color 120ms ease, border-color 120ms ease;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_themeCube"], [class*="_themeCube "]) svg {
-  width: 17px;
-  height: 17px;
+  width: 18px;
+  height: 18px;
+  flex: none;
 }
 @media (hover: hover) {
-  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_themeCube"], [class*="_themeCube "]):hover:not([aria-pressed="true"]):not(:is([class$="_selected"], [class*="_selected "])) {
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_themeCube"], [class*="_themeCube "]):hover:not([aria-pressed="true"]) {
     background: var(--claude-settings-field-hover);
-    border-color: var(--claude-composer-border-focus);
-    color: var(--dsw-alias-label-primary);
   }
 }
-body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_themeCube"], [class*="_themeCube "]):is([aria-pressed="true"], [class$="_selected"], [class*="_selected "]) {
-  background: var(--claude-settings-field-hover);
-  border-color: var(--claude-settings-selected-border);
-  box-shadow: 0 1px 2px #00000018;
-  color: var(--claude-prose-strong-ink);
-  font-weight: 400;
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_themeCube"], [class*="_themeCube "])[aria-pressed="true"] {
+  background: var(--claude-settings-seg-thumb);
+  border-color: var(--claude-settings-card-border);
+  box-shadow: 0 1px 2px #00000008;
 }
 
-/* Filled Recessed 34px Controls (`e.g. JetBrains Mono` / `Default · 13 px` Material) */
+/* Compact controls. Selectors read as values in a row; editable fields keep an outline. */
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) :is(
-  button:is([class$="_selector"], [class*="_selector "]),
-  button:is([class$="_switcher"], [class*="_switcher "]),
   :is([class$="_setting"], [class*="_setting "]) > button:is([class$="_button"], [class*="_button "]),
   button[class*="_button_"][class*="_outline_"]
 ) {
@@ -1475,16 +1627,14 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_opt
   border: 1px solid var(--claude-settings-field-border);
   background: var(--claude-settings-field-bg);
   box-shadow: none;
-  color: var(--dsw-alias-label-primary);
-  font-size: 13.5px;
+  color: var(--claude-settings-ink);
+  font-size: 14px;
   line-height: 20px;
   font-weight: 400;
   transition: background-color 120ms ease, border-color 120ms ease;
 }
 @media (hover: hover) {
   body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) :is(
-    button:is([class$="_selector"], [class*="_selector "]),
-    button:is([class$="_switcher"], [class*="_switcher "]),
     :is([class$="_setting"], [class*="_setting "]) > button:is([class$="_button"], [class*="_button "]),
     button[class*="_button_"][class*="_outline_"]
   ):hover:not(:disabled) {
@@ -1502,7 +1652,7 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_stepp
   box-shadow: none;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_stepper"], [class*="_stepper "]) :is([class$="_value"], [class*="_value "], [class$="_unit"], [class*="_unit "]) {
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 20px;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_field"], [class*="_field "]) > :is(input, select) {
@@ -1520,9 +1670,9 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   border: 1px solid var(--claude-settings-field-border);
   background-color: var(--claude-settings-field-bg);
   box-shadow: none;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 400;
-  color: var(--dsw-alias-label-primary);
+  color: var(--claude-settings-ink);
   transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
@@ -1540,6 +1690,30 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   ):hover:not(:disabled):not(:focus) {
     background-color: var(--claude-settings-field-hover);
   }
+}
+/* The shared Input primitive owns its outline on a wrapping span. Avoid two nested borders. */
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] span:is([class$="_field"], [class*="_field "]):has(> input) {
+  box-sizing: border-box;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--claude-settings-field-border);
+  border-radius: 8px;
+  background: var(--claude-settings-field-bg);
+  box-shadow: none;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] span:is([class$="_field"], [class*="_field "]) > input {
+  height: 100%;
+  border: 0;
+  background: transparent;
+  line-height: 20px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] span:is([class$="_field"], [class*="_field "]) > input:focus {
+  border: 0;
+  box-shadow: none;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] span:is([class$="_field"], [class*="_field "]):focus-within {
+  border-color: var(--claude-accent-blue);
+  box-shadow: 0 0 0 1px var(--claude-accent-blue);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] select {
   -webkit-appearance: none !important;
@@ -1569,7 +1743,7 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   button:is([class$="_dangerButton"], [class*="_dangerButton "])
 ) {
   height: 32px;
-  border-radius: 7px;
+  border-radius: 8px;
   font-size: 13px;
   line-height: 20px;
 }
@@ -1585,7 +1759,7 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_rowAc
   button:is([class$="_dangerButton"], [class*="_dangerButton "])
 ) {
   height: 28px;
-  border-radius: 7px;
+  border-radius: 8px;
   font-size: 12.5px;
 }
 
@@ -1602,7 +1776,7 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
   background: var(--claude-settings-card-bg);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) {
-  max-width: 680px;
+  max-width: none;
   gap: 14px;
   padding: 0;
 }
@@ -1614,15 +1788,15 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_balan
   gap: 10px;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) :is([class$="_avatar"], [class*="_avatar "]) {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   box-shadow: inset 0 0 0 1px var(--claude-settings-card-border);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) :is([class$="_name"], [class*="_name "]) {
   font-size: 14px;
   line-height: 20px;
-  font-weight: var(--claude-prose-strong-weight);
-  color: var(--claude-prose-strong-ink);
+  font-weight: 500;
+  color: var(--claude-settings-ink);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) :is(
   [class$="_secondary"], [class*="_secondary "],
@@ -1637,7 +1811,7 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_accou
   height: 30px;
   padding: 0 10px;
   gap: 4px;
-  border-radius: 7px;
+  border-radius: 8px;
   font-size: 13px;
   line-height: 20px;
   color: var(--dsw-alias-label-secondary);
@@ -1646,13 +1820,13 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_accou
 @media (hover: hover) {
   body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_accountInfo"], [class*="_accountInfo "]):hover {
     background: var(--claude-settings-card-btn-bg);
-    color: var(--dsw-alias-label-primary);
+    color: var(--claude-settings-ink);
   }
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_balanceCard"], [class*="_balanceCard "]) :is([class$="_row"], [class*="_row "]) {
   min-height: 36px;
   padding: 2px 0;
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 20px;
   color: var(--dsw-alias-label-secondary);
 }
@@ -1662,7 +1836,7 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_amoun
   font-weight: 600;
   letter-spacing: -.015em;
   font-variant-numeric: tabular-nums;
-  color: var(--claude-prose-strong-ink);
+  color: var(--claude-settings-ink);
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_balanceCard"], [class*="_balanceCard "]) :is([class$="_divider"], [class*="_divider "]) {
   border-top: 1px solid var(--claude-settings-row-divider);
@@ -1671,10 +1845,10 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_balan
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_linkButton"], [class*="_linkButton "]) {
   height: 32px;
   padding: 0 13px;
-  border-radius: 7px;
+  border-radius: 8px;
   border: 1px solid var(--claude-settings-field-border);
   background: var(--claude-settings-card-btn-bg);
-  color: var(--dsw-alias-label-primary);
+  color: var(--claude-settings-ink);
   font-size: 13px;
   line-height: 20px;
   font-weight: 400;
@@ -1716,6 +1890,63 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_tabs"
   border-bottom: 1px solid var(--claude-settings-row-divider);
 }
 
+/* Account uses the same unboxed rows and fine rules as Claude's Profile section. */
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) {
+  gap: 0;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_section"], [class*="_section "]):has(> :is([class$="_balanceCard"], [class*="_balanceCard "])) > :is([class$="_card"], [class*="_card "]) {
+  padding: 8px 0 20px;
+  border: 0;
+  border-bottom: 1px solid var(--claude-settings-row-divider);
+  border-radius: 0;
+  background: transparent;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_balanceCard"], [class*="_balanceCard "]) {
+  padding: 0;
+  gap: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_balanceCard"], [class*="_balanceCard "]) :is([class$="_row"], [class*="_row "]) {
+  min-height: 60px;
+  padding: 12px 0;
+  font-size: 14px;
+  color: var(--claude-settings-ink);
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_balanceCard"], [class*="_balanceCard "]) :is([class$="_divider"], [class*="_divider "]) {
+  margin: 0;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_amount"], [class*="_amount "]) {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
+  button:is([class$="_selector"], [class*="_selector "]),
+  button:is([class$="_switcher"], [class*="_switcher "])
+) {
+  height: 28px;
+  min-width: 0;
+  padding: 0 10px;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--claude-settings-ink);
+  font: 400 14px/20px var(--claude-ui-sans);
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
+    button:is([class$="_selector"], [class*="_selector "]),
+    button:is([class$="_switcher"], [class*="_switcher "])
+  ):hover:not(:disabled) {
+    background: var(--claude-settings-field-hover);
+  }
+}
+
 /* Companion `dsh-shortcutter` Settings Tab Harmonization */
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences {
   --sc-fg: var(--dsw-alias-label-primary);
@@ -1725,27 +1956,37 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences {
   --sc-accent: var(--claude-accent-blue);
   --sc-hover: var(--claude-settings-field-hover);
   font-family: var(--claude-ui-sans);
+  line-height: 20px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences :is(p, button) {
+  font-size: 14px;
+  line-height: 20px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences h3 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences h2 {
   font-size: 15px;
-  line-height: 22px;
-  font-weight: var(--claude-prose-strong-weight);
-  letter-spacing: -.01em;
-  color: var(--claude-prose-strong-ink);
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--claude-settings-ink);
   margin: 0 0 16px;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences button:not(.sc-primary) {
   height: 32px;
   padding: 0 12px;
-  border-radius: 7px;
+  border-radius: 8px;
   border: 1px solid var(--claude-settings-field-border);
   background: var(--claude-settings-field-bg);
-  font-size: 13px;
+  font-size: 14px;
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences .sc-native-row button[aria-pressed="true"] {
   background: var(--claude-settings-seg-thumb);
   border-color: var(--dsw-alias-border-selected);
-  color: var(--claude-prose-strong-ink);
+  color: var(--claude-settings-ink);
   font-weight: 400;
   box-shadow: 0 1px 2px #00000024;
 }
@@ -1876,11 +2117,34 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences .sc
     border-radius: 0;
     border: 0;
     grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: 48px auto minmax(0, 1fr);
+    grid-template-rows: 44px auto minmax(0, 1fr);
+  }
+  html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_navTitle"], [class*="_navTitle "]) {
+    height: 44px;
+    padding: 0 16px;
+  }
+  html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_header"], [class*="_header "]) {
+    height: 44px;
+    padding: 0 8px;
   }
   html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > nav:is([class$="_nav"], [class*="_nav "]) {
+    padding: 0;
     border-right: 0;
     border-bottom: 1px solid var(--claude-settings-divider);
+  }
+  html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] .claude-settings-search {
+    margin: 12px 16px 0;
+  }
+  html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] .claude-settings-nav-heading {
+    display: none;
+  }
+  html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_navList"], [class*="_navList "]) {
+    gap: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] .claude-settings-search-empty {
+    margin: 0 16px 12px;
   }
   html:not([data-windows-titlebar]):not([data-platform="darwin"]) body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) {
     padding: 18px 20px 28px;

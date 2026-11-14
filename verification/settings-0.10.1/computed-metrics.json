@@ -1,0 +1,23 @@
+{
+  "background": "rgb(255, 255, 255)",
+  "dialog": {
+    "bottom": 824,
+    "height": 800,
+    "left": 81,
+    "right": 1105,
+    "top": 24,
+    "width": 1024,
+    "x": 81,
+    "y": 24
+  },
+  "font": "14px / 20px -apple-system, \"system-ui\", \"SF Pro Text\", \"PingFang SC\", \"PingFang TC\", \"Hiragino Sans\", \"Apple SD Gothic Neo\", \"Microsoft YaHei\", \"Noto Sans CJK SC\", system-ui, sans-serif",
+  "horizontalOverflow": false,
+  "navBackground": "rgb(255, 255, 255)",
+  "navWidth": 212,
+  "shadow": "rgba(0, 0, 0, 0.1) 0px 1px 4px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+  "version": "0.10.1",
+  "viewport": {
+    "height": 848,
+    "width": 1186
+  }
+}

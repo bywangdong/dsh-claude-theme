@@ -1,0 +1,37 @@
+{
+  "source": "Claude Desktop ion-dist.asar",
+  "version": "5.11492.5",
+  "geometry": "Unmodified master20 definitions; renderer stroke 1.25, rounded caps and joins.",
+  "icons": [
+    {
+      "icon": "Settings",
+      "file": "settings.svg",
+      "master": 20,
+      "source_definition_sha256": "38a16b516763404db5ce0512e2bd70805a5f035035ee02fed13291d7aa92f3f6"
+    },
+    {
+      "icon": "Database",
+      "file": "database.svg",
+      "master": 20,
+      "source_definition_sha256": "2253ec977471a773c03255d30f8793783c88767f9bdb9c9bec81b3fbb5c65aaa"
+    },
+    {
+      "icon": "Plugin",
+      "file": "plugin.svg",
+      "master": 20,
+      "source_definition_sha256": "1e4a506a096b030924e4b24d79f472e1fd47aaf565bc096fff08518d9c657db4"
+    },
+    {
+      "icon": "Search",
+      "file": "search.svg",
+      "master": 20,
+      "source_definition_sha256": "9f59f882622c0bc3e155b3632689f06fb241b51e6ecc81e6036dab387b259d33"
+    },
+    {
+      "icon": "Computer",
+      "file": "computer.svg",
+      "master": 20,
+      "source_definition_sha256": "f7cf78d4f9bfc8728570f628e5aa563c5d2090f9b12b8a3ddec9a806c4f04dc6"
+    }
+  ]
+}

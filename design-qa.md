@@ -1,62 +1,49 @@
-# Claude for DSH — design QA
+# Claude for DSH — 设置页视觉验收
 
-**final result: passed**
+**结果：0.11.0 完成本轮灰阶、图标、间距与层次修正，并以已安装桌面客户端的原生截图复核。**
 
-2026-11-14 · 插件 0.1.2 · macOS · DeepSeek Harness 0.2.2-rc.3。
+2026-11-15 · DSH 0.2.2-rc.3 · macOS。旧 0.10.1 验收过于宽松：遗漏了深色灰阶、齿轮轮廓以及搜索/分组层次的差异。历史记录保存在 `verification/design-qa-0.10.1.md`。
 
-此文是 `0.1.2` 的历史验收记录，以下结论对应当时的版本。当前 `0.8.0` 的实现说明见 [DEVELOPMENT.md](DEVELOPMENT.md) 和 [设计规范](design/dsh-theme/design-spec.md)。
+## 最终实图证据
 
-本次目标是把 Claude 的材质、排版和空间节奏带进现有 DSH，不是替换产品的信息结构。DSH 品牌、权限入口、工作区、工具、会话内容和原有图标保留。
+以下路径均在 `verification/settings-0.11.0/`。
 
-## 视觉依据与尺寸
-
-- 源图：[Claude 首页实机截图](design/claude-reference/evidence/01-home-verified.png)，运行版本 5.1231.2。
-- 配色与排版来源：[原始 token](design/claude-reference/evidence/verified-design-tokens.json)、[CSS 摘录](design/claude-reference/evidence/source-excerpts.css)、[计算样式验证](design/claude-reference/evidence/computed-verification.json)；来自已交付到本机的 Claude 5.11492.5 更新包。全部资料已归档到 [design/](design/README.md)，查看不再依赖外部可视化目录。
-- 实现截图：`verification/final-light.png`、`verification/final-dark.png`。均为真实 DSH 桌面窗口，不是模拟页面。
-- 源图 3796×2176 px，去除系统截图外边距，裁切 `(112,76)-(3684,2028)` 得 3572×1952 px；实现截图本身为 3572×1952 px。两者以 2× Retina 密度统一为 1786×976 CSS px 后比较。
-- 窄窗口：960×1050 CSS px，2× 密度。DSH 自动收起侧栏；输入框、工作区菜单、模型和发送按钮保持可达。
-- 全景比较：`verification/comparison-final.png`；标题 / 输入框细节：`verification/comparison-details.png`；侧栏控件细节：`verification/comparison-sidebar.png`。
-- 状态：新会话、浅色 / 深色、空输入、中文多行输入、键盘焦点、侧栏收放、通用设置和插件设置。真实长聊天、表格及链接截图现保留在仓库外工作目录的 `local/verification-private/`，不提交到 Git，也不进入安装包。
-
-## 比较历史与修复
-
-1. **0.1.0 / iteration 1 — blocked**
-   - [P2] 新会话按钮仍是 38px 居中、带边框的按钮，视觉重量大于参考。证据：`verification/iteration-1-light.png`。
-   - [P2] 禁用发送按钮仍是较重的灰色实心块。改为浅灰交互层背景、次要图标色，保留明确的禁用语义。
-2. **0.1.1 / iteration 2 — blocked**
-   - 发送按钮修复生效；侧栏规则使用 `[data-sidebar-collapsed="false"]`，但宿主在展开时省略属性，因此没有命中。
-   - 证据：`verification/iteration-2-light.png`、`verification/iteration-2-dark.png`。发现来自截图比较，而非仅检查构建结果。
-   - 修复：以侧栏列和属性存在性限定展开状态，同时调整按钮内部内容容器。字号与 Markdown heading token 也保持一致。
-3. **0.1.2 / final — passed**
-   - 新会话按钮现在左对齐，32px 高、8px 圆角，低对比填充。最终局部截图已确认，未依赖错误的 false 属性。
-   - 装饰陶土色仍为 `#D97757`；浅色小号功能文字使用 `#A64F34`，与 `#FAFAFA` 背景的对比度约 5.31:1。
-   - 插件详情文案缩短，开关及外观选择更容易找到；详细开发说明移到 `DEVELOPMENT.md`。
-   - 最新全景与局部比较未发现剩余 P0 / P1 / P2 问题。
-
-## 五项视觉检查
-
-| 检查面 | 结论 |
+| 文件 | 内容与比较方法 |
 | --- | --- |
-| 字体与层级 | 系统字体用于导航、控件、聊天，中文由苹方等宿主字体栈呈现。欢迎标题使用本机 Charter 等衬线体，38px / 1.2；正文默认 15px / 24px，代码块默认 13px / 19px，相对用户字号变化。Charter 是 Anthropic Serif 的明确近似替代，属于接受的字体差异。 |
-| 间距与布局 | 新会话输入框最大宽度 672px，与参考尺度相符；默认聊天宽度 720px，并尊重用户已有的拖动宽度。输入框 20px 圆角，普通控件以 8px 为主。外层留白宽松，内部保持紧凑。保留 DSH 的额外工作区 / 模式 / 权限入口，不改变产品信息顺序。 |
-| 颜色与材质 | 真实截图采样确认浅色主画布 `#FFFFFF`、侧栏 `#FAFAFA`；深色主画布 `#191919`、侧栏 `#1F1F1F`。移除侧栏冷色渐变和菜单模糊，使用轻边界和克制阴影。主按钮中性黑白，状态、链接保留独立语义。 |
-| 资产与图标 | 保留 DSH 原有矢量图形与图标，欢迎图形只改变颜色。没有自绘 Claude 商标、替代插画、生成位图或重分发 Anthropic 字体。截图清晰，未接受 Stage Manager 的透视缩略图作为验证证据。 |
-| 文案与内容 | DSH 的标题、提示、工作区及聊天内容保持原样；新增主题配置文案独立完整。主题设置提供启用开关、跟随系统、浅色和深色选项。 |
+| `native-sidebar-comparison.png` | 左侧为用户提供的 Claude 深色侧栏，右侧为已安装 DSH 0.11.0 原生侧栏。同为 2×，保持原始像素比例；对齐导航顶部，搜索框和首个分组标题可直接比较。 |
+| `native-general-before-after.png` | 从上到下为 Claude、旧 DSH 0.10.1、新 DSH 0.11.0。选中行均为 358×64 px，未拉伸。直接检查齿轮、文字位置、笔画、选中底色。 |
+| `native-dark-settings.png` / `native-light-settings.png` | 当前桌面应用实际设置弹窗，2048×1600 px（1024×800 CSS px）。 |
+| `native-light-full-comparison.png` | Claude 与 DSH 的浅色完整弹窗，各缩小为 1024×800；比较窗口、顶栏、导航、字号与设置行密度。 |
+| `general-chinese.jpg` / `search-empty.jpg` / `narrow-680.jpg` | 隔离 profile 的真实 DSH 运行时，分别验证中文、无结果和 680×760 窄窗口状态。 |
 
-## 验证记录
+原生最终画面来自完整 3572×1952 窗口截图，弹窗裁切 `(762,176)-(2810,1776)`。原始全窗口含其他工作区内容，仅存仓库外 `local/verification-private/settings-0.11.0/`。原生捕获为 JPEG；保留真实渲染，不重绘界面。台前调度缩略图、过渡透视画面和浏览器模拟 2× 后出现的模糊截图均不作为最终验收依据。
 
-- `npm run build`、`npm run check` 通过。检查包含实际构建产物语法、两套 token 完整性、离线资源、启用 / 禁用初始化，以及卸载后样式和覆盖层清理。
-- 通过桌面应用的插件管理器安装并启用。已比较已安装的 `lib/client.js`、`lib/index.js`、补丁及 README 与最终构建，逐文件 SHA-256 一致。
-- 原有 Shortcutter 与 Switcher 的版本和依赖保持不变。安装前 profile 备份位于 `/Users/nick/.dsh/profiles/desktop/.claude-theme-backups/20261114-132025`。
-- 原生界面中验证了主题开关、明暗切换、设置页、工作区选择、左右侧栏收放、窗口缩窄后恢复、中文两行输入及 Tab 焦点。输入内容已清空，没有发送模型请求。
-- 主文字 / 次要文字 / 小号元信息在侧栏背景上的对比度，浅色分别约 16.93 / 5.67 / 4.54，深色约 14.36 / 6.18 / 5.79。
-- 最终停留在 Agent 工作区的新会话页面，浅色主题启用，窗口恢复原尺寸。保留可通过通用设置或主题插件详情切换的深色外观。
+## 发现与修正
 
-## 验证边界与后续维护
+| 发现 | 修正 | 最终观察 |
+| --- | --- | --- |
+| [P1] 旧版深色底 #1F1F1F、文字 #DFDFDF，整体偏灰且对比不足 | 设置主体与导航 #191919；文字/图标 #EFEFEF；选中底 #3B3B3B、选中文字 #F1F1F1；顶栏保留 #1F1F1F | 原生侧栏并排对照，底色、正文与选中行的层次接近参考。 |
+| [P1] 没有搜索和分类，六项平铺，缺少 Claude 的导航层次 | 增加可用的页面搜索、Preferences / Customize 分组；沿用宿主原始按钮和顺序 | 搜索框、分组标题的起始位置与参考对齐；DSH 保留实际六个设置入口。 |
+| [P2] 旧齿轮轮廓近似花形；首轮替换后图标光学尺寸仍偏小 | Settings、Search、Database、Plugin、Computer 使用参考中的 20px master；DSH 专用图标使用统一笔画的 Lucide fallback | 选中行原始比例对比确认齿轮轮廓和尺寸已修正，未仅依据 CSS 宽高判断。来源见 `THIRD_PARTY_NOTICES.md` 与资产 provenance。 |
+| [P2] 导航行间距和图文起点有细小偏差 | 32px 行高、1px 行间距、8px 横向内边距、20px 图标、12px 图文间距；搜索框 28px；分组标题 12/18 | 新旧/参考三行对照，文字起点一致，字形墨迹高度均为 21 px（2×）。 |
+| [P2] 搜索后仅剩第二组时顶部多留一段空白 | 按首个可见分组重新应用上边距 | Shortcutter 搜索结果与空结果状态实测通过。 |
 
-- 未做 Windows、移动端、VoiceOver 全流程或应用完全退出后的重启验证；没有读取渲染器控制台。现场未出现加载错误提示，主题控件和样式已实际运行。
-- 深色长聊天在 0.1.0 检查；窄窗口、中文输入及浅色长聊天在 0.1.1 复核。0.1.2 仅改侧栏选择器、功能强调文字对比度与插件说明，随后复核明暗首页和侧栏收放。
-- DSH 的语义 `data-*` 钩子是主要适配面；少量 CSS Module 后缀仍需在宿主结构更新后复核。
-- 跟随系统选项沿用宿主 ThemeRuntime；本轮手动验证明暗切换，没有修改 macOS 系统外观。
+字体继续使用 macOS 系统 sans：正文 14/20、分组标题 12/18、内容标题 15/20/500。弹窗 1024×800、顶栏 44、导航宽 212、内容横向内边距 16。最终验收同时查看截图中的视觉结果与这些尺寸，不以数值单独判定通过。
 
-**实施检查清单：** 最终构建与安装一致；明暗主题生效；所有 P2 修复已经截图复核；原有依赖保留；测试输入清空；浅色及窗口尺寸已恢复。
+## 行为与安装验证
+
+- `npm run pack:local`、`npm run check`、`git diff --check` 通过。检查覆盖输出语法、159 对主题 token、离线资源、语义 CSS、偏好持久化、槽位与样式生命周期；视觉通过结论由上述实图提供。
+- 已通过桌面内置 CLI 安装 0.11.0。六个打包文件逐字节匹配安装文件，见 `verification/installation-verification.json`。Shortcutter、Switcher 依赖与安装前一致。
+- 隔离 profile 中搜索 `shortcuts` 后回车，打开真实 Shortcutter 页面；清除恢复全部入口。搜索 `模型` 后回车打开 Models；未输入密钥。
+- 无结果时显示提示；切换中文后搜索占位文案、分组、原始页面名称同步更新；随后恢复 English。
+- 关闭设置后，搜索与标题节点均清理；重新打开以及插件关闭再开启后仍只有一套搜索和分组。
+- 680×760 实际截图中搜索位于横向导航上方，关闭按钮可达，文档宽度为 680、没有横向页面溢出。浏览器控制台 error 查询为空。临时 viewport 已重置，QA 服务已停止。
+- 原生桌面实际切换浅色和深色效果，最终恢复原有 System 外观，停留在 General。未调整密钥、权限或日志上传选项。
+- 最初要求备份推送的代码已在 `3141125` 推送；0.11.0 源码、构建产物与截图随本轮修改一并提交。
+
+## 明确差异与验证边界
+
+- DSH 仍使用自身设置项、顺序和右上角配置文件入口，分为两个实际分类。Claude 的 Privacy、Usage 等业务项不属于本插件。
+- 原生图中文字 General 墨迹宽约 96 px、参考约 97 px，高度与起点一致；JPEG 捕获和字体抗锯齿仍有细微差异，不据此宣称逐像素一致。
+- 新搜索支持八种界面文案，本轮实测中文和英文；其他语言、Windows、完整 VoiceOver 流程及暖色截图未验收。搜索有可访问名称、清除按钮、空结果状态以及 Enter / ArrowDown 操作，保留宿主导航按钮语义。
+- `iteration-1-*` 记录首轮视觉问题；失败或重复的 2× 模拟截图移到仓库外 `local/verification-private/settings-0.11.0/discarded-browser-captures/`，避免与最终原生截图混淆。

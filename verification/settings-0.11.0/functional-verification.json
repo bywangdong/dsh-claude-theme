@@ -1,0 +1,22 @@
+{
+  "version": "0.11.0",
+  "runtime": "DeepSeek Harness 0.2.2-rc.3, isolated qa profile",
+  "checks": {
+    "englishNavigationAndGrouping": "passed",
+    "keywordSearchAndEnterToShortcutter": "passed",
+    "chineseSearchAndEnterToModels": "passed",
+    "clearSearchAndEmptyState": "passed",
+    "englishChineseLocaleSwitch": "passed",
+    "settingsCloseRemovesOwnedNodes": "passed",
+    "pluginDisableReenableAndSettingsReopen": "passed",
+    "narrow680x760": {
+      "documentWidth": 680,
+      "viewportWidth": 680,
+      "visibleSearchCount": 1
+    },
+    "browserConsoleErrors": [],
+    "nativeDarkLightScreenshots": "captured and visually reviewed",
+    "nativeAppearanceRestored": "System",
+    "temporaryViewportResetAndQAServerStopped": true
+  }
+}

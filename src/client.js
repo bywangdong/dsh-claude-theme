@@ -4,7 +4,8 @@ window.__ModuleLoader__.load({
     const React = require('react');
     /* BUILD_TOKENS */
     /* BUILD_CSS */
-    const VERSION = '0.9.0';
+    /* BUILD_SETTINGS_NAV */
+    const VERSION = '0.11.0';
     const KEYS = {
       enabled: 'dsh-theme-claude.enabled.v1',
       palette: 'dsh-theme-claude.palette.v2',
@@ -202,12 +203,12 @@ window.__ModuleLoader__.load({
           const dispose = ctx.on('theme/change', refresh);
           return () => { subscribers.delete(refresh); dispose(); };
         }, []);
-        if (view === 'summary') return 'Claude Desktop · 1:1 原生苹方中文排版、fizzy-lake 灰阶与全量矢量图标';
+        if (view === 'summary') return 'Claude 风格的字体、配色与界面细节';
         const preference = ctx.theme.getTheme().preference;
 
         return React.createElement('section', { className: 'claude-theme-settings' },
           React.createElement('h3', null, '外观细节'),
-          React.createElement('p', null, '严格对齐 Claude Desktop (@ant/cds fizzy-lake + Claude Code) 原生 PingFang SC 14px/20px 中文排版、明暗灰阶层次与全量矢量图标，基础字号与快捷键继续遵循 DSH 通用设置。'),
+          React.createElement('p', null, '调整主题、色温和回复字体。会话字号与键盘快捷键可在通用设置中修改。'),
           React.createElement('div', { className: 'claude-theme-rows' },
             renderRow(
               '启用 Claude 主题',
@@ -256,6 +257,30 @@ window.__ModuleLoader__.load({
 
       ctx.effect(() => ctx.slots.inject('plugins.bundle.config', () =>
         ctx.slots.register({ name: 'plugins.bundle.config', key: 'dsh-theme-claude' }, Settings)), 'dsh-theme-claude: settings');
+
+      function SettingsNavigation() {
+        const anchor = React.useRef(null);
+        const [, refresh] = React.useReducer(n => n + 1, 0);
+        React.useEffect(() => {
+          subscribers.add(refresh);
+          return () => subscribers.delete(refresh);
+        }, []);
+        React.useLayoutEffect(() => {
+          if (!enabled) return;
+          const panel = anchor.current?.closest('[data-shortcut-modal="settings"]');
+          if (!panel) return;
+          return enhanceSettingsNavigation(panel, () => ctx.slots.entries('settings.section')
+            .map(entry => ({
+              id: entry.options.id ?? '',
+              order: entry.options.order ?? 0,
+              label: typeof entry.options.label === 'function' ? entry.options.label() : entry.options.label,
+            }))
+            .sort((a, b) => a.order - b.order));
+        }, [enabled]);
+        return React.createElement('span', { ref: anchor, hidden: true });
+      }
+      ctx.effect(() => ctx.slots.inject('settings.action', () =>
+        ctx.slots.register({ name: 'settings.action', id: 'claude-settings-navigation', order: -100 }, SettingsNavigation)), 'dsh-theme-claude: settings navigation');
     }
 
     return { inject, apply };

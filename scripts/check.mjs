@@ -15,7 +15,7 @@ const neutralKeys = Object.keys(PALETTES.neutral).sort();
 assert.deepEqual(warmKeys, neutralKeys, 'warm and neutral palettes must define the exact same token keys');
 assert.equal(tokens, PALETTES.neutral, 'default export must be the neutral palette');
 
-// Guard verbatim Claude Desktop @ant/cds fizzy-lake surface, Settings modal elevation & CJK typography calibration
+// Guard palette values; visual fidelity is checked separately against screenshots.
 assert.equal(PALETTES.neutral['--dsw-alias-bg-base'].light, '#FFFFFF');
 assert.equal(PALETTES.neutral['--dsw-alias-bg-base'].dark, '#191919');
 assert.equal(PALETTES.neutral['--dsw-specific-sidebar-fill'].light, '#FAFAFA');
@@ -25,8 +25,8 @@ assert.equal(PALETTES.neutral['--claude-nav-active-bg'].dark, '#3F3F3F');
 assert.equal(PALETTES.neutral['--claude-prose-strong-weight'].light, '600');
 assert.equal(PALETTES.neutral['--claude-prose-strong-weight'].dark, '500');
 assert.equal(PALETTES.neutral['--claude-settings-panel-bg'].light, '#FFFFFF');
-assert.equal(PALETTES.neutral['--claude-settings-panel-bg'].dark, '#1F1F1F');
-assert.equal(PALETTES.neutral['--claude-settings-nav-bg'].light, '#F6F6F6');
+assert.equal(PALETTES.neutral['--claude-settings-panel-bg'].dark, '#191919');
+assert.equal(PALETTES.neutral['--claude-settings-nav-bg'].light, '#FFFFFF');
 assert.equal(PALETTES.neutral['--claude-settings-nav-bg'].dark, '#191919');
 assert.equal(PALETTES.neutral['--claude-switch-on'].light, '#2A78D6');
 assert.equal(PALETTES.neutral['--claude-switch-on'].dark, '#3987E5');
@@ -121,7 +121,7 @@ for (const scenario of [
     assert.equal(svg.props.className, 'claude-hero-sunburst');
   }
   if (!scenario.disabled) {
-    assert.equal(attrs.get('data-dsh-claude-theme'), '0.9.0');
+    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.0');
     assert.equal(attrs.get('data-claude-palette'), scenario.expectPalette);
     assert.equal(attrs.get('data-claude-prose'), scenario.expectProse);
     assert.equal(attrs.get('data-claude-chrome'), scenario.expectChrome);
@@ -148,7 +148,7 @@ for (const scenario of [
   assert.equal(windowListeners.size, 0, 'all window focus/blur listeners must be removed on unload');
 }
 
-assert.ok(!source.includes('BUILD_CSS') && !source.includes('BUILD_TOKENS'));
+assert.ok(!source.includes('BUILD_CSS') && !source.includes('BUILD_TOKENS') && !source.includes('BUILD_SETTINGS_NAV'));
 for (const marker of [
   'PingFang SC',
   '--dsw-font-markdown-table:',
@@ -162,7 +162,7 @@ for (const marker of [
   'canvas[data-home-whale]',
   '[data-sidebar-right-guide]',
   '[data-shortcut-modal="settings"]',
-  'grid-template-rows: 48px minmax(0, 1fr)',
+  'grid-template-rows: 44px minmax(0, 1fr)',
   '--claude-settings-panel-bg',
   '--claude-settings-nav-bg',
   '--claude-settings-field-bg',
@@ -175,7 +175,7 @@ for (const marker of [
   'M2.80078 10.2112',
   'M8.48924 28H19.5108',
 ]) {
-  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.9.0 semantic selector marker: ${marker}`);
+  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.0 semantic selector marker: ${marker}`);
 }
 
 for (const name of iconNames) {
@@ -198,4 +198,4 @@ for (const pat of rawClassContains) {
 }
 
 assert.ok(!/https?:\/\/|fetch\(|XMLHttpRequest/.test(source.replaceAll('http://www.w3.org/2000/svg', '')), 'theme must be offline and self contained');
-console.log('PASS: emitted 0.9.0 JS, verbatim Claude CJK/Latin typography, fizzy-lake & Settings modal surfaces, 102 icon families + 64 inline/FileTypeIcon glyphs, window focus dimming, offline bundle & complete unload.');
+console.log('PASS: emitted 0.11.0 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');

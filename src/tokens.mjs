@@ -1,7 +1,7 @@
-// Dual Claude palettes for DeepSeek Harness (0.9.0):
+// Dual Claude palettes for DeepSeek Harness (0.11.0):
 // 1. neutral (default): Verbatim Claude Desktop @ant/cds fizzy-lake surfaces, settings modal & ink hierarchy
-//    - Light: #FAFAFA sidebar | #EAEAEA 1px seam | #FFFFFF canvas | #E4E4E4 selected pill | #FFFFFF/#F6F6F6 settings modal
-//    - Dark:  #1F1F1F sidebar | #2B2B2B 1px seam | #191919 canvas | #3F3F3F selected pill | #1F1F1F/#191919 settings modal
+//    - Light: #FAFAFA sidebar | #EAEAEA 1px seam | #FFFFFF canvas | #E4E4E4 selected pill | #FFFFFF settings modal
+//    - Dark:  #1F1F1F sidebar | #2B2B2B 1px seam | #191919 canvas | #3F3F3F selected pill | #191919 settings modal, #1F1F1F settings header
 // 2. warm: Classic Claude warm parchment (#FAF9F5 canvas / #F3F1E9 sidebar) & warm charcoal (#1C1C1A canvas / #222120 sidebar).
 
 function createPalette(spec) {
@@ -154,8 +154,14 @@ export const WARM_TOKENS = createPalette(({ pair, alias, specific }) => {
   pair('--claude-popover-shadow', '0 10px 28px -4px #1414131C, 0 2px 6px 0 #1414130F', '0 12px 32px -4px #00000054, 0 2px 8px 0 #00000033');
   pair('--claude-modal-shadow', '0 24px 64px -12px #14141333, 0 4px 16px -2px #14141314', '0 28px 72px -10px #0000008C, 0 6px 24px -2px #00000059');
   pair('--claude-settings-backdrop', '#1414134A', '#0000009E');
+  pair('--claude-settings-shadow', '0 1px 4px #1414131A, 0 0 0 1px #14141314', '0 2px 12px #00000050, 0 0 0 1px #FAF9F514');
   pair('--claude-settings-panel-bg', '#FAF9F5', '#21201E');
-  pair('--claude-settings-nav-bg', '#F2F0E8', '#1A1918');
+  pair('--claude-settings-nav-bg', '#FAF9F5', '#21201E');
+  pair('--claude-settings-header-bg', '#FAF9F5', '#282724');
+  pair('--claude-settings-search-bg', '#FAF9F5', '#2B2A27');
+  pair('--claude-settings-search-border', '#E3E0D5', '#353430');
+  pair('--claude-settings-nav-selected-ink', '#191918', '#FAF9F5');
+  pair('--claude-settings-ink', '#191918', '#E1DFD6');
   pair('--claude-settings-divider', '#E3E0D5', '#2E2D2A');
   pair('--claude-settings-row-divider', '#1414130D', '#FAF9F50D');
   pair('--claude-settings-nav-ink', '#353430', '#CECCC3');
@@ -318,20 +324,26 @@ export const NEUTRAL_TOKENS = createPalette(({ pair, alias, specific }) => {
   pair('--claude-composer-shadow-focus', '0 3px 14px -2px #00000010, 0 1px 3px 0 #00000006', '0 8px 24px -2px #00000050, 0 2px 6px 0 #00000030');
   pair('--claude-popover-shadow', '0 8px 24px #00000018, 0 2px 6px #0000000F', '0 12px 32px #00000050, 0 2px 6px #0000002B');
   pair('--claude-modal-shadow', '0 24px 64px -12px #0000002E, 0 4px 16px -2px #00000012', '0 28px 72px -10px #0000008C, 0 6px 24px -2px #00000059');
-  pair('--claude-settings-backdrop', '#0F0F0E45', '#0000009E');
-  pair('--claude-settings-panel-bg', '#FFFFFF', '#1F1F1F');
-  pair('--claude-settings-nav-bg', '#F6F6F6', '#191919');
-  pair('--claude-settings-divider', '#EAEAEA', '#2B2B2B');
+  pair('--claude-settings-backdrop', '#00000066', '#0000009E');
+  pair('--claude-settings-shadow', '0 1px 4px #0000001A, 0 0 0 1px #00000014', '0 2px 12px #00000050, 0 0 0 1px #FFFFFF14');
+  pair('--claude-settings-panel-bg', '#FFFFFF', '#191919');
+  pair('--claude-settings-nav-bg', '#FFFFFF', '#191919');
+  pair('--claude-settings-header-bg', '#FFFFFF', '#1F1F1F');
+  pair('--claude-settings-search-bg', '#FFFFFF', '#252425');
+  pair('--claude-settings-search-border', '#E8E8E8', '#2D2C2D');
+  pair('--claude-settings-nav-selected-ink', '#1A1A1A', '#F1F1F1');
+  pair('--claude-settings-ink', '#1A1A1A', '#EFEFEF');
+  pair('--claude-settings-divider', '#E1E1E1', '#303030');
   pair('--claude-settings-row-divider', '#0000000D', '#FFFFFF0D');
-  pair('--claude-settings-nav-ink', '#383838', '#CCCCCC');
-  pair('--claude-settings-nav-icon', '#666666', '#A8A8A8');
+  pair('--claude-settings-nav-ink', '#1A1A1A', '#EFEFEF');
+  pair('--claude-settings-nav-icon', '#1A1A1A', '#EFEFEF');
   pair('--claude-settings-nav-hover', '#00000009', '#FFFFFF0E');
-  pair('--claude-settings-nav-active-bg', '#E5E5E5', '#393939');
-  pair('--claude-settings-desc-ink', '#6B6B6B', '#969696');
-  pair('--claude-settings-field-bg', '#F1F1F0', '#2B2B2B');
-  pair('--claude-settings-field-hover', '#E8E8E7', '#333333');
-  pair('--claude-settings-field-border', '#00000006', '#FFFFFF06');
-  pair('--claude-settings-seg-track', '#EDEDEC', '#282828');
+  pair('--claude-settings-nav-active-bg', '#E5E5E5', '#3B3B3B');
+  pair('--claude-settings-desc-ink', '#6B6B6B', '#9C9C9C');
+  pair('--claude-settings-field-bg', '#FFFFFF', '#242424');
+  pair('--claude-settings-field-hover', '#F3F3F3', '#333333');
+  pair('--claude-settings-field-border', '#E5E5E5', '#3B3B3B');
+  pair('--claude-settings-seg-track', '#F3F3F3', '#282828');
   pair('--claude-settings-seg-thumb', '#FFFFFF', '#404040');
   pair('--claude-settings-card-bg', '#FAFAFA', '#262626');
   pair('--claude-settings-card-border', '#E8E8E8', '#333333');

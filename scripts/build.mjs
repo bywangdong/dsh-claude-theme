@@ -1,12 +1,15 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import tokens, { PALETTES } from '../src/tokens.mjs';
 import { DSH_ICON_MASKS, INLINE_SVG_MASKS, buildIconCss } from '../src/icons.mjs';
+import { buildSettingsIconCss } from '../src/settings-icons.mjs';
 
 const root = new URL('../', import.meta.url);
 const read = path => readFile(new URL(path, root), 'utf8');
-const css = `${await read('src/theme.css')}\n\n${buildIconCss()}\n`;
+const settingsNavigationSource = (await read('src/settings-navigation.mjs')).replace('export function', 'function');
+const css = `${await read('src/theme.css')}\n\n${buildIconCss()}\n\n${buildSettingsIconCss()}\n`;
 const client = (await read('src/client.js'))
   .replace('/* BUILD_TOKENS */', () => `const PALETTES = ${JSON.stringify(PALETTES)};`)
+  .replace('/* BUILD_SETTINGS_NAV */', () => (settingsNavigationSource))
   .replace('/* BUILD_CSS */', () => `const THEME_CSS = ${JSON.stringify(css)};`);
 
 await mkdir(new URL('lib/', root), { recursive: true });
