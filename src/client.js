@@ -5,7 +5,7 @@ window.__ModuleLoader__.load({
     /* BUILD_TOKENS */
     /* BUILD_CSS */
     /* BUILD_SETTINGS_NAV */
-    const VERSION = '0.11.1';
+    const VERSION = '0.11.2';
     const KEYS = {
       enabled: 'dsh-theme-claude.enabled.v1',
       palette: 'dsh-theme-claude.palette.v2',
@@ -96,28 +96,33 @@ window.__ModuleLoader__.load({
       style.textContent = THEME_CSS;
       const oldAttrs = new Map(BODY_ATTRS.map(name => [name, document.body.getAttribute(name)]));
 
+      function setBodyAttr(name, value) {
+        if (document.body.getAttribute(name) === value) return;
+        if (value === null) document.body.removeAttribute(name);
+        else document.body.setAttribute(name, value);
+      }
+
       function restoreBodyAttrs() {
         for (const [name, prev] of oldAttrs) {
-          if (prev === null) document.body.removeAttribute(name);
-          else document.body.setAttribute(name, prev);
+          setBodyAttr(name, prev);
         }
       }
 
       function syncWindowActivity() {
         if (!enabled) return;
         if (typeof document.hasFocus === 'function' && !document.hasFocus()) {
-          document.body.setAttribute('data-claude-window-inactive', 'true');
+          setBodyAttr('data-claude-window-inactive', 'true');
         } else {
-          document.body.removeAttribute('data-claude-window-inactive');
+          setBodyAttr('data-claude-window-inactive', null);
         }
       }
 
       function sync() {
         if (enabled) {
-          document.body.setAttribute('data-dsh-claude-theme', VERSION);
-          document.body.setAttribute('data-claude-palette', palette);
-          document.body.setAttribute('data-claude-prose', prose);
-          document.body.setAttribute('data-claude-chrome', chrome);
+          setBodyAttr('data-dsh-claude-theme', VERSION);
+          setBodyAttr('data-claude-palette', palette);
+          setBodyAttr('data-claude-prose', prose);
+          setBodyAttr('data-claude-chrome', chrome);
           syncWindowActivity();
           if (!releaseTokens || appliedPalette !== palette) {
             releaseTokens?.();
@@ -197,13 +202,17 @@ window.__ModuleLoader__.load({
       }
 
       function Settings({ view } = {}) {
+        if (view === 'summary') return 'Claude 风格的字体、配色与界面细节';
+        return React.createElement(SettingsControls);
+      }
+
+      function SettingsControls() {
         const [, refresh] = React.useReducer(n => n + 1, 0);
         React.useEffect(() => {
           subscribers.add(refresh);
           const dispose = ctx.on('theme/change', refresh);
           return () => { subscribers.delete(refresh); dispose(); };
         }, []);
-        if (view === 'summary') return 'Claude 风格的字体、配色与界面细节';
         const preference = ctx.theme.getTheme().preference;
 
         return React.createElement('section', { className: 'claude-theme-settings' },
@@ -233,6 +242,7 @@ window.__ModuleLoader__.load({
               '纸张色温',
               'Claude Desktop #FAFAFA/#FFFFFF 浅灰与 #1F1F1F/#191919 深炭，或经典暖纸',
               renderSegmented('纸张色温', palette, [['neutral', '现代浅灰 (默认)'], ['warm', '经典暖纸']], id => {
+                if (palette === id) return;
                 palette = id;
                 writePref(KEYS.palette, id);
                 sync();
@@ -241,6 +251,7 @@ window.__ModuleLoader__.load({
               '回复正文字体',
               '默认采用 Claude Desktop 原生 PingFang SC 无衬线；可选书卷衬线',
               renderSegmented('回复正文字体', prose, [['sans', '无衬线 Sans (默认)'], ['serif', '书卷衬线 Serif']], id => {
+                if (prose === id) return;
                 prose = id;
                 writePref(KEYS.prose, id);
                 sync();
@@ -249,6 +260,7 @@ window.__ModuleLoader__.load({
               '宿主工作区与品牌元素',
               '默认采用 Claude Desktop 全套线性图标、极简侧栏与底部贴合新建会话画布，可随时恢复 DSH 原生图标与布局',
               renderSegmented('宿主工作区与品牌元素', chrome, [['claude', '纯粹克制'], ['dsh', '保留 DSH']], id => {
+                if (chrome === id) return;
                 chrome = id;
                 writePref(KEYS.chrome, id);
                 sync();

@@ -1,0 +1,13 @@
+{
+  "host": "DeepSeek Harness 0.2.2-rc.3",
+  "browser": "Chrome 157.0.0.0 (Codex in-app browser)",
+  "viewport": [
+    1280,
+    720
+  ],
+  "deviceScaleFactor": 2,
+  "baselineVersion": "0.11.1",
+  "optimizedVersion": "0.11.2",
+  "profile": "isolated qa; no model requests",
+  "metrics": "Chromium Performance.getMetrics; renderer CPU durations, not elapsed UI latency"
+}

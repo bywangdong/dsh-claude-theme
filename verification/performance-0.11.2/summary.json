@@ -1,0 +1,83 @@
+{
+  "settings": {
+    "baselineSamples": 11,
+    "optimizedSamples": 11,
+    "excludedFirstSample": true,
+    "metrics": {
+      "RecalcStyleDuration": {
+        "baselineMedianMs": 154.248,
+        "optimizedMedianMs": 47.872,
+        "reductionPercent": 69.0
+      },
+      "ScriptDuration": {
+        "baselineMedianMs": 11.399,
+        "optimizedMedianMs": 13.986,
+        "reductionPercent": -22.7
+      },
+      "LayoutDuration": {
+        "baselineMedianMs": 0.939,
+        "optimizedMedianMs": 1.02,
+        "reductionPercent": -8.6
+      },
+      "TaskDuration": {
+        "baselineMedianMs": 188.25,
+        "optimizedMedianMs": 89.595,
+        "reductionPercent": 52.4
+      }
+    }
+  },
+  "composer": {
+    "baselineSamples": 11,
+    "optimizedSamples": 11,
+    "excludedFirstSample": true,
+    "metrics": {
+      "RecalcStyleDuration": {
+        "baselineMedianMs": 21.907,
+        "optimizedMedianMs": 5.007,
+        "reductionPercent": 77.1
+      },
+      "ScriptDuration": {
+        "baselineMedianMs": 2.143,
+        "optimizedMedianMs": 1.785,
+        "reductionPercent": 16.7
+      },
+      "LayoutDuration": {
+        "baselineMedianMs": 0.196,
+        "optimizedMedianMs": 0.195,
+        "reductionPercent": 0.5
+      },
+      "TaskDuration": {
+        "baselineMedianMs": 27.472,
+        "optimizedMedianMs": 10.107,
+        "reductionPercent": 63.2
+      }
+    }
+  },
+  "plugins-settings": {
+    "baselineSamples": 7,
+    "optimizedSamples": 7,
+    "excludedFirstSample": true,
+    "metrics": {
+      "RecalcStyleDuration": {
+        "baselineMedianMs": 151.288,
+        "optimizedMedianMs": 47.97,
+        "reductionPercent": 68.3
+      },
+      "ScriptDuration": {
+        "baselineMedianMs": 11.049,
+        "optimizedMedianMs": 14.931,
+        "reductionPercent": -35.1
+      },
+      "LayoutDuration": {
+        "baselineMedianMs": 0.913,
+        "optimizedMedianMs": 0.977,
+        "reductionPercent": -7.0
+      },
+      "TaskDuration": {
+        "baselineMedianMs": 187.007,
+        "optimizedMedianMs": 97.204,
+        "reductionPercent": 48.0
+      }
+    }
+  }
+}

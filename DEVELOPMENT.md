@@ -1,8 +1,15 @@
 # Claude for DSH
 
-面向 DeepSeek Harness `0.2.2-rc.3` 的 Claude Desktop（Code 模式）质感主题插件（`0.11.1`）。
+面向 DeepSeek Harness `0.2.2-rc.3` 的 Claude Desktop（Code 模式）质感主题插件（`0.11.2`）。
 
 围绕 Claude Desktop（`@ant/cds` `fizzy-lake` + `.dframe-sidebar` + `.epitaxy-markdown`）核心视觉体验打磨九个维度：**1:1 原生 `PingFang SC` 中英文排版与字阶、深色 `#1F1F1F` 侧栏 / `#191919` 画布表面校准、窗口失焦侧栏柔和降噪、全量 102 组 `dsw-icon-*` + 64 处内联/`FileTypeIcon` SVG + 实验性插件图标体系、右侧 `Start` 工具启动台与 `Files` 单色文件树、1:1 原生通栏顶栏 + 分层表面设置页（`Settings`）与 `@ant/cds` 蓝胶囊开关、槽位安全（Slot-Safe）精确选择器、贴底输入卡与中心星芒新会话主页、以及双色温自适应 Token 与 100% 纯前端可逆架构**。
+
+## 0.11.2 性能优化
+
+- 用真实 DSH 隔离 profile 和 Chromium Performance 指标复现图标选择器热点。共同图标规则增加 SVG 标签入口，移除通配子节点匹配，并排除宿主 204 个不参与显示的 symbol 定义；`:where` 保持选择器权重。
+- 偏好未变化时直接返回，仅写入发生变化的 body 属性；静态插件摘要不再订阅主题事件。
+- 设置导航缓存搜索文本，语义未变化的子树更新保留分组节点，及时恢复并释放已移除的宿主按钮；相同过滤结果不重复写 DOM。
+- 性能数据、对照方法、图标一致性与实际操作检查见 `verification/performance-0.11.2/README.md`。原生 MutationObserver 回归检查位于 `scripts/check-settings-navigation.browser.mjs`，使用独立文档，不改动应用界面。
 
 ## 0.11.1 侧栏设置按钮
 
@@ -29,7 +36,7 @@ npm run pack:local
 
 以上命令均在 `dsh-claude-theme/` 仓库根目录执行。构建产物写入 `lib/`，本地安装包写入被 Git 忽略的 `dist/`。仓库目录名与插件包名 `dsh-theme-claude` 不同，插件标识及已有设置保持原样。
 
-桌面版 `0.2.2-rc.3` 由运行中的应用管理 `/Users/nick/.dsh/profiles/desktop`。请通过桌面内置 CLI（`/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh plugin --profile desktop`）或在应用 **Plugins → Add plugin → Install a third-party plugin** 中安装 `dist/dsh-theme-claude-0.11.1.tgz`。
+桌面版 `0.2.2-rc.3` 由运行中的应用管理 `/Users/nick/.dsh/profiles/desktop`。请通过桌面内置 CLI（`/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh plugin --profile desktop`）或在应用 **Plugins → Add plugin → Install a third-party plugin** 中安装 `dist/dsh-theme-claude-0.11.2.tgz`。
 
 插件详情页内置实时开关与分段控件：
 - **启用开关**：采用 Claude `@ant/cds` 原生蓝 `role="switch"` 胶囊（`#2A78D6` / `#3987E5`），即时挂载/卸载 `ctx.theme.overrideTokens()`、`conversation.hero.brand.mark` 插槽、窗口焦点监听、全量图标遮罩层与样式层

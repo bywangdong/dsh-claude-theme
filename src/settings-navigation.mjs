@@ -30,6 +30,17 @@ export function enhanceSettingsNavigation(panel, getSections) {
   const headings = [];
   let rows = [];
   let disposed = false;
+  let lastLanguage;
+
+  function setHidden(node, hidden) {
+    if (node.hidden !== hidden) node.hidden = hidden;
+  }
+
+  function restoreButton(button, previous) {
+    if (previous.id === null) button.removeAttribute('data-claude-settings-id');
+    else button.setAttribute('data-claude-settings-id', previous.id);
+    button.toggleAttribute('data-claude-search-hidden', previous.hidden);
+  }
 
   const search = doc.createElement('div');
   search.className = 'claude-settings-search';
@@ -57,18 +68,20 @@ export function enhanceSettingsNavigation(panel, getSections) {
 
   function filter() {
     const terms = normalize(input.value).split(/\s+/).filter(Boolean);
+    const visibleGroups = new Set();
     for (const row of rows) {
-      const haystack = normalize(`${row.label} ${row.id} ${aliases[row.id] ?? ''} ${row.id.includes('shortcutter') ? 'keyboard shortcuts 快捷键' : ''}`);
-      row.button.toggleAttribute('data-claude-search-hidden', !terms.every(term => haystack.includes(term)));
+      const visible = terms.every(term => row.searchText.includes(term));
+      row.button.toggleAttribute('data-claude-search-hidden', !visible);
+      if (visible) visibleGroups.add(row.group);
     }
     let firstVisibleGroup = true;
     for (const { node, group } of headings) {
-      node.hidden = !rows.some(row => row.group === group && !row.button.hasAttribute('data-claude-search-hidden'));
+      setHidden(node, !visibleGroups.has(group));
       node.toggleAttribute('data-claude-first-group', !node.hidden && firstVisibleGroup);
       if (!node.hidden) firstVisibleGroup = false;
     }
-    clear.hidden = !input.value;
-    empty.hidden = rows.some(row => !row.button.hasAttribute('data-claude-search-hidden'));
+    setHidden(clear, !input.value);
+    setHidden(empty, visibleGroups.size > 0);
   }
 
   function observe() {
@@ -79,17 +92,10 @@ export function enhanceSettingsNavigation(panel, getSections) {
   function refresh() {
     if (disposed) return;
     observer.disconnect();
-    const text = copy[doc.documentElement.lang.split('-')[0]] ?? copy.en;
-    input.placeholder = text[0];
-    input.setAttribute('aria-label', text[1]);
-    clear.setAttribute('aria-label', text[2]);
-    empty.textContent = text[5];
-    nav.setAttribute('aria-label', text[6]);
-    for (const { node } of headings) node.remove();
-    headings.length = 0;
+    const language = doc.documentElement.lang.split('-')[0];
     const sections = getSections();
     const buttons = Array.from(list.children).filter(node => node.matches('button'));
-    rows = buttons.map((button, index) => {
+    const nextRows = buttons.map((button, index) => {
       const label = button.textContent.trim();
       // Locale changes can commit before the slot ledger. Prefer a label match;
       // use the host's ordered projection only when the row counts agree.
@@ -97,13 +103,41 @@ export function enhanceSettingsNavigation(panel, getSections) {
         ?? (sections.length === buttons.length ? sections[index] : undefined);
       const id = section?.id ?? button.dataset.claudeSettingsId ?? '';
       const group = ['account', 'general', 'models'].includes(id) ? 'preferences' : 'customize';
+      return { button, label, id, group };
+    });
+    // Icon hydration and other nested changes do not change the navigation.
+    // Keep the existing headings and attributes when its semantic rows agree.
+    if (language === lastLanguage && rows.length === nextRows.length
+      && nextRows.every((row, index) => row.button === rows[index].button && row.id === rows[index].id && row.label === rows[index].label)) {
+      observe();
+      return;
+    }
+    lastLanguage = language;
+    const text = copy[language] ?? copy.en;
+    input.placeholder = text[0];
+    input.setAttribute('aria-label', text[1]);
+    clear.setAttribute('aria-label', text[2]);
+    empty.textContent = text[5];
+    nav.setAttribute('aria-label', text[6]);
+    const currentButtons = new Set(buttons);
+    for (const [button, previous] of decorated) {
+      if (!currentButtons.has(button)) {
+        restoreButton(button, previous);
+        decorated.delete(button);
+      }
+    }
+    for (const { node } of headings) node.remove();
+    headings.length = 0;
+    rows = nextRows;
+    for (const row of rows) {
+      const { button, id, label } = row;
       if (!decorated.has(button)) decorated.set(button, {
         id: button.getAttribute('data-claude-settings-id'),
         hidden: button.hasAttribute('data-claude-search-hidden'),
       });
-      button.dataset.claudeSettingsId = id;
-      return { button, label, id, group };
-    });
+      if (button.dataset.claudeSettingsId !== id) button.dataset.claudeSettingsId = id;
+      row.searchText = normalize(`${label} ${id} ${aliases[id] ?? ''} ${id.includes('shortcutter') ? 'keyboard shortcuts 快捷键' : ''}`);
+    }
     let previousGroup;
     for (const row of rows) {
       if (row.group === previousGroup) continue;
@@ -153,10 +187,11 @@ export function enhanceSettingsNavigation(panel, getSections) {
     empty.remove();
     for (const { node } of headings) node.remove();
     for (const [button, previous] of decorated) {
-      if (previous.id === null) button.removeAttribute('data-claude-settings-id');
-      else button.setAttribute('data-claude-settings-id', previous.id);
-      button.toggleAttribute('data-claude-search-hidden', previous.hidden);
+      restoreButton(button, previous);
     }
+    decorated.clear();
+    rows = [];
+    headings.length = 0;
     delete nav.dataset.claudeSettingsNavigation;
     if (originalNavLabel === null) nav.removeAttribute('aria-label');
     else nav.setAttribute('aria-label', originalNavLabel);

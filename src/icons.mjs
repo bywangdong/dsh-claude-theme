@@ -716,8 +716,11 @@ export function buildIconCss() {
   ];
 
   const lines = [
-    '/* Auto-generated Claude Desktop Icon Pack (all 102 DSH symbol families + 36 inline UI glyphs + Guide & Plugin overrides) */',
-    `${scope} :is(\n  ${mappedSelectors.join(',\n  ')}\n) {`,
+    '/* Auto-generated Claude Desktop Icon Pack (102 DSH symbol families + 64 inline UI glyphs + Guide & Plugin overrides) */',
+    // Keep HTML elements out of this large matcher. In particular, a trailing
+    // universal child selector made ordinary text/input changes recheck the
+    // entire icon list. :where preserves the original rule specificity.
+    `${scope} :where(svg):is(\n  ${mappedSelectors.join(',\n  ')}\n) {`,
     '  background-color: currentColor;',
     '  -webkit-mask-image: var(--claude-icon);',
     '  -webkit-mask-position: center;',
@@ -728,7 +731,9 @@ export function buildIconCss() {
     '  mask-size: contain;',
     '  mask-repeat: no-repeat;',
     '}',
-    `${scope} :is(\n  ${mappedSelectors.join(',\n  ')}\n) > * {`,
+    // Symbols are non-rendering definitions. Including them would pull the
+    // host's entire hidden sprite registry back into the expensive matcher.
+    `${scope} :where(svg):is(\n  ${mappedSelectors.join(',\n  ')}\n) > :where(path, circle, rect, line, polyline, polygon, ellipse, g, use, text, image, foreignObject, svg, defs, switch, a) {`,
     '  display: none;',
     '}',
   ];

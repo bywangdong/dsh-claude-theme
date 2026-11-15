@@ -1,0 +1,14 @@
+{
+  "seconds": 24.752648000023328,
+  "delta": {
+    "TaskDuration": 0.003010999999999875,
+    "ScriptDuration": 0,
+    "RecalcStyleDuration": 0,
+    "LayoutDuration": 0,
+    "LayoutCount": 0,
+    "RecalcStyleCount": 0,
+    "JSEventListeners": 0,
+    "Nodes": 0,
+    "JSHeapUsedSize": 13796
+  }
+}

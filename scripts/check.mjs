@@ -61,7 +61,7 @@ for (const scenario of [
   { disabled: false, palette: 'warm', prose: 'serif', chrome: 'dsh', expectPalette: 'warm', expectProse: 'serif', expectChrome: 'dsh', expectHeroMark: false },
   { disabled: true, palette: 'warm', prose: 'serif', chrome: 'claude', expectPalette: 'warm', expectProse: 'serif', expectChrome: 'claude', expectHeroMark: false },
 ]) {
-  const effects = [], componentEffects = [], attrs = new Map(), styles = new Set(), layers = new Map(), registeredSlots = new Map(), windowListeners = new Map(), slotSubscriptions = new Set();
+  const effects = [], componentEffects = [], bodyWrites = [], attrs = new Map(), styles = new Set(), layers = new Map(), registeredSlots = new Map(), windowListeners = new Map(), slotSubscriptions = new Set(), themeSubscriptions = new Set();
   let settingsOpens = 0;
   let settingsOwners = [{ children: { 'settings.section': {} }, store: { create: () => ({ actions: { open: () => settingsOpens++ } }) } }];
   let plugin;
@@ -74,7 +74,11 @@ for (const scenario of [
 
   const document = {
     hasFocus: () => focused,
-    body: { getAttribute: k => attrs.get(k) ?? null, setAttribute: (k, v) => attrs.set(k, v), removeAttribute: k => attrs.delete(k) },
+    body: {
+      getAttribute: k => attrs.get(k) ?? null,
+      setAttribute: (k, v) => { bodyWrites.push(k); attrs.set(k, v); },
+      removeAttribute: k => { bodyWrites.push(k); attrs.delete(k); },
+    },
     head: { append: element => { styles.add(element); if (!injectedCss && element.textContent) injectedCss = element.textContent; } },
     createElement: () => { const element = { dataset: {}, textContent: '', remove: () => styles.delete(element) }; return element; },
   };
@@ -102,7 +106,15 @@ for (const scenario of [
   };
   const context = {
     effect(fn) { const dispose = fn(); if (dispose) effects.push(dispose); },
-    theme: { overrideTokens(id, value) { layers.set(id, value); return () => layers.delete(id); } },
+    on(name, fn) {
+      assert.equal(name, 'theme/change');
+      themeSubscriptions.add(fn);
+      return () => themeSubscriptions.delete(fn);
+    },
+    theme: {
+      getTheme: () => ({ preference: 'system' }),
+      overrideTokens(id, value) { layers.set(id, value); return () => layers.delete(id); },
+    },
     slots: {
       inject(_name, fn) { return fn(); },
       entriesOfSlot(name) { assert.equal(name, 'sidebar.settings'); return settingsOwners; },
@@ -133,7 +145,7 @@ for (const scenario of [
     assert.equal(svg.props.className, 'claude-hero-sunburst');
   }
   if (!scenario.disabled) {
-    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.1');
+    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.2');
     assert.equal(attrs.get('data-claude-palette'), scenario.expectPalette);
     assert.equal(attrs.get('data-claude-prose'), scenario.expectProse);
     assert.equal(attrs.get('data-claude-chrome'), scenario.expectChrome);
@@ -143,6 +155,9 @@ for (const scenario of [
     focused = false;
     for (const fn of windowListeners.get('blur') ?? []) fn();
     assert.equal(attrs.get('data-claude-window-inactive'), 'true');
+    const afterBlurWrites = bodyWrites.length;
+    for (const fn of windowListeners.get('blur') ?? []) fn();
+    assert.equal(bodyWrites.length, afterBlurWrites, 'repeated focus state must not rewrite body attributes');
     focused = true;
     for (const fn of windowListeners.get('focus') ?? []) fn();
     assert.equal(attrs.has('data-claude-window-inactive'), false);
@@ -152,6 +167,22 @@ for (const scenario of [
   } else {
     assert.equal(attrs.size, 0, 'disabled startup must not dirty body attributes');
   }
+  const ThemeSettings = registeredSlots.get('plugins.bundle.config');
+  assert.equal(typeof ThemeSettings({ view: 'summary' }), 'string');
+  assert.equal(themeSubscriptions.size, 0, 'static plugin summary must not subscribe to theme changes');
+  const controls = ThemeSettings({});
+  const controlsTree = controls.tag();
+  const buttons = [];
+  const visit = node => {
+    if (!node || typeof node !== 'object') return;
+    if (node.tag === 'button') buttons.push(node);
+    node.children?.forEach(visit);
+  };
+  visit(controlsTree);
+  const selectedPreferences = buttons.filter(node => node.props['aria-pressed'] && node.children[0] !== '跟随系统');
+  const beforeSamePreference = bodyWrites.length;
+  for (const button of selectedPreferences) button.props.onClick();
+  assert.equal(bodyWrites.length, beforeSamePreference, 'selecting an unchanged preference must do no theme DOM writes');
   // The visible cog must open the live settings owner directly, without an account-menu click.
   const FooterButton = registeredSlots.get('sidebar.footer.action');
   const footer = FooterButton({ wide: true, t: key => key === 'trigger' ? 'Settings' : key });
@@ -175,6 +206,7 @@ for (const scenario of [
   assert.equal(FooterButton({ wide: false, t: () => 'Settings' }), null, 'collapsed sidebar retains its native launcher');
   for (const dispose of componentEffects.reverse()) dispose();
   assert.equal(slotSubscriptions.size, 0, 'footer owner subscription must be removed on unmount');
+  assert.equal(themeSubscriptions.size, 0, 'settings theme subscription must be removed on unmount');
   for (const dispose of effects.reverse()) dispose();
   assert.equal(styles.size, 0, 'theme stylesheet must be removed on unload');
   assert.equal(layers.size, 0, 'override layer must be removed on unload');
@@ -210,13 +242,22 @@ for (const marker of [
   'M2.80078 10.2112',
   'M8.48924 28H19.5108',
 ]) {
-  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.1 semantic selector marker: ${marker}`);
+  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.2 semantic selector marker: ${marker}`);
 }
 
 for (const name of iconNames) {
   assert.ok(injectedCss.includes(`dsw-icon-${name}-regular`), `missing regular icon rule: ${name}`);
   assert.ok(injectedCss.includes(`dsw-icon-${name}-medium`), `missing medium icon rule: ${name}`);
 }
+
+// Performance regression: shared icon rules must reject ordinary HTML and the
+// 204 non-rendering symbols in DSH's sprite registry before the large matcher.
+const sharedIconsStart = injectedCss.indexOf('/* Auto-generated Claude Desktop Icon Pack');
+const sharedIconsEnd = injectedCss.indexOf('{ --claude-icon:', sharedIconsStart);
+const sharedIconRules = injectedCss.slice(sharedIconsStart, sharedIconsEnd);
+assert.equal((sharedIconRules.match(/:where\(svg\):is\(/g) ?? []).length, 2, 'shared icon matching must be gated by the SVG tag');
+assert.ok(!/\)\s*>\s*\*/.test(sharedIconRules), 'icon child rules must not consider every HTML element');
+assert.ok(!/>\s*:where\([^)]*\bsymbol\b/.test(sharedIconRules), 'sprite definitions must stay outside the icon child matcher');
 
 // Guard against '>' across DSH <span data-slot="..."> boundaries!
 assert.ok(!/_sidebarCol["\]\s)]*>\s*:is\(\[class\$="_root"/.test(injectedCss), 'must never use > between _sidebarCol and _root (broken by <span data-slot="sidebar">)');
@@ -233,4 +274,4 @@ for (const pat of rawClassContains) {
 }
 
 assert.ok(!/https?:\/\/|fetch\(|XMLHttpRequest/.test(source.replaceAll('http://www.w3.org/2000/svg', '')), 'theme must be offline and self contained');
-console.log('PASS: emitted 0.11.1 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');
+console.log('PASS: emitted 0.11.2 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');

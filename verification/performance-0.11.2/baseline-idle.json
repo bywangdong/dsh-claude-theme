@@ -1,0 +1,26 @@
+{
+  "seconds": 14.79293300001882,
+  "delta": {
+    "TaskDuration": 0.0016090000000001936,
+    "ScriptDuration": 0,
+    "RecalcStyleDuration": 0,
+    "LayoutDuration": 0,
+    "LayoutCount": 0,
+    "RecalcStyleCount": 0,
+    "JSEventListeners": 0,
+    "Nodes": 0,
+    "JSHeapUsedSize": 12380
+  },
+  "topSamples": [
+    {
+      "name": "(idle)",
+      "url": "",
+      "milliseconds": 14801.115
+    },
+    {
+      "name": "(program)",
+      "url": "",
+      "milliseconds": 107.487
+    }
+  ]
+}

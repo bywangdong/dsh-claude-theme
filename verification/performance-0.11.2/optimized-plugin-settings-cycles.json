@@ -1,0 +1,90 @@
+[
+  {
+    "TaskDuration": 0.08165800000000001,
+    "ScriptDuration": 0.012129000000000001,
+    "RecalcStyleDuration": 0.045018,
+    "LayoutDuration": 0.0007869999999999995,
+    "LayoutCount": 6,
+    "RecalcStyleCount": 18,
+    "JSEventListeners": 194,
+    "Nodes": 307,
+    "JSHeapUsedSize": 1906028
+  },
+  {
+    "TaskDuration": 0.11210399999999998,
+    "ScriptDuration": 0.013365999999999989,
+    "RecalcStyleDuration": 0.0461680000000001,
+    "LayoutDuration": 0.0009429999999999994,
+    "LayoutCount": 6,
+    "RecalcStyleCount": 17,
+    "JSEventListeners": -457,
+    "Nodes": -924,
+    "JSHeapUsedSize": -15144500
+  },
+  {
+    "TaskDuration": 0.1015299999999999,
+    "ScriptDuration": 0.014307000000000014,
+    "RecalcStyleDuration": 0.047316000000000025,
+    "LayoutDuration": 0.0010529999999999984,
+    "LayoutCount": 6,
+    "RecalcStyleCount": 17,
+    "JSEventListeners": -10,
+    "Nodes": -164,
+    "JSHeapUsedSize": -482592
+  },
+  {
+    "TaskDuration": 0.09422400000000009,
+    "ScriptDuration": 0.015957,
+    "RecalcStyleDuration": 0.04700199999999999,
+    "LayoutDuration": 0.0009480000000000009,
+    "LayoutCount": 6,
+    "RecalcStyleCount": 17,
+    "JSEventListeners": 196,
+    "Nodes": 307,
+    "JSHeapUsedSize": 427456
+  },
+  {
+    "TaskDuration": 0.103348,
+    "ScriptDuration": 0.014824999999999977,
+    "RecalcStyleDuration": 0.0492189999999999,
+    "LayoutDuration": 0.00102,
+    "LayoutCount": 6,
+    "RecalcStyleCount": 18,
+    "JSEventListeners": -196,
+    "Nodes": -307,
+    "JSHeapUsedSize": -39316
+  },
+  {
+    "TaskDuration": 0.09672899999999984,
+    "ScriptDuration": 0.015975000000000017,
+    "RecalcStyleDuration": 0.0485310000000001,
+    "LayoutDuration": 0.0009760000000000012,
+    "LayoutCount": 6,
+    "RecalcStyleCount": 17,
+    "JSEventListeners": 196,
+    "Nodes": 307,
+    "JSHeapUsedSize": 1066872
+  },
+  {
+    "TaskDuration": 0.09720400000000007,
+    "ScriptDuration": 0.014931000000000028,
+    "RecalcStyleDuration": 0.047969999999999846,
+    "LayoutDuration": 0.0009769999999999987,
+    "LayoutCount": 6,
+    "RecalcStyleCount": 17,
+    "JSEventListeners": 196,
+    "Nodes": 307,
+    "JSHeapUsedSize": -1120160
+  },
+  {
+    "TaskDuration": 0.09538100000000016,
+    "ScriptDuration": 0.015612999999999988,
+    "RecalcStyleDuration": 0.04814099999999999,
+    "LayoutDuration": 0.0010000000000000009,
+    "LayoutCount": 6,
+    "RecalcStyleCount": 17,
+    "JSEventListeners": 196,
+    "Nodes": 307,
+    "JSHeapUsedSize": 540708
+  }
+]
