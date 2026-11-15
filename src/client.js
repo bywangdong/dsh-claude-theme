@@ -5,7 +5,7 @@ window.__ModuleLoader__.load({
     /* BUILD_TOKENS */
     /* BUILD_CSS */
     /* BUILD_SETTINGS_NAV */
-    const VERSION = '0.11.0';
+    const VERSION = '0.11.1';
     const KEYS = {
       enabled: 'dsh-theme-claude.enabled.v1',
       palette: 'dsh-theme-claude.palette.v2',
@@ -257,6 +257,34 @@ window.__ModuleLoader__.load({
 
       ctx.effect(() => ctx.slots.inject('plugins.bundle.config', () =>
         ctx.slots.register({ name: 'plugins.bundle.config', key: 'dsh-theme-claude' }, Settings)), 'dsh-theme-claude: settings');
+
+      function currentSettingsActions() {
+        const owner = ctx.slots.entriesOfSlot('sidebar.settings')
+          .find(entry => entry.children?.['settings.section']);
+        const store = owner?.store;
+        return store && typeof store !== 'function' ? store.create().actions : undefined;
+      }
+
+      function SidebarSettingsButton({ wide, t }) {
+        const [, refresh] = React.useReducer(n => n + 1, 0);
+        React.useEffect(() => {
+          subscribers.add(refresh);
+          const dispose = ctx.slots.subscribe('sidebar.settings', refresh);
+          return () => { subscribers.delete(refresh); dispose(); };
+        }, []);
+        if (!wide || !enabled || chrome !== 'claude' || typeof currentSettingsActions()?.open !== 'function') return null;
+        return React.createElement('button', {
+          type: 'button',
+          className: 'claude-sidebar-settings-button',
+          'aria-label': t('trigger'),
+          'aria-haspopup': 'dialog',
+          title: t('trigger'),
+          // Resolve the live owner at click time, including after host reloads.
+          onClick: () => currentSettingsActions()?.open(),
+        }, React.createElement('span', { 'aria-hidden': 'true' }));
+      }
+      ctx.effect(() => ctx.slots.inject('sidebar.footer.action', () =>
+        ctx.slots.register({ name: 'sidebar.footer.action', id: 'claude-open-settings', locale: 'settings' }, SidebarSettingsButton)), 'dsh-theme-claude: sidebar settings button');
 
       function SettingsNavigation() {
         const anchor = React.useRef(null);

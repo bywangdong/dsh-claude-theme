@@ -1,4 +1,4 @@
-// Dual Claude palettes for DeepSeek Harness (0.11.0):
+// Dual Claude palettes for DeepSeek Harness (0.11.1):
 // 1. neutral (default): Verbatim Claude Desktop @ant/cds fizzy-lake surfaces, settings modal & ink hierarchy
 //    - Light: #FAFAFA sidebar | #EAEAEA 1px seam | #FFFFFF canvas | #E4E4E4 selected pill | #FFFFFF settings modal
 //    - Dark:  #1F1F1F sidebar | #2B2B2B 1px seam | #191919 canvas | #3F3F3F selected pill | #191919 settings modal, #1F1F1F settings header

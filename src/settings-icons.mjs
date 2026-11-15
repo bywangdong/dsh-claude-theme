@@ -8,7 +8,10 @@ export function buildSettingsIconCss() {
     .replace(/<!--[\s\S]*?-->/g, '').replaceAll('currentColor', 'black')
     .replace('stroke-width="2"', 'stroke-width="1.5"'));
   const scope = 'body[data-dsh-claude-theme] [data-shortcut-modal="settings"]';
-  const lines = [`${scope} { --claude-settings-search-icon: ${asset('claude-settings/search')}; --claude-settings-close-icon: ${asset('lucide/x')}; }`];
+  const lines = [
+    `body[data-dsh-claude-theme] { --claude-sidebar-settings-icon: ${asset('claude-settings/settings')}; }`,
+    `${scope} { --claude-settings-search-icon: ${asset('claude-settings/search')}; --claude-settings-close-icon: ${asset('lucide/x')}; }`,
+  ];
   const icons = { account: 'lucide/user-round', general: 'claude-settings/settings', models: 'claude-settings/database', plugins: 'claude-settings/plugin', 'agent-presets': 'claude-settings/computer' };
   lines.push(`${scope} [data-claude-settings-id] { --claude-settings-icon: ${asset('claude-settings/settings')}; }`);
   for (const [id, name] of Object.entries(icons)) {

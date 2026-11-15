@@ -1,6 +1,6 @@
 {
   "plugin": "dsh-theme-claude",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "host": "DeepSeek Harness 0.2.2-rc.3",
   "installedMatchesBuild": {
     "lib/client.js": true,
@@ -11,17 +11,17 @@
     "THIRD_PARTY_NOTICES.md": true
   },
   "sha256": {
-    "lib/client.js": "4d8ab2d7e43f48955f867ce798de2323af63ffd32b386db19e3cf58ead343a7b",
+    "lib/client.js": "0a58f074e754e25320566c89ac1ba9892a10f676f91d92893864b0ca94148d5f",
     "lib/index.js": "60e2d41c24fe8aae18a27b1ff9b0eba58da8d0759ef06211c9f2e1e130bcdd45",
     "cordis.patch.yml": "c2659fd7a68aba594fd9fce79245b3de83b0113d9f7575f9af18b79ba53b61b5",
-    "README.md": "ef7ab7b22fe4112ba1e5730a750284da312fb5ce1d4cf2c065277d529d83de9c",
-    "package.json": "7ee4e4d85fd8a700221a6987fb7281a009853513bb07784e3bc93d9141bb2c54",
+    "README.md": "2e72db5b4473c01010a9c577c2d89fb1c09134b48c4a782268c1e60b9180592b",
+    "package.json": "29425f71413612b51845ae50d4964b79223b2f0eb18a2f435f48a13f0f19c08e",
     "THIRD_PARTY_NOTICES.md": "7c71cdfbe3d9a9dfd358bfc62e4d8f06ad18d82e90d30be28bdba96852ac37f7"
   },
   "otherDependenciesPreserved": {
     "dsh-shortcutter": true,
     "dsh-switcher": true
   },
-  "profileBackup": "/Users/nick/.dsh/profiles/desktop/.claude-theme-backups/20261115-002957-settings-0.11.0",
-  "validationReport": "../design-qa.md"
+  "profileBackup": "/Users/nick/.dsh/profiles/desktop/.claude-theme-backups/20261115-103454-settings-0.11.1",
+  "validationReport": "settings-0.11.1/README.md"
 }

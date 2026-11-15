@@ -61,7 +61,9 @@ for (const scenario of [
   { disabled: false, palette: 'warm', prose: 'serif', chrome: 'dsh', expectPalette: 'warm', expectProse: 'serif', expectChrome: 'dsh', expectHeroMark: false },
   { disabled: true, palette: 'warm', prose: 'serif', chrome: 'claude', expectPalette: 'warm', expectProse: 'serif', expectChrome: 'claude', expectHeroMark: false },
 ]) {
-  const effects = [], attrs = new Map(), styles = new Set(), layers = new Map(), registeredSlots = new Map(), windowListeners = new Map();
+  const effects = [], componentEffects = [], attrs = new Map(), styles = new Set(), layers = new Map(), registeredSlots = new Map(), windowListeners = new Map(), slotSubscriptions = new Set();
+  let settingsOpens = 0;
+  let settingsOwners = [{ children: { 'settings.section': {} }, store: { create: () => ({ actions: { open: () => settingsOpens++ } }) } }];
   let plugin;
   let focused = true;
   const storage = new Map();
@@ -90,7 +92,11 @@ for (const scenario of [
     },
     __ModuleLoader__: {
       load(def) {
-        plugin = def.factory(() => ({ createElement: (tag, props, ...children) => ({ tag, props, children }) }));
+        plugin = def.factory(() => ({
+          createElement: (tag, props, ...children) => ({ tag, props, children }),
+          useReducer: () => [0, () => {}],
+          useEffect: fn => { const dispose = fn(); if (dispose) componentEffects.push(dispose); },
+        }));
       },
     },
   };
@@ -99,6 +105,12 @@ for (const scenario of [
     theme: { overrideTokens(id, value) { layers.set(id, value); return () => layers.delete(id); } },
     slots: {
       inject(_name, fn) { return fn(); },
+      entriesOfSlot(name) { assert.equal(name, 'sidebar.settings'); return settingsOwners; },
+      subscribe(name, fn) {
+        assert.equal(name, 'sidebar.settings');
+        slotSubscriptions.add(fn);
+        return () => slotSubscriptions.delete(fn);
+      },
       register(spec, comp) {
         registeredSlots.set(spec.name, comp);
         return () => registeredSlots.delete(spec.name);
@@ -121,7 +133,7 @@ for (const scenario of [
     assert.equal(svg.props.className, 'claude-hero-sunburst');
   }
   if (!scenario.disabled) {
-    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.0');
+    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.1');
     assert.equal(attrs.get('data-claude-palette'), scenario.expectPalette);
     assert.equal(attrs.get('data-claude-prose'), scenario.expectProse);
     assert.equal(attrs.get('data-claude-chrome'), scenario.expectChrome);
@@ -140,6 +152,29 @@ for (const scenario of [
   } else {
     assert.equal(attrs.size, 0, 'disabled startup must not dirty body attributes');
   }
+  // The visible cog must open the live settings owner directly, without an account-menu click.
+  const FooterButton = registeredSlots.get('sidebar.footer.action');
+  const footer = FooterButton({ wide: true, t: key => key === 'trigger' ? 'Settings' : key });
+  if (!scenario.disabled && scenario.expectChrome === 'claude') {
+    assert.equal(footer.tag, 'button');
+    assert.equal(footer.props['aria-label'], 'Settings');
+    assert.equal(footer.props['aria-haspopup'], 'dialog');
+    footer.props.onClick();
+    assert.equal(settingsOpens, 1);
+    let replacementOpens = 0;
+    settingsOwners = [{ children: { 'settings.section': {} }, store: { create: () => ({ actions: { open: () => replacementOpens++ } }) } }];
+    footer.props.onClick();
+    assert.equal(replacementOpens, 1, 'click must resolve the current owner after host reloads');
+    assert.equal(settingsOpens, 1, 'stale settings owner must not receive later clicks');
+    settingsOwners = [];
+    assert.doesNotThrow(() => footer.props.onClick());
+    assert.equal(FooterButton({ wide: true, t: () => 'Settings' }), null, 'hide the action when settings is unavailable');
+  } else {
+    assert.equal(footer, null, 'disabled and native DSH chrome must not add a footer action');
+  }
+  assert.equal(FooterButton({ wide: false, t: () => 'Settings' }), null, 'collapsed sidebar retains its native launcher');
+  for (const dispose of componentEffects.reverse()) dispose();
+  assert.equal(slotSubscriptions.size, 0, 'footer owner subscription must be removed on unmount');
   for (const dispose of effects.reverse()) dispose();
   assert.equal(styles.size, 0, 'theme stylesheet must be removed on unload');
   assert.equal(layers.size, 0, 'override layer must be removed on unload');
@@ -175,7 +210,7 @@ for (const marker of [
   'M2.80078 10.2112',
   'M8.48924 28H19.5108',
 ]) {
-  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.0 semantic selector marker: ${marker}`);
+  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.1 semantic selector marker: ${marker}`);
 }
 
 for (const name of iconNames) {
@@ -198,4 +233,4 @@ for (const pat of rawClassContains) {
 }
 
 assert.ok(!/https?:\/\/|fetch\(|XMLHttpRequest/.test(source.replaceAll('http://www.w3.org/2000/svg', '')), 'theme must be offline and self contained');
-console.log('PASS: emitted 0.11.0 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');
+console.log('PASS: emitted 0.11.1 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');

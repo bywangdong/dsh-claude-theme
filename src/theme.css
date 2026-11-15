@@ -553,7 +553,7 @@ body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "])
   font-weight: 400;
   color: var(--claude-session-ink);
   gap: 8px;
-  padding: 0 30px 0 var(--dsh-sidebar-row-padding);
+  padding: 0 8px 0 var(--dsh-sidebar-row-padding);
 }
 body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_avatar"], [class*="_avatar "]) {
   width: 19px;
@@ -575,24 +575,45 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sideba
   margin-left: -1px;
   flex: none;
 }
-/* Right-aligned subtle 8-tooth vector settings cog matching Claude Desktop's bottom-right footer icon */
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_anchor"], [class*="_anchor "]):has(> button[data-signed-out="false"]:not([data-collapsed="true"]))::after {
-  content: "";
+/* The footer cog is a real, keyboard-accessible slot action, separate from the account menu. */
+body[data-dsh-claude-theme] :is([class$="_footArea"], [class*="_footArea "]):has(.claude-sidebar-settings-button) {
+  position: relative;
+}
+body[data-dsh-claude-theme] :is([class$="_footArea"], [class*="_footArea "]):has(.claude-sidebar-settings-button) > :is([class$="_settingsArea"], [class*="_settingsArea "]) {
+  box-sizing: border-box;
+  padding-right: 38px;
+}
+body[data-dsh-claude-theme] .claude-sidebar-settings-button {
   position: absolute;
-  right: 9px;
-  top: 50%;
-  width: 15px;
-  height: 15px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  background-color: var(--dsw-alias-label-tertiary);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E") center / 15px 15px no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E") center / 15px 15px no-repeat;
-  transition: background-color 120ms ease;
+  right: var(--dsh-sidebar-inline-padding);
+  bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--dsw-alias-label-tertiary);
+  cursor: pointer;
+}
+body[data-dsh-claude-theme] .claude-sidebar-settings-button > span {
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: var(--claude-sidebar-settings-icon) center / contain no-repeat;
+  mask: var(--claude-sidebar-settings-icon) center / contain no-repeat;
+}
+body[data-dsh-claude-theme] .claude-sidebar-settings-button:focus-visible {
+  outline: 2px solid var(--dsw-alias-label-secondary);
+  outline-offset: -2px;
 }
 @media (hover: hover) {
-  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_anchor"], [class*="_anchor "]):hover::after {
-    background-color: var(--dsw-alias-label-secondary);
+  body[data-dsh-claude-theme] .claude-sidebar-settings-button:hover {
+    background: var(--dsw-alias-interactive-bg-hover);
+    color: var(--dsw-alias-label-secondary);
   }
 }
 

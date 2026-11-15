@@ -1,6 +1,6 @@
 # Claude for DSH
 
-把 Claude Desktop（Code 模式 `@ant/cds` `fizzy-lake` + `.dframe-sidebar` + `.epitaxy-markdown`）的中英文排版设定、深/浅色表面层级、窗口失焦侧栏降噪、全量 Claude 线性矢量图标体系、右侧 `Start` 工具台与设置弹窗风格带入 DeepSeek Harness（`0.11.0`）。
+把 Claude Desktop（Code 模式 `@ant/cds` `fizzy-lake` + `.dframe-sidebar` + `.epitaxy-markdown`）的中英文排版设定、深/浅色表面层级、窗口失焦侧栏降噪、全量 Claude 线性矢量图标体系、右侧 `Start` 工具台与设置弹窗风格带入 DeepSeek Harness（`0.11.1`）。
 
 - **参考 Claude Desktop 中文字体、字号、字重与颜色（`@ant/cds` + `.epitaxy-markdown`）**：全界面与回复正文统一优先指定 `"PingFang SC"`（解决 `<html lang="en">` 下中文回退不一致及此前默认 `Songti SC` 宋体混排割裂问题）；正文、列表、表格、用户气泡与左侧栏会话行统一对齐 Claude 原生 `14px / 20px`，工作区分组标题对齐 `13px / 16px`（行高与胶囊圆角对齐 `--df-row-h: 32px`、`--df-radius-pill: 8px`），聊天标题收敛为 `.epitaxy-markdown` 紧凑字阶（`h1: 16px`、`h2: 15px`、`h3: 14px`）；深色模式中文加粗自动采用 `PingFangSC-Medium`（`500`）配柔和正文墨色 `#DFDFDF` / 气泡墨色 `#CECECE`，消除笔画糊粗与刺眼反差。
 - **校准深/浅色物理表面层级与窗口失焦侧栏降噪（`fizzy-lake`）**：深色模式精确对齐 `#1F1F1F` 侧栏、`#191919` 主画布与 `#3F3F3F` 选中胶囊（浅色 `#FAFAFA` 侧栏、`#FFFFFF` 画布、`#E4E4E4` 胶囊），并同步实现 Claude 原生窗口失焦时侧栏与顶栏文字自动柔和降噪（`--cds-alpha-5`：`#FFFFFF80` / `#00000080`）。
@@ -10,7 +10,7 @@
 - **设置导航搜索与分组**：搜索会按页面名称与常用中英文关键词筛选现有设置入口，支持清除、无结果提示和 Enter 打开。偏好设置与自定义分组使用 `12/18px` 标题、组间留白；导航行高 `32px`、行间距 `1px`，图标使用 `20px` 光学尺寸。保持宿主按钮顺序和原有功能；关闭主题会移除搜索、分组和附加属性。
 - **设置图标来源**：采用安装版 Claude Desktop 的原始设置图标轮廓，以及用于 DSH 特有入口的 Lucide 图标。来源记录见 `src/assets/` 和 [第三方声明](THIRD_PARTY_NOTICES.md)。设置图标与旧版全局近似图标分开维护。
 
-安装包路径：`dist/dsh-theme-claude-0.11.0.tgz`（在 **Plugins → Add plugin → Install a third-party plugin** 中选择更新或安装）。
+安装包路径：`dist/dsh-theme-claude-0.11.1.tgz`（在 **Plugins → Add plugin → Install a third-party plugin** 中选择更新或安装）。底部齿轮现在是独立的设置按钮，点击直接打开设置；左侧账户入口仍打开账户菜单。
 
 ## 开发与打包
 
