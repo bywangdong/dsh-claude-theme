@@ -1,0 +1,17 @@
+{
+  "header": {
+    "mean_channel_difference": 1.462
+  },
+  "first_title": {
+    "mean_channel_difference": 3.371
+  },
+  "second_title": {
+    "mean_channel_difference": 2.899
+  },
+  "selected_background": {
+    "mean_channel_difference": 0.0
+  },
+  "first_icon": {
+    "mean_channel_difference": 10.326
+  }
+}

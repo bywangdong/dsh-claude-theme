@@ -22,3 +22,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ## Claude Desktop settings reference icons
 
 The Settings, Database, Plugin, Search and Computer outlines retain the master20 geometry from the installed Claude Desktop 5.11492.5 reference. Provenance and definition hashes are in `src/assets/claude-settings/provenance.json`. These reference assets are separate from the ISC-licensed Lucide assets above.
+
+## Claude Desktop search reference icons
+
+The Search, Code, X and ArrowReturn assets in `src/assets/claude-search/` retain the outlines from the installed Claude Desktop Anthropicons variable font. They were instantiated at the original renderer optical sizes and regular stroke weights, then exported as SVG with fontTools. No font file is distributed. Source font and output hashes are recorded in `provenance.json`. These reference assets are separate from the ISC-licensed Lucide assets.

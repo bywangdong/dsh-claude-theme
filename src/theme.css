@@ -2012,6 +2012,247 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] .sc-preferences .sc
   box-shadow: 0 1px 2px #00000024;
 }
 
+/* Companion `dsh-shortcutter` Overlays & Claude Desktop `f` Session Search Palette */
+body[data-dsh-claude-theme] .sc-root {
+  --sc-bg: var(--claude-cmdk-bg);
+  --sc-fg: var(--claude-cmdk-active-ink);
+  --sc-muted: var(--claude-cmdk-muted);
+  --sc-line: var(--claude-cmdk-border);
+  --sc-key: var(--claude-cmdk-selected-bg);
+  --sc-accent: var(--claude-clay);
+  --sc-hover: var(--claude-cmdk-hover-bg);
+  font-family: var(--claude-ui-sans);
+}
+body[data-dsh-claude-theme] .sc-root :is(.sc-panel, .sc-peek, .sc-notice) {
+  box-shadow: 0 12px 36px #0000002E, 0 2px 8px #00000014;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+body[data-dsh-claude-theme] .sc-root .sc-dot {
+  box-shadow: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search {
+  /* Claude Desktop: 42rem shell, 60px header + divider, 440px scrollport.
+     An inset shadow preserves its half-point edge in Chromium at any DPR. */
+  box-sizing: border-box;
+  width: min(672px, calc(100vw - 32px));
+  margin: 20vh auto auto;
+  max-height: calc(80vh - 24px);
+  border-radius: 12px;
+  padding: 0.5px;
+  border: 0;
+  background: var(--claude-cmdk-bg);
+  color: var(--claude-cmdk-ink);
+  box-shadow: inset 0 0 0 0.5px var(--claude-cmdk-border), 0 8px 24px #0000001F, 0 2px 6px #00000014;
+  font-family: var(--claude-ui-sans);
+  overflow: hidden;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search::backdrop {
+  background: var(--claude-cmdk-backdrop);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-header {
+  box-sizing: border-box;
+  height: 61px;
+  padding: 3.2px 10px 0 24px;
+  gap: 8px;
+  border-bottom: 1px solid var(--claude-cmdk-divider);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-header::before {
+  content: "";
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--claude-cmdk-muted);
+  background: currentColor;
+  -webkit-mask: var(--claude-palette-search-icon) center / contain no-repeat;
+  mask: var(--claude-palette-search-icon) center / contain no-repeat;
+  transform: translateX(-4px);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-header input {
+  height: 100%;
+  padding: 0;
+  font-family: var(--claude-ui-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--claude-cmdk-active-ink);
+  caret-color: currentColor;
+  outline: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-header input:focus,
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-header input:focus-visible {
+  outline: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-header input::placeholder {
+  color: var(--claude-cmdk-placeholder);
+  opacity: 1;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-header > button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--claude-cmdk-active-ink);
+  opacity: 1;
+  font-size: 0;
+  line-height: 0;
+  transition: background-color 120ms ease, opacity 120ms ease;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-header > button::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  -webkit-mask: var(--claude-palette-close-icon) center / contain no-repeat;
+  mask: var(--claude-palette-close-icon) center / contain no-repeat;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-header > button:focus-visible {
+  outline: 2px solid var(--dsw-focus-ring-color);
+  outline-offset: -2px;
+  opacity: 1;
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-header > button:hover {
+    background: var(--claude-cmdk-hover-bg);
+    opacity: 1;
+  }
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search:has(.sc-search-result) .sc-search-status:not([data-claude-error="true"]) {
+  display: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-status {
+  margin: 0;
+  padding: 28px 20px;
+  text-align: center;
+  font-size: 13.5px;
+  line-height: 20px;
+  color: var(--claude-cmdk-muted);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-status[data-claude-error="true"] {
+  padding: 10px 20px 2px;
+  text-align: left;
+  font-size: 12.5px;
+  line-height: 18px;
+  color: var(--claude-clay);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-footer {
+  display: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-results {
+  box-sizing: border-box;
+  padding: 10px;
+  max-height: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  scrollbar-width: thin;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result {
+  height: 36px;
+  min-height: 36px;
+  flex: none;
+  padding: 8px 12px;
+  gap: 8px;
+  border: 0;
+  border-radius: 8px;
+  outline: none;
+  color: var(--claude-cmdk-ink);
+  transition: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result::before {
+  content: "";
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--claude-cmdk-ink);
+  background: currentColor;
+  -webkit-mask: var(--claude-code-session-icon) center / contain no-repeat;
+  mask: var(--claude-code-session-icon) center / contain no-repeat;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-text {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-text strong {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: inherit;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-text small {
+  display: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result[data-claude-project-hit="true"] .sc-search-text small {
+  display: inline;
+  flex: 0 0 auto;
+  max-width: 144px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--claude-cmdk-muted);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result > .sc-muted {
+  flex: none;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--claude-cmdk-muted);
+  white-space: nowrap;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result > .sc-muted[data-claude-reltime] {
+  font-size: 0;
+  line-height: 0;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result > .sc-muted[data-claude-reltime]::after {
+  content: attr(data-claude-reltime);
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--claude-cmdk-muted);
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result:not([aria-selected="true"]):hover {
+    background: var(--claude-cmdk-hover-bg);
+    color: var(--claude-cmdk-active-ink);
+  }
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result:not([aria-selected="true"]):hover::before {
+    color: var(--claude-cmdk-active-ink);
+  }
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result[aria-selected="true"] {
+  background: var(--claude-cmdk-selected-bg);
+  outline: none;
+  color: var(--claude-cmdk-active-ink);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result[aria-selected="true"]::before {
+  color: var(--claude-cmdk-active-ink);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result[aria-selected="true"] > .sc-muted {
+  display: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result[aria-selected="true"]::after {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--claude-cmdk-enter-ink);
+  background: currentColor;
+  -webkit-mask: var(--claude-return-enter-icon) center / contain no-repeat;
+  mask: var(--claude-return-enter-icon) center / contain no-repeat;
+}
+
 /* 18. Claude-Style Plugin Settings Card (`Normal | Thinking | Verbose` Segmented + Accent-Blue Switch) */
 .claude-theme-settings {
   font: 14px/1.5 var(--claude-ui-sans);

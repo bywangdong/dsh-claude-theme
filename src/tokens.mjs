@@ -1,4 +1,4 @@
-// Dual Claude palettes for DeepSeek Harness (0.11.2):
+// Dual Claude palettes for DeepSeek Harness (0.11.5):
 // 1. neutral (default): Verbatim Claude Desktop @ant/cds fizzy-lake surfaces, settings modal & ink hierarchy
 //    - Light: #FAFAFA sidebar | #EAEAEA 1px seam | #FFFFFF canvas | #E4E4E4 selected pill | #FFFFFF settings modal
 //    - Dark:  #1F1F1F sidebar | #2B2B2B 1px seam | #191919 canvas | #3F3F3F selected pill | #191919 settings modal, #1F1F1F settings header
@@ -182,6 +182,17 @@ export const WARM_TOKENS = createPalette(({ pair, alias, specific }) => {
   pair('--claude-control-shadow', '0 1px 2px #1414130A', '0 1px 2px #0000002E');
   pair('--claude-switch-off', '#CFCBC0', '#403F3B');
   pair('--claude-switch-on', '#2A78D6', '#3987E5');
+  pair('--claude-cmdk-bg', '#FAF9F5', '#2B2A27');
+  pair('--claude-cmdk-border', '#E5E2D8', '#3C3A36');
+  pair('--claude-cmdk-divider', '#E5E2D8', '#3C3A36');
+  pair('--claude-cmdk-hover-bg', '#F1EFE8', '#353430');
+  pair('--claude-cmdk-selected-bg', '#E7E4DB', '#484641');
+  pair('--claude-cmdk-ink', '#4A4945', '#B3B0A8');
+  pair('--claude-cmdk-active-ink', '#141413', '#F5F3EC');
+  pair('--claude-cmdk-muted', '#75736C', '#9C9990');
+  pair('--claude-cmdk-placeholder', '#8A877F', '#8A877F');
+  pair('--claude-cmdk-enter-ink', '#66645E', '#BAB7AE');
+  pair('--claude-cmdk-backdrop', '#14141336', '#00000072');
 });
 
 export const NEUTRAL_TOKENS = createPalette(({ pair, alias, specific }) => {
@@ -353,6 +364,17 @@ export const NEUTRAL_TOKENS = createPalette(({ pair, alias, specific }) => {
   pair('--claude-control-shadow', '0 1px 2px #00000008', '0 1px 2px #0000002E');
   pair('--claude-switch-off', '#CECECC', '#3D3D3D');
   pair('--claude-switch-on', '#2A78D6', '#3987E5');
+  pair('--claude-cmdk-bg', '#FFFFFF', '#303030');
+  pair('--claude-cmdk-border', '#E5E5E5', '#595959');
+  pair('--claude-cmdk-divider', '#E5E5E5', '#454545');
+  pair('--claude-cmdk-hover-bg', '#F3F3F3', '#3B3B3B');
+  pair('--claude-cmdk-selected-bg', '#EAEAEA', '#4F4F4F');
+  pair('--claude-cmdk-ink', '#666666', '#A6A6A6');
+  pair('--claude-cmdk-active-ink', '#141413', '#FFFFFFED');
+  pair('--claude-cmdk-muted', '#666666', '#A6A6A6');
+  pair('--claude-cmdk-placeholder', '#878787', '#878787');
+  pair('--claude-cmdk-enter-ink', '#666666', '#FFFFFF91');
+  pair('--claude-cmdk-backdrop', '#00000038', '#00000070');
 });
 
 export const PALETTES = Object.freeze({

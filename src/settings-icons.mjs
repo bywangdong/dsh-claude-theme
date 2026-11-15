@@ -9,7 +9,7 @@ export function buildSettingsIconCss() {
     .replace('stroke-width="2"', 'stroke-width="1.5"'));
   const scope = 'body[data-dsh-claude-theme] [data-shortcut-modal="settings"]';
   const lines = [
-    `body[data-dsh-claude-theme] { --claude-sidebar-settings-icon: ${asset('claude-settings/settings')}; }`,
+    `body[data-dsh-claude-theme] { --claude-sidebar-settings-icon: ${asset('claude-settings/settings')}; --claude-palette-search-icon: ${asset('claude-search/search')}; --claude-palette-close-icon: ${asset('claude-search/close')}; --claude-code-session-icon: ${asset('claude-search/code')}; --claude-return-enter-icon: ${asset('claude-search/return')}; }`,
     `${scope} { --claude-settings-search-icon: ${asset('claude-settings/search')}; --claude-settings-close-icon: ${asset('lucide/x')}; }`,
   ];
   const icons = { account: 'lucide/user-round', general: 'claude-settings/settings', models: 'claude-settings/database', plugins: 'claude-settings/plugin', 'agent-presets': 'claude-settings/computer' };

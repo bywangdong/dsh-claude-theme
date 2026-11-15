@@ -5,7 +5,8 @@ window.__ModuleLoader__.load({
     /* BUILD_TOKENS */
     /* BUILD_CSS */
     /* BUILD_SETTINGS_NAV */
-    const VERSION = '0.11.2';
+    /* BUILD_SHORTCUTTER_SEARCH */
+    const VERSION = '0.11.6';
     const KEYS = {
       enabled: 'dsh-theme-claude.enabled.v1',
       palette: 'dsh-theme-claude.palette.v2',
@@ -19,7 +20,7 @@ window.__ModuleLoader__.load({
       'data-claude-chrome',
       'data-claude-window-inactive',
     ];
-    const inject = ['theme', 'slots'];
+    const inject = ['theme', 'slots', 'sessions'];
 
     // Asymmetric 12-ray organic starburst inspired by Claude Desktop's terracotta emblem.
     const SUNBURST_RAYS = [
@@ -180,6 +181,25 @@ window.__ModuleLoader__.load({
           unregister = null;
         };
       }), 'dsh-theme-claude: hero-mark');
+
+      ctx.effect(() => {
+        let disposeSearch = null;
+        const syncShortcutterSearch = () => {
+          if (enabled && chrome === 'claude') {
+            disposeSearch ??= observeShortcutterSearch(document, () => ctx.sessions?.list?.getSnapshot?.());
+          } else if (disposeSearch) {
+            disposeSearch();
+            disposeSearch = null;
+          }
+        };
+        subscribers.add(syncShortcutterSearch);
+        syncShortcutterSearch();
+        return () => {
+          subscribers.delete(syncShortcutterSearch);
+          disposeSearch?.();
+          disposeSearch = null;
+        };
+      }, 'dsh-theme-claude: shortcutter-search');
 
       function renderRow(title, desc, control) {
         return React.createElement('div', { className: 'claude-theme-row' },

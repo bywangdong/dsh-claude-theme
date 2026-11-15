@@ -1,6 +1,6 @@
 {
   "name": "dsh-theme-claude",
-  "version": "0.11.2",
+  "version": "0.11.6",
   "private": true,
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
       "inject": [
         "@deepseek-ai/dsh-client-ui-theme",
         "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-workspace",
         "@deepseek-ai/dsh-client-ui-settings"
       ]
     }

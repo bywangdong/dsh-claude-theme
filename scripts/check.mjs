@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import tokens, { PALETTES } from '../src/tokens.mjs';
+import { observeShortcutterSearch } from '../src/shortcutter-search.mjs';
 import { DSH_ICON_MASKS, INLINE_SVG_MASKS, toDataUri } from '../src/icons.mjs';
 
 const root = new URL('../', import.meta.url);
@@ -145,7 +146,7 @@ for (const scenario of [
     assert.equal(svg.props.className, 'claude-hero-sunburst');
   }
   if (!scenario.disabled) {
-    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.2');
+    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.6');
     assert.equal(attrs.get('data-claude-palette'), scenario.expectPalette);
     assert.equal(attrs.get('data-claude-prose'), scenario.expectProse);
     assert.equal(attrs.get('data-claude-chrome'), scenario.expectChrome);
@@ -215,8 +216,16 @@ for (const scenario of [
   assert.equal(windowListeners.size, 0, 'all window focus/blur listeners must be removed on unload');
 }
 
-assert.ok(!source.includes('BUILD_CSS') && !source.includes('BUILD_TOKENS') && !source.includes('BUILD_SETTINGS_NAV'));
+assert.ok(!source.includes('BUILD_CSS') && !source.includes('BUILD_TOKENS') && !source.includes('BUILD_SETTINGS_NAV') && !source.includes('BUILD_SHORTCUTTER_SEARCH'));
+assert.equal(typeof observeShortcutterSearch, 'function');
+assert.equal(PALETTES.neutral['--claude-cmdk-bg'].dark, '#303030');
+assert.equal(PALETTES.neutral['--claude-cmdk-selected-bg'].dark, '#4F4F4F');
 for (const marker of [
+  'dialog.sc-session-search',
+  '--claude-cmdk-bg',
+  '--claude-code-session-icon',
+  '--claude-return-enter-icon',
+  'data-claude-reltime',
   'PingFang SC',
   '--dsw-font-markdown-table:',
   '--claude-prose-strong-weight',
@@ -242,7 +251,7 @@ for (const marker of [
   'M2.80078 10.2112',
   'M8.48924 28H19.5108',
 ]) {
-  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.2 semantic selector marker: ${marker}`);
+  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.6 semantic selector marker: ${marker}`);
 }
 
 for (const name of iconNames) {
@@ -274,4 +283,4 @@ for (const pat of rawClassContains) {
 }
 
 assert.ok(!/https?:\/\/|fetch\(|XMLHttpRequest/.test(source.replaceAll('http://www.w3.org/2000/svg', '')), 'theme must be offline and self contained');
-console.log('PASS: emitted 0.11.2 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');
+console.log('PASS: emitted 0.11.6 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');
