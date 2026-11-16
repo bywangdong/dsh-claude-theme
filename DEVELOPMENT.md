@@ -10,7 +10,18 @@
 - 顶栏 60px 加 1px 分隔线；列表内边距 10px、滚动区域最高 440px；外框用内阴影保留半像素描边，避免 Chromium 将 0.5px border 取整。
 - 深色普通标题与时间统一为 #A6A6A6；标题 14/20px、时间 12/18px；选中底 #4F4F4F。文字光标跟随正文色，列表选择取消淡入淡出。
 - 图标来自本机 Claude 的 Anthropicons 原始轮廓，按原渲染器字号与字重实例化，来源和哈希见 src/assets/claude-search/provenance.json。
-- 使用真实 Shortcutter 和主题构建产物在浏览器宿主夹具中验证；详见 verification/f-search-0.11.6/README.md。
+- 使用真实 Shortcutter 和主题构建产物在浏览器宿主夹具中验证；详见 verification/f-search-0.11.6/README.md。此前工作区、设置等变更保持原状。
+
+## 0.11.5 伴生 `f` 快捷键会话与项目搜索面板重构
+
+- 对齐 Claude Desktop `Search sessions and projects` 悬浮命令面板（`src/shortcutter-search.mjs` + `src/theme.css`）：将伴生 `dsh-shortcutter` 的 `f` 搜索弹窗（`dialog.sc-session-search`）重构为 `600px` 宽、`12px` 圆角、`#303030` / `#FFFFFF`（暖纸 `#2B2A27` / `#FAF9F5`）悬浮面板，顶栏 `52px` 高配 `16×16px` 线性放大镜与 `28×28px` 关闭按钮，去除聚焦输入框外框、顶部冗余会话数提示与底栏快捷键条（同步调和 `.sc-root` 浮层色板）。
+- 结果行统一为 `32px` 单行 `8px` 圆角胶囊（前置 `16×16px` `</>` 代码图标，与顶栏搜索图标同轴 `x = 20px` 对齐）：选中行（`[aria-selected="true"]`）采用 `#4F4F4F` / `#EAEAEA` 胶囊底并在右侧显示 `14×14px` `↵` 回车图标；未选中行通过 `ctx.sessions.list` 读取真实 `updatedAt` 写入 `data-claude-reltime` 属性（不篡改 React 文本子节点），展示多语言相对时间分段（`今天` / `昨天` / `过去一周` / `过去一个月` / `过去一年`），按工作区名检索命中时自动内联展示项目名称。仅监听 `document.body` 顶层子节点挂载（`subtree: false`），日常对话零开销，切换 `保留 DSH` 或停用卸载完整还原。实测记录见 `verification/f-search-0.11.5/README.md`。
+
+## 0.11.4 逐项目悬停分组排序条与顶部按需搜索
+
+- 对齐 Claude Code Desktop 侧栏架构（`src/sidebar-workspaces.mjs`）：按工作区分组时收起冗余的 `Workspaces` 独立工具栏行，在每个 `[data-row-key^="workspace:"]` 项目行悬停态（`32px` 高、`8px` 圆角胶囊）右侧展示 `[ ↑↓   + ]` 两枚 `24×24px` 按钮（`16×16px` 线性遮罩图标、`4px` 按钮间距、`4px` 右/上下内边距），隐藏行内 `•••` 按钮（保留原生右键工作区菜单）。
+- `↑↓` 菜单直连 `sidebar.workspaces` 槽位共享单例 `WorkspaceViewStore`，提供分组方式（按工作区 / 按工作区树 / 单列表）、排序方式（最近更新 / 创建时间 / 手动排序）、归档筛选、管理此工作区（转发触发宿主右键菜单以重命名/移除）与添加工作区（转发触发宿主 `wsPlusRef` 目录选择流）；菜单打开期间通过 `data-claude-sort-open="true"` 锁定项目行胶囊高亮。
+- 在顶部导航 `+ 新会话` 下方注入同轴对齐的 `搜索` 入口行，点击按需展开 `28px` 高 Claude 内联会话搜索框（`_searchExpanded`），清除或按 `Escape` 收起；切换至 `单列表`（`flat`）或无工作区时自动展开 `会话` 顶栏行，确保分组视图切换始终可达。`保留 DSH` 模式或停用/卸载插件时完整卸载自建节点、监听与属性。实测记录见 `verification/workspace-0.11.4/README.md`。
 
 ## 0.11.2 性能优化
 

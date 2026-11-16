@@ -5,6 +5,7 @@ window.__ModuleLoader__.load({
     /* BUILD_TOKENS */
     /* BUILD_CSS */
     /* BUILD_SETTINGS_NAV */
+    /* BUILD_SIDEBAR_WORKSPACES */
     /* BUILD_SHORTCUTTER_SEARCH */
     const VERSION = '0.11.6';
     const KEYS = {
@@ -317,6 +318,31 @@ window.__ModuleLoader__.load({
       }
       ctx.effect(() => ctx.slots.inject('sidebar.footer.action', () =>
         ctx.slots.register({ name: 'sidebar.footer.action', id: 'claude-open-settings', locale: 'settings' }, SidebarSettingsButton)), 'dsh-theme-claude: sidebar settings button');
+
+      function currentWorkspaceOwner() {
+        return ctx.slots.entriesOfSlot('sidebar.workspaces')[0];
+      }
+
+      function SidebarWorkspacesEnhancer({ wide }) {
+        const anchor = React.useRef(null);
+        const [, refresh] = React.useReducer(n => n + 1, 0);
+        React.useEffect(() => {
+          subscribers.add(refresh);
+          const dispose = ctx.slots.subscribe('sidebar.workspaces', refresh);
+          return () => { subscribers.delete(refresh); dispose(); };
+        }, []);
+        const active = Boolean(wide && enabled && chrome === 'claude');
+        React.useLayoutEffect(() => {
+          if (!active) return;
+          const sidebarRoot = anchor.current?.closest(':is([class$="_root"], [class*="_root "]):has([data-sidebar-scrollport])');
+          if (!sidebarRoot) return;
+          return enhanceSidebarWorkspaces(sidebarRoot, currentWorkspaceOwner);
+        }, [active]);
+        if (!active) return null;
+        return React.createElement('span', { ref: anchor, hidden: true });
+      }
+      ctx.effect(() => ctx.slots.inject('sidebar.footer.action', () =>
+        ctx.slots.register({ name: 'sidebar.footer.action', id: 'claude-sidebar-workspaces', order: -100 }, SidebarWorkspacesEnhancer)), 'dsh-theme-claude: sidebar workspaces');
 
       function SettingsNavigation() {
         const anchor = React.useRef(null);

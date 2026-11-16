@@ -4,8 +4,9 @@ import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import tokens, { PALETTES } from '../src/tokens.mjs';
-import { observeShortcutterSearch } from '../src/shortcutter-search.mjs';
 import { DSH_ICON_MASKS, INLINE_SVG_MASKS, toDataUri } from '../src/icons.mjs';
+import { enhanceSidebarWorkspaces } from '../src/sidebar-workspaces.mjs';
+import { observeShortcutterSearch } from '../src/shortcutter-search.mjs';
 
 const root = new URL('../', import.meta.url);
 const source = readFileSync(new URL('lib/client.js', root), 'utf8');
@@ -99,12 +100,15 @@ for (const scenario of [
       load(def) {
         plugin = def.factory(() => ({
           createElement: (tag, props, ...children) => ({ tag, props, children }),
+          useRef: initial => ({ current: initial }),
           useReducer: () => [0, () => {}],
           useEffect: fn => { const dispose = fn(); if (dispose) componentEffects.push(dispose); },
+          useLayoutEffect: fn => { const dispose = fn(); if (dispose) componentEffects.push(dispose); },
         }));
       },
     },
   };
+  const workspaceOwners = [{ store: { create: () => ({ getSnapshot: () => ({ groupBy: 'workspace', orderBy: 'updated', archivedFilter: 'default' }), actions: {} }) } }];
   const context = {
     effect(fn) { const dispose = fn(); if (dispose) effects.push(dispose); },
     on(name, fn) {
@@ -118,15 +122,19 @@ for (const scenario of [
     },
     slots: {
       inject(_name, fn) { return fn(); },
-      entriesOfSlot(name) { assert.equal(name, 'sidebar.settings'); return settingsOwners; },
+      entriesOfSlot(name) {
+        assert.ok(name === 'sidebar.settings' || name === 'sidebar.workspaces', `unexpected slot lookup: ${name}`);
+        return name === 'sidebar.settings' ? settingsOwners : workspaceOwners;
+      },
       subscribe(name, fn) {
-        assert.equal(name, 'sidebar.settings');
+        assert.ok(name === 'sidebar.settings' || name === 'sidebar.workspaces', `unexpected slot subscribe: ${name}`);
         slotSubscriptions.add(fn);
         return () => slotSubscriptions.delete(fn);
       },
       register(spec, comp) {
-        registeredSlots.set(spec.name, comp);
-        return () => registeredSlots.delete(spec.name);
+        const slotKey = spec.id ? `${spec.name}:${spec.id}` : spec.name;
+        registeredSlots.set(slotKey, comp);
+        return () => registeredSlots.delete(slotKey);
       },
     },
   };
@@ -185,7 +193,17 @@ for (const scenario of [
   for (const button of selectedPreferences) button.props.onClick();
   assert.equal(bodyWrites.length, beforeSamePreference, 'selecting an unchanged preference must do no theme DOM writes');
   // The visible cog must open the live settings owner directly, without an account-menu click.
-  const FooterButton = registeredSlots.get('sidebar.footer.action');
+  const FooterButton = registeredSlots.get('sidebar.footer.action:claude-open-settings');
+  const WorkspacesEnhancer = registeredSlots.get('sidebar.footer.action:claude-sidebar-workspaces');
+  assert.equal(typeof WorkspacesEnhancer, 'function');
+  const enhancerNode = WorkspacesEnhancer({ wide: true });
+  if (!scenario.disabled && scenario.expectChrome === 'claude') {
+    assert.equal(enhancerNode.tag, 'span');
+    assert.equal(enhancerNode.props.hidden, true);
+  } else {
+    assert.equal(enhancerNode, null, 'disabled and native DSH chrome must not mount sidebar workspace enhancer');
+  }
+  assert.equal(WorkspacesEnhancer({ wide: false }), null, 'collapsed sidebar must not mount wide workspace enhancer');
   const footer = FooterButton({ wide: true, t: key => key === 'trigger' ? 'Settings' : key });
   if (!scenario.disabled && scenario.expectChrome === 'claude') {
     assert.equal(footer.tag, 'button');
@@ -216,16 +234,18 @@ for (const scenario of [
   assert.equal(windowListeners.size, 0, 'all window focus/blur listeners must be removed on unload');
 }
 
-assert.ok(!source.includes('BUILD_CSS') && !source.includes('BUILD_TOKENS') && !source.includes('BUILD_SETTINGS_NAV') && !source.includes('BUILD_SHORTCUTTER_SEARCH'));
+assert.ok(
+  !source.includes('BUILD_CSS')
+  && !source.includes('BUILD_TOKENS')
+  && !source.includes('BUILD_SETTINGS_NAV')
+  && !source.includes('BUILD_SIDEBAR_WORKSPACES')
+  && !source.includes('BUILD_SHORTCUTTER_SEARCH'),
+);
+assert.equal(typeof enhanceSidebarWorkspaces, 'function');
 assert.equal(typeof observeShortcutterSearch, 'function');
 assert.equal(PALETTES.neutral['--claude-cmdk-bg'].dark, '#303030');
 assert.equal(PALETTES.neutral['--claude-cmdk-selected-bg'].dark, '#4F4F4F');
 for (const marker of [
-  'dialog.sc-session-search',
-  '--claude-cmdk-bg',
-  '--claude-code-session-icon',
-  '--claude-return-enter-icon',
-  'data-claude-reltime',
   'PingFang SC',
   '--dsw-font-markdown-table:',
   '--claude-prose-strong-weight',
@@ -233,6 +253,18 @@ for (const marker of [
   'data-row-key^="workspace:"',
   'data-row-key^="session:"',
   'data-sidebar-workspace-header',
+  '_searchExpanded',
+  '_searchResultRow',
+  'claude-sidebar-search-row',
+  'claude-workspace-sort-btn',
+  'claude-workspace-sort-menu',
+  '--claude-workspace-sort-icon',
+  'data-claude-sort-open="true"',
+  'dialog.sc-session-search',
+  '--claude-cmdk-bg',
+  '--claude-code-session-icon',
+  '--claude-return-enter-icon',
+  'data-claude-reltime',
   'data-sidebar-scrollport',
   'data-content-phase="hero"',
   'canvas[data-home-whale]',
@@ -253,6 +285,10 @@ for (const marker of [
 ]) {
   assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.6 semantic selector marker: ${marker}`);
 }
+assert.ok(
+  injectedCss.includes(':not(:has([data-row-key^="workspace:"])) [data-sidebar-workspace-header]'),
+  'flat/empty mode must keep workspace header reachable when no workspace rows are rendered',
+);
 
 for (const name of iconNames) {
   assert.ok(injectedCss.includes(`dsw-icon-${name}-regular`), `missing regular icon rule: ${name}`);

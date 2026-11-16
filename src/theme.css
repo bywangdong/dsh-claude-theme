@@ -323,58 +323,247 @@ body[data-dsh-claude-theme] [data-sidebar-scrollport] :is([class$="_panelEntryAc
 body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_folderActive"], [class*="_folderActive "]) {
   color: var(--claude-session-active-ink);
 }
-
-/* 5. Hover-Reveal Workspaces Toolbar (Exact 20px Gap Between "More" and First Workspace) */
-body[data-dsh-claude-theme] [data-sidebar-workspace-header] :is([class$="_sectionLabel"], [class*="_sectionLabel "]) {
-  left: 0;
-  font-size: 12px;
-  font-weight: 450;
-  letter-spacing: .01em;
-  color: var(--claude-workspace-label);
+/* Claude Desktop top-nav "Search" row (seated right under "+ New Session") */
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] .claude-sidebar-search-entry {
+  display: flex;
+  border-radius: 8px;
 }
-body[data-dsh-claude-theme][data-claude-chrome="dsh"] [data-sidebar-workspace-header] {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] .claude-sidebar-search-row {
+  width: 100%;
+  height: 32px;
+  min-height: 32px;
+  margin: 0;
+  padding: 0 var(--dsh-sidebar-row-padding);
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: var(--dsh-sidebar-label-gap);
+  background: transparent;
+  color: var(--claude-session-ink);
+  font-family: var(--claude-ui-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] .claude-sidebar-search-glyph {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--dsw-alias-label-secondary);
+  background: currentColor;
+  -webkit-mask: var(--claude-sidebar-search-icon) center / contain no-repeat;
+  mask: var(--claude-sidebar-search-icon) center / contain no-repeat;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] .claude-sidebar-search-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] .claude-sidebar-search-row:focus-visible {
+  outline: 2px solid var(--dsw-focus-ring-color);
+  outline-offset: -2px;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] .claude-sidebar-search-row[aria-expanded="true"] {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--claude-session-active-ink);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] .claude-sidebar-search-row[aria-expanded="true"] .claude-sidebar-search-glyph {
+  color: var(--claude-session-active-ink);
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] .claude-sidebar-search-row:hover {
+    background: var(--dsw-alias-interactive-bg-hover);
+    color: var(--claude-session-active-ink);
+  }
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] .claude-sidebar-search-row:hover .claude-sidebar-search-glyph {
+    color: var(--claude-session-active-ink);
+  }
+}
+
+/* 5. Claude .dframe-sidebar Workspace Header & On-Demand 28px Inline Session Search
+   - Grouped mode at rest: header collapses to 0px (controls live on each project row + top-nav Search)
+   - Flat / empty mode: header acts as a calm 32px group row ("Sessions    ↑↓ 📁+") so grouping is always reachable
+   - Search active: expands smoothly into a 28px Claude search bar */
+body[data-dsh-claude-theme] [data-sidebar-scrollport] [data-sidebar-workspace-header] :is([class$="_sectionLabel"], [class*="_sectionLabel "]) {
+  left: 0;
+  font-size: 13.5px;
+  line-height: 18px;
+  font-weight: 420;
+  letter-spacing: 0;
+  color: var(--claude-workspace-label);
+  -webkit-user-select: none;
+  user-select: none;
+}
+body[data-dsh-claude-theme][data-claude-chrome="dsh"] [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) {
   margin-top: 8px;
   height: 28px;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):has([data-sidebar-workspace-header]) {
-  --workspace-toolbar-height: 20px;
+/* Grouped mode at rest: zero-chrome workspace list */
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):has([data-row-key^="workspace:"]):not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) {
+  --workspace-toolbar-height: 0px;
+  --workspace-toolbar-gap: 0px;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):has([data-sidebar-workspace-header] :is([class$="_searchExpanded"], [class*="_searchExpanded "])) {
-  --workspace-toolbar-height: 34px;
-}
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):has([data-row-key^="workspace:"]) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) {
+  height: 0;
+  min-height: 0;
   margin: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is([class$="_searchSlot"], [class*="_searchSlot "]) {
-  max-width: 22px;
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):has([data-row-key^="workspace:"]):not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) [data-sidebar-list-area] {
+  margin-top: 10px;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is([class$="_iconButton"], [class*="_iconButton "]),
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is([class$="_search"], [class*="_search "]),
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is([class$="_searchButton"], [class*="_searchButton "]) {
-  width: 22px;
-  height: 20px;
+/* Flat-list ("Sessions") or empty-workspace fallback row */
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):not(:has([data-row-key^="workspace:"])):not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))):has([data-sidebar-workspace-header]) {
+  --workspace-toolbar-height: 32px;
+  --workspace-toolbar-gap: 2px;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-workspace-header] svg {
-  width: 13.5px;
-  height: 13.5px;
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):not(:has([data-row-key^="workspace:"])) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) {
+  margin: 10px 0 2px;
+  padding: 0 4px 0 var(--dsh-sidebar-row-padding);
+  border-radius: 8px;
+  gap: 4px;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport]:has(.claude-sidebar-search-entry) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is([class$="_searchSlot"], [class*="_searchSlot "]) {
+  display: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is([class$="_sectionLabel"], [class*="_sectionLabel "]) {
+  margin-right: auto;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is([class$="_headerActions"], [class*="_headerActions "]) {
+  gap: 4px;
 }
 @media (hover: hover) {
-  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))):not(:focus-within):not(:has([aria-expanded="true"])) {
-    opacity: 0;
-    transition: opacity 150ms var(--ds-ease-in-out);
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not(:has([data-row-key^="workspace:"])) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))):hover {
+    background: var(--dsw-alias-interactive-bg-hover);
   }
-  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))):hover {
-    opacity: 1;
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not(:has([data-row-key^="workspace:"])) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))):hover :is([class$="_sectionLabel"], [class*="_sectionLabel "]) {
+    color: var(--claude-session-active-ink);
+  }
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not(:has([data-row-key^="workspace:"])) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))):not(:hover):not(:focus-within):not(:has([aria-expanded="true"])) :is([class$="_headerActions"], [class*="_headerActions "]) {
+    opacity: 0;
   }
 }
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is(
+  [class$="_iconButton"], [class*="_iconButton "],
+  [class$="_searchButton"], [class*="_searchButton "]
+) {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  color: var(--dsw-alias-label-secondary);
+  transition: background-color 120ms ease, color 120ms ease;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) button[aria-haspopup="menu"] svg {
+  --claude-icon: var(--claude-workspace-sort-icon);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is(
+  :is([class$="_iconButton"], [class*="_iconButton "])[aria-expanded="true"],
+  :is([class$="_searchButton"], [class*="_searchButton "])[aria-expanded="true"],
+  :is([aria-expanded="true"], [data-state="open"]) :is([class$="_iconButton"], [class*="_iconButton "])
+) {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--claude-session-active-ink);
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is(
+    [class$="_iconButton"], [class*="_iconButton "],
+    [class$="_searchButton"], [class*="_searchButton "]
+  ):hover {
+    background: var(--dsw-alias-interactive-bg-hover);
+    color: var(--claude-session-active-ink);
+  }
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) svg {
+  width: 15px;
+  height: 15px;
+}
 
-/* 6. Claude Desktop Folderless Project Headers ("workspace ›" / "workspace ⌄", --df-group-font: 13px / 16px) */
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] {
+/* Expanded inline session search: full-pill 28px Claude search bar, aligned to 18px icon / 34px label axes */
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):has(:is([class$="_searchExpanded"], [class*="_searchExpanded "])) {
+  --workspace-toolbar-height: 30px;
+  --workspace-toolbar-gap: 6px;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "])) {
+  height: 30px;
+  min-height: 30px;
+  margin: 10px 0 6px;
+  padding-inline: 0;
+  gap: 0;
+  opacity: 1;
+  pointer-events: auto;
+  overflow: visible;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header] :is([class$="_searchExpanded"], [class*="_searchExpanded "]) {
   height: 28px;
-  gap: 5px;
+  padding: 0 3px 0 0;
+  border: 1px solid var(--claude-composer-border);
+  border-radius: 8px;
+  background: var(--claude-settings-search-bg);
+  color: var(--dsw-alias-label-tertiary);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header] :is([class$="_searchExpanded"], [class*="_searchExpanded "]):focus-within {
+  border-color: var(--claude-composer-border-focus);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header] :is([class$="_searchExpanded"], [class*="_searchExpanded "]) :is([class$="_searchButton"], [class*="_searchButton "]) {
+  width: 32px;
+  height: 26px;
+  padding: 0 0 0 2px;
+  border-radius: 7px 0 0 7px;
+  background: transparent;
+  color: var(--dsw-alias-label-tertiary);
+  cursor: text;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header] :is([class$="_searchExpanded"], [class*="_searchExpanded "]) :is([class$="_searchButton"], [class*="_searchButton "]) svg {
+  width: 14px;
+  height: 14px;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header] :is([class$="_searchExpanded"], [class*="_searchExpanded "]) :is([class$="_searchInput"], [class*="_searchInput "]) {
+  margin-left: 1px;
+  font-family: var(--claude-ui-sans);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--claude-session-active-ink);
+  caret-color: var(--claude-clay);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header] :is([class$="_searchExpanded"], [class*="_searchExpanded "]) :is([class$="_searchInput"], [class*="_searchInput "])::placeholder {
+  color: var(--dsw-alias-label-tertiary);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header] :is([class$="_searchExpanded"], [class*="_searchExpanded "]) :is([class$="_clearButton"], [class*="_clearButton "]) {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  color: var(--dsw-alias-label-tertiary);
+  transition: background-color 120ms ease, color 120ms ease;
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header] :is([class$="_searchExpanded"], [class*="_searchExpanded "]) :is([class$="_clearButton"], [class*="_clearButton "]):hover {
+    background: var(--dsw-alias-interactive-bg-hover);
+    color: var(--claude-session-active-ink);
+  }
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header] :is([class$="_searchExpanded"], [class*="_searchExpanded "]) :is([class$="_clearButton"], [class*="_clearButton "]) svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* 6. Claude Code Desktop Folderless Project Headers ("[ workspace ⌄      ↑↓  + ]", 32px pill) */
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] {
+  height: 32px;
+  gap: 6px;
   border-inline: 0;
   border-radius: 8px;
-  padding-inline-start: calc(var(--dsh-sidebar-row-padding) + var(--dsh-workspace-indent, 0px));
+  padding: 0 4px 0 calc(var(--dsh-sidebar-row-padding) + var(--dsh-workspace-indent, 0px));
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"][data-claude-sort-open="true"] {
+  background-color: var(--dsw-alias-interactive-bg-hover);
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_folder"], [class*="_folder "]) {
   display: none;
@@ -388,12 +577,18 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
   flex: 1 1 auto;
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] :is([class$="_title"], [class*="_title "]) {
-  font-size: 13px;
-  line-height: 16px;
-  font-weight: 400;
+  font-size: 13.5px;
+  line-height: 18px;
+  font-weight: 420;
   letter-spacing: 0;
   color: var(--claude-workspace-label);
   transition: color 120ms ease;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is(
+  [data-row-key^="workspace:"][data-claude-sort-open="true"],
+  [data-row-key^="workspace:"]:is([class$="_menuOpen"], [class*="_menuOpen "])
+) :is([class$="_title"], [class*="_title "]) {
+  color: var(--claude-session-active-ink);
 }
 @media (hover: hover) {
   body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"]:hover :is([class$="_title"], [class*="_title "]) {
@@ -407,17 +602,31 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
   width: 12px;
   height: 12px;
   color: var(--claude-workspace-chevron);
+  transition: color 120ms ease;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is(
+  [data-row-key^="workspace:"][data-claude-sort-open="true"],
+  [data-row-key^="workspace:"]:is([class$="_menuOpen"], [class*="_menuOpen "])
+) > :is([class$="_chevron"], [class*="_chevron "]) {
+  color: var(--claude-session-active-ink);
+  opacity: 0.88;
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"]:hover > :is([class$="_chevron"], [class*="_chevron "]) {
+    color: var(--claude-session-active-ink);
+    opacity: 0.88;
+  }
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_chevron"], [class*="_chevron "]) > svg {
   display: none;
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_chevron"], [class*="_chevron "])::before {
   content: "";
-  width: 4.5px;
-  height: 4.5px;
+  width: 5.25px;
+  height: 5.25px;
   box-sizing: border-box;
-  border-right: 1.25px solid currentColor;
-  border-bottom: 1.25px solid currentColor;
+  border-right: 1.4px solid currentColor;
+  border-bottom: 1.4px solid currentColor;
   transform: translate(-1px, .5px) rotate(-45deg);
   transition: transform 150ms var(--ds-ease-in-out);
 }
@@ -430,7 +639,172 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_rowActions"], [class*="_rowActions "]) {
   order: 3;
   margin-left: auto;
+  height: 24px;
+  gap: 4px;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"][data-claude-sort-open="true"] > :is([class$="_rowActions"], [class*="_rowActions "]),
+html[data-input-modality="keyboard"] body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"]:focus-within > :is([class$="_rowActions"], [class*="_rowActions "]) {
+  display: inline-flex;
+}
+/* Replace inline workspace "•••" with Claude's "[ ↑↓  + ]" hover actions (workspace rename/delete stays on right-click & ↑↓ menu) */
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_rowActions"], [class*="_rowActions "]) > [data-slot="contextMenu.button"],
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_rowActions"], [class*="_rowActions "]) button[aria-haspopup="menu"]:not(.claude-workspace-sort-btn) {
+  display: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_rowActions"], [class*="_rowActions "]) :is(
+  .claude-workspace-sort-btn,
+  [class$="_iconButton"], [class*="_iconButton "]
+) {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--claude-session-active-ink);
+  opacity: 0.88;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease, opacity 120ms ease;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_rowActions"], [class*="_rowActions "]) .claude-workspace-sort-btn > span {
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  -webkit-mask: var(--claude-workspace-sort-icon) center / contain no-repeat;
+  mask: var(--claude-workspace-sort-icon) center / contain no-repeat;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_rowActions"], [class*="_rowActions "]) :is([class$="_iconButton"], [class*="_iconButton "]) svg {
+  --claude-icon: var(--claude-workspace-plus-icon);
+  width: 16px;
+  height: 16px;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_rowActions"], [class*="_rowActions "]) :is(
+  .claude-workspace-sort-btn:focus-visible,
+  :is([class$="_iconButton"], [class*="_iconButton "]):focus-visible
+) {
+  outline: 2px solid var(--dsw-focus-ring-color);
+  outline-offset: -2px;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_rowActions"], [class*="_rowActions "]) .claude-workspace-sort-btn[aria-expanded="true"] {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--claude-session-active-ink);
+  opacity: 1;
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_rowActions"], [class*="_rowActions "]) :is(
+    .claude-workspace-sort-btn,
+    [class$="_iconButton"], [class*="_iconButton "]
+  ):hover {
+    background: var(--dsw-alias-interactive-bg-hover);
+    color: var(--claude-session-active-ink);
+    opacity: 1;
+  }
+}
+
+/* Claude Group & Sort Popover Menu (anchored below per-project ↑↓ button) */
+body[data-dsh-claude-theme] .claude-workspace-sort-menu {
+  position: fixed;
+  z-index: 9999;
+  min-width: 214px;
+  max-width: 268px;
+  box-sizing: border-box;
+  padding: 5px;
+  border-radius: 10px;
+  background: var(--dsw-menu-surface-fill);
+  box-shadow: 0 0 0 1px var(--dsw-alias-border-l2), var(--claude-popover-shadow);
+  font-family: var(--claude-ui-sans);
+  color: var(--claude-session-active-ink);
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-heading {
+  padding: 5px 8px 3px;
+  font-size: 11.5px;
+  line-height: 15px;
+  font-weight: 450;
+  color: var(--dsw-alias-label-tertiary);
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-separator {
+  height: 1px;
+  margin: 4px 4px;
+  background: var(--dsw-alias-border-l1);
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-item {
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  padding: 0 8px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
+  background: transparent;
+  color: var(--claude-session-ink);
+  font-family: var(--claude-ui-sans);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-item[aria-checked="true"] {
+  color: var(--claude-session-active-ink);
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-item:focus-visible {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--claude-session-active-ink);
+  outline: none;
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme] .claude-workspace-sort-item:hover {
+    background: var(--dsw-alias-interactive-bg-hover);
+    color: var(--claude-session-active-ink);
+  }
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-item-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-item-check {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  color: var(--claude-session-active-ink);
+  background: currentColor;
+  -webkit-mask: var(--claude-menu-check-icon) center / contain no-repeat;
+  mask: var(--claude-menu-check-icon) center / contain no-repeat;
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-item[aria-checked="true"] .claude-workspace-sort-item-check {
+  opacity: 1;
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-action {
+  justify-content: flex-start;
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-action-icon {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  color: var(--dsw-alias-label-secondary);
+  background: currentColor;
+  -webkit-mask: var(--claude-workspace-add-icon) center / contain no-repeat;
+  mask: var(--claude-workspace-add-icon) center / contain no-repeat;
+}
+body[data-dsh-claude-theme] .claude-workspace-sort-action-icon[data-icon="manage"] {
+  -webkit-mask-image: var(--claude-workspace-manage-icon);
+  mask-image: var(--claude-workspace-manage-icon);
 }
 
 /* 7. Flush-Left 14px / 32px Session Rows (--df-row-font: 14px, --df-row-h: 32px), Hidden Blank Placeholder & Right Fade */
@@ -526,6 +900,48 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
 /* Generous 18px breathing room after expanded workspaces that contain at least one visible non-blank session */
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_groupSection"], [class*="_groupSection "]):has([data-row-key^="session:"] :is([class$="_rowResting"], [class*="_rowResting "])) + :is([class$="_groupSection"], [class*="_groupSection "]) {
   margin-top: 18px;
+}
+/* Flush-left 8px pill search results & empty status inside the sidebar search tree */
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_searchResultRow"], [class*="_searchResultRow "]) {
+  min-height: 44px;
+  padding: 6px var(--dsh-sidebar-row-padding);
+  gap: 1px;
+  border-inline: 0;
+  border-radius: 8px;
+  color: var(--claude-session-ink);
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_searchResultRow"], [class*="_searchResultRow "]):hover {
+    color: var(--claude-session-active-ink);
+  }
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_searchResultRow"], [class*="_searchResultRow "]):is([class$="_selected"], [class*="_selected "]) {
+  background-color: var(--claude-nav-active-bg);
+  color: var(--claude-session-active-ink);
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_searchResultHeading"], [class*="_searchResultHeading "]) :is([class$="_slot"], [class*="_slot "]):empty,
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_skeletonRow"], [class*="_skeletonRow "]) :is([class$="_skeletonDot"], [class*="_skeletonDot "]) {
+  display: none;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_searchResultHeading"], [class*="_searchResultHeading "]) :is([class$="_slot"], [class*="_slot "]):not(:empty) {
+  width: auto;
+  min-width: 10px;
+  margin-right: 6px;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_searchResultTitle"], [class*="_searchResultTitle "]) {
+  margin: 0 6px 0 0;
+  font-size: 13.5px;
+  line-height: 19px;
+  font-weight: 400;
+  color: inherit;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_searchResultMeta"], [class*="_searchResultMeta "]) {
+  margin-left: 0;
+}
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_searchStatus"], [class*="_searchStatus "]) {
+  padding: 8px var(--dsh-sidebar-row-padding);
+  font-size: 12.5px;
+  color: var(--dsw-alias-label-tertiary);
 }
 
 /* 8. Bottom Account & Settings Footer: Full-Width 1px Hairline, Compact Bar, "Nick ⌄" & Right Settings Cog */
@@ -2415,9 +2831,11 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-se
 @media (prefers-reduced-motion: reduce) {
   body[data-dsh-claude-theme] [data-composer-card],
   body[data-dsh-claude-theme] [data-composer-card] button:is([class$="_primary"], [class*="_primary "]),
-  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-workspace-header],
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header] button,
   body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] :is([class$="_title"], [class*="_title "]),
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_chevron"], [class*="_chevron "]),
   body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_chevron"], [class*="_chevron "])::before,
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] button,
   body[data-dsh-claude-theme] .claude-hero-sunburst,
   body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"],
   body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"] [class*="_thumb_"],

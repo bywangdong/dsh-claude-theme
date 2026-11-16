@@ -1,7 +1,6 @@
 {
   "plugin": "dsh-theme-claude",
-  "version": "0.11.2",
-  "host": "DeepSeek Harness 0.2.2-rc.3",
+  "version": "0.11.6",
   "installedMatchesBuild": {
     "lib/client.js": true,
     "lib/index.js": true,
@@ -11,17 +10,18 @@
     "THIRD_PARTY_NOTICES.md": true
   },
   "sha256": {
-    "lib/client.js": "5b4b058ebc12af693b0743f1288eb28eae11a103156a3c6484f55c25778c86d3",
+    "lib/client.js": "e8322136b127adf89e7a7b18b8c53b41efac1201e4f92bdf706bdd7552e5881d",
     "lib/index.js": "60e2d41c24fe8aae18a27b1ff9b0eba58da8d0759ef06211c9f2e1e130bcdd45",
     "cordis.patch.yml": "c2659fd7a68aba594fd9fce79245b3de83b0113d9f7575f9af18b79ba53b61b5",
-    "README.md": "35231975dd613a69cf6f1bb7fc3b77fa8de7ff3b8cca236acda0023ca8e3a982",
-    "package.json": "09632aef65140f1f1e7d3f70999afbeac9f239812ea34209c284fc8bdd9b1b0d",
-    "THIRD_PARTY_NOTICES.md": "7c71cdfbe3d9a9dfd358bfc62e4d8f06ad18d82e90d30be28bdba96852ac37f7"
+    "README.md": "18c33a92044add0c646b49c64890e576950896dc4638a8422f4812a3a91a1227",
+    "package.json": "271d8db4e547303212a90b6e6c8abd0df9c9be260c2016af7ac5635834c8453b",
+    "THIRD_PARTY_NOTICES.md": "b1d7f6e6f2f9a5096df0dbdb5a795542a406a930843282cbfa4345e751a364a6"
   },
   "otherDependenciesPreserved": {
     "dsh-shortcutter": true,
     "dsh-switcher": true
   },
-  "profileBackup": "/Users/nick/.dsh/profiles/desktop/.claude-theme-backups/20261115-114358-performance-0.11.2",
-  "validationReport": "performance-0.11.2/README.md"
+  "profileBackup": "/Users/nick/Documents/Projects/2026-11-14 Claude DSH Theme/local/verification-private/f-search-0.11.6/profile-before-install",
+  "validationReport": "f-search-0.11.6/README.md",
+  "nativeDshKeyboardAcceptance": false
 }

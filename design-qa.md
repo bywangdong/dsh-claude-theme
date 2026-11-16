@@ -4,6 +4,11 @@
 
 本轮对照正在运行的 Claude 深色搜索原版与真实 Shortcutter/主题构建产物，修正面板尺寸、行高、图标、灰阶、边线和选中态过渡。参考截图、实现路径、同倍率比较方法、1280×820/360×600 视口记录及验收限制见 [0.11.6 验收记录](verification/f-search-0.11.6/README.md)。本轮范围内 `final result: passed`；不将浏览器夹具验证称为已安装 DSH 的原生验收，也不声称整体逐像素一致。
 
+以下为此前设置页等功能的历史验收记录。
+
+0.11.5 对齐 Claude Desktop `Search sessions and projects` 悬浮命令面板重构伴生 `dsh-shortcutter` 的 `f` 搜索弹窗（`#303030` / `#4F4F4F` 深色表面、`</>` 前置图标、选中行 `↵` 回车提示与相对时间分段），实图与测量见 `verification/f-search-0.11.5/README.md`。
+
+0.11.4 按 Claude Code Desktop 逻辑将工作区分组排序入口下沉至每个项目行悬停右侧（`[ 项目名 ⌄      ↑↓  + ]`），并在顶部导航挂载按需展开 `28px` 内联会话搜索的 `搜索` 入口；几何测量与浅/深色实图见 `verification/workspace-0.11.4/README.md`。
 
 0.11.2 在保留外观的前提下收窄图标样式匹配、减少重复更新。性能测量、32 个 SVG 的零差异对照与行为回归见 `verification/performance-0.11.2/README.md`。
 

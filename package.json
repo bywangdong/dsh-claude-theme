@@ -4,7 +4,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iobee/dsh-claude-theme.git"
+    "url": "git+https://github.com/bywangdong/dsh-claude-theme.git"
   },
   "description": "Verbatim Claude Desktop CJK/Latin typography, fizzy-lake dark/light surfaces, quiet craft & optical icons for DeepSeek Harness",
   "type": "module",
@@ -37,6 +37,7 @@
       "inject": [
         "@deepseek-ai/dsh-client-ui-theme",
         "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar",
         "@deepseek-ai/dsh-client-ui-workspace",
         "@deepseek-ai/dsh-client-ui-settings"
       ]
