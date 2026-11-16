@@ -173,7 +173,38 @@ export function enhanceSidebarWorkspaces(sidebarRoot, getWorkspaceOwner) {
       : undefined;
   };
 
-  const getHeader = () => scrollport.querySelector('[data-sidebar-workspace-header]');
+  let cachedHeader = null;
+  let cachedPanelList = null;
+  let cachedListArea = null;
+  let cachedNewSessionBtn = null;
+  let observedHeader = null;
+  let observedHeroSignature = '';
+  let lastLang = null;
+
+  const getHeader = () => {
+    if (!cachedHeader?.isConnected) {
+      cachedHeader = scrollport.querySelector('[data-sidebar-workspace-header]');
+    }
+    return cachedHeader;
+  };
+  const getPanelList = () => {
+    if (!cachedPanelList?.isConnected) {
+      cachedPanelList = scrollport.querySelector('nav[class$="_panelList"], nav[class*="_panelList "]');
+    }
+    return cachedPanelList;
+  };
+  const getListArea = () => {
+    if (!cachedListArea?.isConnected) {
+      cachedListArea = scrollport.querySelector('[data-sidebar-list-area]');
+    }
+    return cachedListArea;
+  };
+  const getNewSessionBtn = () => {
+    if (!cachedNewSessionBtn?.isConnected) {
+      cachedNewSessionBtn = sidebarRoot.querySelector('button[class$="_newSession"], button[class*="_newSession "]');
+    }
+    return cachedNewSessionBtn;
+  };
   const getSearchButton = () => getHeader()?.querySelector('[class$="_searchButton"], [class*="_searchButton "]') ?? null;
   const getSearchInput = () => getHeader()?.querySelector('[class$="_searchInput"], [class*="_searchInput "]') ?? null;
   const getClearButton = () => getHeader()?.querySelector('[class$="_clearButton"], [class*="_clearButton "]') ?? null;
@@ -183,6 +214,8 @@ export function enhanceSidebarWorkspaces(sidebarRoot, getWorkspaceOwner) {
 
   let disposed = false;
   const sortButtons = new Set();
+  const decoratedRows = new WeakMap();
+  const stampedHeaderNodes = new Set();
   let activeMenu = null;
   let activeButton = null;
   let activeRow = null;
@@ -463,41 +496,95 @@ export function enhanceSidebarWorkspaces(sidebarRoot, getWorkspaceOwner) {
   }
   searchButton.addEventListener('click', onSearchClick);
 
-  function observe() {
-    observer.observe(scrollport, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['aria-expanded', 'aria-keyshortcuts'],
-    });
-    observer.observe(doc.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  function setAttrIfChanged(el, name, value) {
+    if (!el) return;
+    if (value === null) {
+      if (el.hasAttribute(name)) el.removeAttribute(name);
+    } else if (el.getAttribute(name) !== value) {
+      el.setAttribute(name, value);
+    }
   }
 
-  function refresh() {
+  function syncHeroActive() {
     if (disposed) return;
-    observer.disconnect();
+    const btn = getNewSessionBtn();
+    const conv = doc.querySelector('[data-conversation-content]');
+    const isHero = Boolean(conv?.getAttribute('data-content-phase') === 'hero' && !doc.querySelector('[data-global-panel]'));
+    setAttrIfChanged(btn, 'data-claude-hero-active', isHero ? 'true' : null);
 
+    const centerCol = doc.querySelector('[class$="_centerCol"], [class*="_centerCol "]');
+    const centerSlot = centerCol?.firstElementChild ?? null;
+    const mainPanel = doc.querySelector('[class$="_mainPanel"], [class*="_mainPanel "]');
+    const viewArea = mainPanel?.lastElementChild ?? null;
+    const viewSlot = viewArea && viewArea !== conv ? viewArea.firstElementChild : null;
+    const containers = [centerCol, centerSlot, mainPanel, viewArea, viewSlot].filter(
+      (node, idx, arr) => node && node !== conv && arr.indexOf(node) === idx,
+    );
+    const sig = `${containers.length}:${Boolean(conv)}:${containers.map(n => n.tagName).join(',')}`;
+    // Always rebind if any tracked node changed reference
+    if (
+      sig !== observedHeroSignature
+      || !syncHeroActive._nodes
+      || syncHeroActive._conv !== conv
+      || syncHeroActive._nodes.some((n, i) => n !== containers[i])
+    ) {
+      heroObserver.disconnect();
+      observedHeroSignature = sig;
+      syncHeroActive._nodes = containers;
+      syncHeroActive._conv = conv;
+      for (const node of containers) {
+        heroObserver.observe(node, { childList: true });
+      }
+      if (conv) {
+        heroObserver.observe(conv, { attributes: true, attributeFilter: ['data-content-phase'] });
+      }
+    }
+  }
+
+  function syncHeaderAndNav() {
+    if (disposed) return;
     const strings = currentStrings();
     if (searchTitle.textContent !== strings.search) searchTitle.textContent = strings.search;
     if (searchButton.getAttribute('aria-label') !== strings.searchAria) {
       searchButton.setAttribute('aria-label', strings.searchAria);
       searchButton.title = strings.searchAria;
     }
-    const hostSearchBtn = getSearchButton();
-    const shortcut = hostSearchBtn?.getAttribute('aria-keyshortcuts');
-    if (shortcut) {
-      if (searchButton.getAttribute('aria-keyshortcuts') !== shortcut) {
-        searchButton.setAttribute('aria-keyshortcuts', shortcut);
+
+    const header = getHeader();
+    if (header !== observedHeader) {
+      headerObserver.disconnect();
+      observedHeader = header;
+      if (observedHeader) {
+        headerObserver.observe(observedHeader, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['class', 'aria-expanded', 'aria-keyshortcuts'],
+        });
       }
-    } else if (searchButton.hasAttribute('aria-keyshortcuts')) {
-      searchButton.removeAttribute('aria-keyshortcuts');
-    }
-    const expanded = String(isSearchExpanded());
-    if (searchButton.getAttribute('aria-expanded') !== expanded) {
-      searchButton.setAttribute('aria-expanded', expanded);
     }
 
-    const panelList = scrollport.querySelector('nav[class$="_panelList"], nav[class*="_panelList "]');
+    const hostSearchBtn = getSearchButton();
+    const shortcut = hostSearchBtn?.getAttribute('aria-keyshortcuts') ?? null;
+    setAttrIfChanged(searchButton, 'aria-keyshortcuts', shortcut);
+
+    const searchOpen = isSearchExpanded();
+    setAttrIfChanged(searchButton, 'aria-expanded', String(searchOpen));
+
+    const listScope = getListArea() ?? scrollport;
+    const hasWorkspaceRow = Boolean(listScope.querySelector('[data-row-key^="workspace:"]'));
+    const mode = searchOpen ? 'search' : hasWorkspaceRow ? 'collapsed' : 'flat';
+    if (header) {
+      stampedHeaderNodes.add(header);
+      setAttrIfChanged(header, 'data-claude-ws-header', mode);
+      const wsRoot = header.parentElement;
+      if (wsRoot) {
+        stampedHeaderNodes.add(wsRoot);
+        setAttrIfChanged(wsRoot, 'data-claude-ws-header', mode);
+      }
+    }
+
+    const panelList = getPanelList();
     if (panelList) {
       if (panelList.firstElementChild !== searchEntry) {
         panelList.insertBefore(searchEntry, panelList.firstElementChild);
@@ -508,44 +595,131 @@ export function enhanceSidebarWorkspaces(sidebarRoot, getWorkspaceOwner) {
         scrollport.insertBefore(searchEntry, regionArea);
       }
     }
+  }
 
+  function decorateWorkspaceRow(row, strings) {
+    const existing = decoratedRows.get(row);
+    if (existing?.isConnected && existing.parentElement?.parentElement === row) {
+      if (existing.parentElement.firstElementChild !== existing) {
+        existing.parentElement.insertBefore(existing, existing.parentElement.firstElementChild);
+      }
+      if (existing.getAttribute('aria-label') !== strings.sortAria) {
+        existing.setAttribute('aria-label', strings.sortAria);
+        existing.title = strings.sortAria;
+      }
+      return;
+    }
+    let rowActions = null;
+    for (let child = row.firstElementChild; child; child = child.nextElementSibling) {
+      if (hasToken(child, '_rowActions')) {
+        rowActions = child;
+        break;
+      }
+    }
+    if (!rowActions) return;
+    let sortBtn = rowActions.querySelector(':scope > .claude-workspace-sort-btn');
+    if (!sortBtn) {
+      sortBtn = createSortButton(row);
+      rowActions.insertBefore(sortBtn, rowActions.firstElementChild);
+    } else if (rowActions.firstElementChild !== sortBtn) {
+      rowActions.insertBefore(sortBtn, rowActions.firstElementChild);
+    }
+    if (sortBtn.getAttribute('aria-label') !== strings.sortAria) {
+      sortBtn.setAttribute('aria-label', strings.sortAria);
+      sortBtn.title = strings.sortAria;
+    }
+    decoratedRows.set(row, sortBtn);
+  }
+
+  function syncWorkspaceRows(forceAll = false) {
+    if (disposed) return;
     if (activeRow && !activeRow.isConnected) {
       closeMenu();
     }
-
     for (const btn of Array.from(sortButtons)) {
       if (!btn.isConnected) sortButtons.delete(btn);
     }
-
-    const workspaceRows = scrollport.querySelectorAll('[data-row-key^="workspace:"]');
+    const strings = currentStrings();
+    const lang = doc.documentElement.lang || '';
+    const langChanged = lang !== lastLang;
+    lastLang = lang;
+    const listScope = getListArea() ?? scrollport;
+    const workspaceRows = listScope.querySelectorAll('[data-row-key^="workspace:"]');
     for (const row of workspaceRows) {
-      const rowActions = Array.from(row.children).find(child => hasToken(child, '_rowActions'));
-      if (!rowActions) continue;
-      let sortBtn = rowActions.querySelector(':scope > .claude-workspace-sort-btn');
-      if (!sortBtn) {
-        sortBtn = createSortButton(row);
-        rowActions.insertBefore(sortBtn, rowActions.firstElementChild);
-      } else if (rowActions.firstElementChild !== sortBtn) {
-        rowActions.insertBefore(sortBtn, rowActions.firstElementChild);
-      }
-      if (sortBtn.getAttribute('aria-label') !== strings.sortAria) {
-        sortBtn.setAttribute('aria-label', strings.sortAria);
-        sortBtn.title = strings.sortAria;
-      }
+      if (!forceAll && !langChanged && decoratedRows.get(row)?.isConnected) continue;
+      decorateWorkspaceRow(row, strings);
     }
-
-    observe();
   }
 
-  const observer = new MutationObserver(refresh);
-  refresh();
+  const isOwnNode = node =>
+    node === searchEntry
+    || (node?.nodeType === 1 && (
+      node.classList?.contains('claude-workspace-sort-btn')
+      || node.classList?.contains('claude-sidebar-search-entry')
+    ));
+
+  const headerObserver = new win.MutationObserver(records => {
+    if (disposed) return;
+    if (records.every(r => isOwnNode(r.target))) return;
+    syncHeaderAndNav();
+  });
+
+  const heroObserver = new win.MutationObserver(() => {
+    syncHeroActive();
+  });
+
+  const scrollportObserver = new win.MutationObserver(records => {
+    if (disposed) return;
+    let needsHeader = false;
+    let needsRows = false;
+    for (const r of records) {
+      const target = r.target;
+      if (target === doc.documentElement) {
+        needsHeader = true;
+        needsRows = true;
+        break;
+      }
+      if (!target || target.nodeType !== 1) continue;
+      // Fast-skip all high-frequency session row mutations (spinners, timestamps, hover actions)
+      if (target.closest?.('[data-row-key^="session:"]')) continue;
+      const addedNonOwn = Array.from(r.addedNodes).some(n => n.nodeType === 1 && !isOwnNode(n));
+      const removedNonOwn = Array.from(r.removedNodes).some(n => n.nodeType === 1 && !isOwnNode(n));
+      if (!addedNonOwn && !removedNonOwn) continue;
+      needsHeader = true;
+      needsRows = true;
+      break;
+    }
+    if (needsHeader) syncHeaderAndNav();
+    if (needsRows) syncWorkspaceRows(false);
+  });
+
+  scrollportObserver.observe(scrollport, { childList: true, subtree: true });
+  if (doc.documentElement) {
+    scrollportObserver.observe(doc.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  }
+
+  const unsubscribeStore = resolveViewStore()?.subscribe?.(() => {
+    syncHeaderAndNav();
+  });
+
+  syncHeaderAndNav();
+  syncWorkspaceRows(true);
+  syncHeroActive();
 
   return () => {
     disposed = true;
-    observer.disconnect();
+    headerObserver.disconnect();
+    heroObserver.disconnect();
+    scrollportObserver.disconnect();
+    unsubscribeStore?.();
     closeMenu();
     searchButton.removeEventListener('click', onSearchClick);
     searchEntry.remove();
+    setAttrIfChanged(cachedNewSessionBtn, 'data-claude-hero-active', null);
+    for (const node of stampedHeaderNodes) {
+      node.removeAttribute('data-claude-ws-header');
+    }
+    stampedHeaderNodes.clear();
     for (const btn of sortButtons) btn.remove();
     sortButtons.clear();
   };

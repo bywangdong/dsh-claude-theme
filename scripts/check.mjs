@@ -154,7 +154,7 @@ for (const scenario of [
     assert.equal(svg.props.className, 'claude-hero-sunburst');
   }
   if (!scenario.disabled) {
-    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.6');
+    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.8');
     assert.equal(attrs.get('data-claude-palette'), scenario.expectPalette);
     assert.equal(attrs.get('data-claude-prose'), scenario.expectProse);
     assert.equal(attrs.get('data-claude-chrome'), scenario.expectChrome);
@@ -283,11 +283,19 @@ for (const marker of [
   'M2.80078 10.2112',
   'M8.48924 28H19.5108',
 ]) {
-  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.6 semantic selector marker: ${marker}`);
+  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.8 semantic selector marker: ${marker}`);
 }
 assert.ok(
-  injectedCss.includes(':not(:has([data-row-key^="workspace:"])) [data-sidebar-workspace-header]'),
+  injectedCss.includes('[data-sidebar-workspace-header][data-claude-ws-header="flat"]'),
   'flat/empty mode must keep workspace header reachable when no workspace rows are rendered',
+);
+assert.ok(
+  !/body\[[^\]]*\](?::not\([^)]*\))*:has\(/.test(injectedCss),
+  'never place :has() directly on body (triggers full-document style recalculation on every DOM mutation)',
+);
+assert.ok(
+  !/\[data-sidebar-scrollport\][^{]*_root[^{]*:has\(/.test(injectedCss),
+  'never place subtree :has() on WorkspaceBrowser _root (triggers full-sidebar style recalculation on every session update)',
 );
 
 for (const name of iconNames) {
@@ -308,6 +316,7 @@ assert.ok(!/>\s*:where\([^)]*\bsymbol\b/.test(sharedIconRules), 'sprite definiti
 assert.ok(!/_sidebarCol["\]\s)]*>\s*:is\(\[class\$="_root"/.test(injectedCss), 'must never use > between _sidebarCol and _root (broken by <span data-slot="sidebar">)');
 assert.ok(!/_newSessionRow["\]\s)]*>\s*button/.test(injectedCss), 'must never use > between _newSessionRow and button (broken by <span data-slot="sidebar.session.action">)');
 assert.ok(!/_fishHitbox["\]\s)]*>\s*svg/.test(injectedCss), 'must never use > between _fishHitbox and svg (broken by <span data-slot="conversation.hero.brand.mark">)');
+assert.ok(!/_composerHero["\]\s)]*>\s*:is\(\[class\$="_root"/.test(injectedCss), 'must never use > between _composerHero and _root (broken by <span data-slot>)');
 
 // Guard against unanchored [class*="_foo"] substring collisions (only trailing-space [class*="_foo "] or Vite _foo_ allowed)
 const rawClassContains = [...injectedCss.matchAll(/\[class\*="([^"]+)"\]/g)].map(m => m[1]);
@@ -319,4 +328,4 @@ for (const pat of rawClassContains) {
 }
 
 assert.ok(!/https?:\/\/|fetch\(|XMLHttpRequest/.test(source.replaceAll('http://www.w3.org/2000/svg', '')), 'theme must be offline and self contained');
-console.log('PASS: emitted 0.11.6 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');
+console.log('PASS: emitted 0.11.8 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');

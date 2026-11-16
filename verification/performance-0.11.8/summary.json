@@ -1,0 +1,38 @@
+{
+  "version": "0.11.8",
+  "baselineCommit": "cb3b0e9",
+  "domNodes": 13071,
+  "fixture": "35 workspaces x 20 sessions (700 session rows) + 80 conversation turns + 300-path chart SVG + 200 file tree rows",
+  "nativeDsh": {
+    "streaming60FramesMs": 3.4,
+    "composer40KeysMs": 0.2,
+    "sidebar80HoverMutationsMs": 1.8,
+    "windowFocusBlur20Ms": 0,
+    "codeBlock10500NodesMountMs": 9.8,
+    "RecalcStyleDurationMs": 0.57,
+    "LayoutDurationMs": 4.13,
+    "ScriptDurationMs": 0,
+    "TaskDurationMs": 6.61
+  },
+  "before_0_11_6": {
+    "streaming60FramesMs": 7548.8,
+    "composer40KeysMs": 4998.0,
+    "sidebar80HoverMutationsMs": 10020.8,
+    "sessionSwitchAndPhase20Ms": 2515.2,
+    "windowFocusBlur20Ms": 2185.6,
+    "RecalcStyleDurationMs": 27166.13,
+    "LayoutDurationMs": 13.18,
+    "ScriptDurationMs": 45.49,
+    "TaskDurationMs": 27278.34
+  },
+  "after_0_11_8": {
+    "streaming60FramesMs": 6.9,
+    "composer40KeysMs": 0.4,
+    "sidebar80HoverMutationsMs": 6.3,
+    "sessionSelect20Ms": 2.8,
+    "workspaceExpand20Ms": 0.4,
+    "windowFocusBlur20Ms": 24.5,
+    "codeBlock10500NodesMountMs": 29.3,
+    "ScriptDurationMs": 2.84
+  }
+}

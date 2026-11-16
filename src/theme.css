@@ -92,7 +92,6 @@ body[data-dsh-claude-theme] {
   font-family: var(--claude-ui-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 /* Optional book-serif response font mode (when explicitly selected in Settings). */
@@ -118,21 +117,20 @@ body[data-dsh-claude-theme] [data-rightbar-col] {
 }
 
 /* 2. Left Sidebar Geometry: Verbatim Claude .dframe-sidebar (--df-row-h: 32px, --df-row-font: 14px, --df-group-font: 13px, --df-radius-pill: 8px)
-   Note: DSH wraps SidebarRoot in <span data-slot="sidebar" style="display:contents"> inside _sidebarCol.
-   Using :has(> _scrollRegion) without '>' between _sidebarCol and _root pierces the slot wrapper cleanly
-   while never matching nested _root elements (WorkspaceSidebarRoot or AccountMenu). */
-body[data-dsh-claude-theme][data-claude-window-inactive="true"] :is([class$="_sidebarCol"], [class*="_sidebarCol "]),
-body[data-dsh-claude-theme][data-claude-window-inactive="true"] :is([class$="_mainPanel"], [class*="_mainPanel "]) header:is([class$="_header"], [class*="_header "]),
-body[data-dsh-claude-theme][data-claude-window-inactive="true"] :is([class$="_leadingSeat"], [class*="_leadingSeat "]) {
-  --claude-session-ink: var(--claude-sidebar-inactive-ink);
-  --claude-session-active-ink: var(--claude-sidebar-inactive-ink);
-  --claude-workspace-label: var(--claude-sidebar-inactive-ink);
-  --claude-workspace-chevron: var(--claude-sidebar-inactive-ink);
-  --dsw-alias-label-primary-dimmed: var(--claude-sidebar-inactive-ink);
-  --dsw-alias-label-secondary: var(--claude-sidebar-inactive-ink);
-  --dsw-alias-label-tertiary: var(--claude-sidebar-inactive-ink);
+   Note: DSH renders SidebarRoot as the sole child of <span data-slot="sidebar"> (or [data-shortcut-modal="sidebar"] in drawer mode).
+   Targeting [data-slot="sidebar"] > div avoids expensive :has() invalidation and never matches nested _root elements. */
+body[data-dsh-claude-theme][data-claude-window-inactive="true"] :is(
+  [data-sidebar-scrollport],
+  [data-slot="sidebar.session.action"],
+  button[data-sidebar-toggle],
+  button[data-sidebar-opener],
+  .claude-sidebar-settings-button,
+  [data-slot="sidebar.settings"],
+  [data-slot="conversation.header"]
+) {
+  opacity: 0.58;
 }
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) {
   --dsh-sidebar-inline-padding: 8px;
   --dsh-sidebar-paint-inset: 0px;
   --dsh-sidebar-row-padding: 10px;
@@ -145,14 +143,14 @@ body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "])
 }
 
 /* macOS top strip: align Claude sidebar toggle [◧] dead-center on Electron traffic-light axis (y=25px, x=82px) */
-html[data-platform="darwin"]:not([data-fullscreen]) body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_topStrip"], [class*="_topStrip "]) {
+html[data-platform="darwin"]:not([data-fullscreen]) body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_topStrip"], [class*="_topStrip "]) {
   height: 50px;
   margin: -6px calc(-1 * var(--dsh-sidebar-inline-padding)) -4px;
   padding: 0 10px 0 82px;
   justify-content: flex-start;
   align-items: center;
 }
-html[data-platform="darwin"][data-fullscreen] body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_topStrip"], [class*="_topStrip "]) {
+html[data-platform="darwin"][data-fullscreen] body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_topStrip"], [class*="_topStrip "]) {
   height: 46px;
   margin: -6px calc(-1 * var(--dsh-sidebar-inline-padding)) -2px;
   padding: 0 10px 0 12px;
@@ -163,7 +161,7 @@ html[data-platform="darwin"]:not([data-fullscreen]) body[data-dsh-claude-theme]:
   left: 82px;
   top: 11px;
 }
-html[data-platform="darwin"] body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_topStrip"], [class*="_topStrip "]) button[data-sidebar-toggle] {
+html[data-platform="darwin"] body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_topStrip"], [class*="_topStrip "]) button[data-sidebar-toggle] {
   transform: none;
   width: 28px;
   height: 28px;
@@ -200,14 +198,14 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is(
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_logoRow"], [class*="_logoRow "]) :is([class$="_brand"], [class*="_brand "]) {
   display: none;
 }
-html[data-platform="darwin"] body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_logoRow"], [class*="_logoRow "]) {
+html[data-platform="darwin"] body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_logoRow"], [class*="_logoRow "]) {
   display: none;
 }
-html:not([data-platform="darwin"]) body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_logoRow"], [class*="_logoRow "]) {
+html:not([data-platform="darwin"]) body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_logoRow"], [class*="_logoRow "]) {
   height: 38px;
   padding: 4px 2px 4px 8px;
 }
-body[data-dsh-claude-theme][data-claude-chrome="dsh"] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_logoRow"], [class*="_logoRow "]) {
+body[data-dsh-claude-theme][data-claude-chrome="dsh"] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_logoRow"], [class*="_logoRow "]) {
   height: 44px;
   opacity: .82;
 }
@@ -218,10 +216,10 @@ body[data-dsh-claude-theme][data-claude-chrome="dsh"] :is([class$="_sidebarCol"]
 }
 
 /* 3. "+ New Session" Row: Verbatim 32px Pill, 14px/20px & Hero-Only Active Highlight (--cds-fill-ghost-selected) */
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_newSessionRow"], [class*="_newSessionRow "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_newSessionRow"], [class*="_newSessionRow "]) {
   margin: 0 0 2px;
 }
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) button:is([class$="_newSession"], [class*="_newSession "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) button:is([class$="_newSession"], [class*="_newSession "]) {
   height: 32px;
   padding: 0 var(--dsh-sidebar-row-padding);
   justify-content: flex-start;
@@ -236,38 +234,38 @@ body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "])
   line-height: 20px;
 }
 @media (hover: hover) {
-  body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) button:is([class$="_newSession"], [class*="_newSession "]):hover {
+  body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) button:is([class$="_newSession"], [class*="_newSession "]):hover {
     background: var(--dsw-alias-interactive-bg-hover);
     color: var(--claude-session-active-ink);
   }
 }
-body[data-dsh-claude-theme]:has([data-conversation-content][data-content-phase="hero"]):not(:has([data-global-panel])) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) button:is([class$="_newSession"], [class*="_newSession "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) button:is([class$="_newSession"], [class*="_newSession "])[data-claude-hero-active="true"] {
   background: var(--claude-nav-active-bg);
   color: var(--claude-session-active-ink);
   font-weight: 400;
 }
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) :is([class$="_newSessionContent"], [class*="_newSessionContent "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) :is([class$="_newSessionContent"], [class*="_newSessionContent "]) {
   justify-content: flex-start;
   gap: var(--dsh-sidebar-label-gap);
   width: 100%;
 }
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) :is([class$="_newSessionLabelMask"], [class*="_newSessionLabelMask "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) :is([class$="_newSessionLabelMask"], [class*="_newSessionLabelMask "]) {
   flex: 1 1 auto;
   text-align: left;
 }
 /* Size & ink alignment for "+ New Session" icon (Claude "+" SVG mask supplied by src/icons.mjs) */
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) button:is([class$="_newSession"], [class*="_newSession "]) :is([class$="_newSessionContent"], [class*="_newSessionContent "]) > svg,
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) button:is([class$="_newSession"], [class*="_newSession "]) :is([class$="_newSessionContent"], [class*="_newSessionContent "]) > svg,
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_leadingSeat"], [class*="_leadingSeat "]) :is([class$="_controls"], [class*="_controls "]) button:not([data-sidebar-opener]) > svg {
   width: 16px;
   height: 16px;
   color: var(--dsw-alias-label-secondary);
 }
-body[data-dsh-claude-theme]:has([data-conversation-content][data-content-phase="hero"]):not(:has([data-global-panel])):not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) button:is([class$="_newSession"], [class*="_newSession "]) :is([class$="_newSessionContent"], [class*="_newSessionContent "]) > svg {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) button:is([class$="_newSession"], [class*="_newSession "])[data-claude-hero-active="true"] :is([class$="_newSessionContent"], [class*="_newSessionContent "]) > svg {
   color: var(--claude-session-active-ink);
 }
 
 /* 4. Global Navigation Rows (Plugins, Automation tasks, More) — Exact 32px / 14px Claude .dframe-sidebar */
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_scrollRegion"], [class*="_scrollRegion "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_scrollRegion"], [class*="_scrollRegion "]) {
   margin-top: 0;
 }
 body[data-dsh-claude-theme] [data-sidebar-scrollport] {
@@ -399,16 +397,16 @@ body[data-dsh-claude-theme] [data-sidebar-scrollport] [data-sidebar-workspace-he
   -webkit-user-select: none;
   user-select: none;
 }
-body[data-dsh-claude-theme][data-claude-chrome="dsh"] [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) {
+body[data-dsh-claude-theme][data-claude-chrome="dsh"] [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(> * > :is([class$="_searchExpanded"], [class*="_searchExpanded "]))) {
   margin-top: 8px;
   height: 28px;
 }
-/* Grouped mode at rest: zero-chrome workspace list */
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):has([data-row-key^="workspace:"]):not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) {
+/* Grouped mode at rest: zero-chrome workspace list (driven by O(1) data-claude-ws-header without :has() subtree scans) */
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-claude-ws-header="collapsed"]:not([class$="_rail"]):not([class*="_rail "]):not([data-sidebar-workspace-header]) {
   --workspace-toolbar-height: 0px;
   --workspace-toolbar-gap: 0px;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):has([data-row-key^="workspace:"]) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header][data-claude-ws-header="collapsed"] {
   height: 0;
   min-height: 0;
   margin: 0;
@@ -417,41 +415,41 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
   pointer-events: none;
   overflow: hidden;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):has([data-row-key^="workspace:"]):not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) [data-sidebar-list-area] {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-claude-ws-header="collapsed"]:not([class$="_rail"]):not([class*="_rail "]) > [data-sidebar-list-area] {
   margin-top: 10px;
 }
 /* Flat-list ("Sessions") or empty-workspace fallback row */
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):not(:has([data-row-key^="workspace:"])):not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))):has([data-sidebar-workspace-header]) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-claude-ws-header="flat"]:not([class$="_rail"]):not([class*="_rail "]):not([data-sidebar-workspace-header]) {
   --workspace-toolbar-height: 32px;
   --workspace-toolbar-gap: 2px;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):not(:has([data-row-key^="workspace:"])) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header][data-claude-ws-header="flat"] {
   margin: 10px 0 2px;
   padding: 0 4px 0 var(--dsh-sidebar-row-padding);
   border-radius: 8px;
   gap: 4px;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport]:has(.claude-sidebar-search-entry) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is([class$="_searchSlot"], [class*="_searchSlot "]) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:is([data-claude-ws-header="collapsed"], [data-claude-ws-header="flat"]) :is([class$="_searchSlot"], [class*="_searchSlot "]) {
   display: none;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is([class$="_sectionLabel"], [class*="_sectionLabel "]) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not([data-claude-ws-header="search"]) :is([class$="_sectionLabel"], [class*="_sectionLabel "]) {
   margin-right: auto;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is([class$="_headerActions"], [class*="_headerActions "]) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not([data-claude-ws-header="search"]) :is([class$="_headerActions"], [class*="_headerActions "]) {
   gap: 4px;
 }
 @media (hover: hover) {
-  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not(:has([data-row-key^="workspace:"])) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))):hover {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header][data-claude-ws-header="flat"]:hover {
     background: var(--dsw-alias-interactive-bg-hover);
   }
-  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not(:has([data-row-key^="workspace:"])) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))):hover :is([class$="_sectionLabel"], [class*="_sectionLabel "]) {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header][data-claude-ws-header="flat"]:hover :is([class$="_sectionLabel"], [class*="_sectionLabel "]) {
     color: var(--claude-session-active-ink);
   }
-  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not(:has([data-row-key^="workspace:"])) [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))):not(:hover):not(:focus-within):not(:has([aria-expanded="true"])) :is([class$="_headerActions"], [class*="_headerActions "]) {
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header][data-claude-ws-header="flat"]:not(:hover):not(:focus-within):not(:has(> :is([class$="_headerActions"], [class*="_headerActions "]) [aria-expanded="true"])) :is([class$="_headerActions"], [class*="_headerActions "]) {
     opacity: 0;
   }
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is(
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not([data-claude-ws-header="search"]) :is(
   [class$="_iconButton"], [class*="_iconButton "],
   [class$="_searchButton"], [class*="_searchButton "]
 ) {
@@ -461,10 +459,10 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
   color: var(--dsw-alias-label-secondary);
   transition: background-color 120ms ease, color 120ms ease;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) button[aria-haspopup="menu"] svg {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not([data-claude-ws-header="search"]) button[aria-haspopup="menu"] svg {
   --claude-icon: var(--claude-workspace-sort-icon);
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is(
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not([data-claude-ws-header="search"]) :is(
   :is([class$="_iconButton"], [class*="_iconButton "])[aria-expanded="true"],
   :is([class$="_searchButton"], [class*="_searchButton "])[aria-expanded="true"],
   :is([aria-expanded="true"], [data-state="open"]) :is([class$="_iconButton"], [class*="_iconButton "])
@@ -473,7 +471,7 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
   color: var(--claude-session-active-ink);
 }
 @media (hover: hover) {
-  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) :is(
+  body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not([data-claude-ws-header="search"]) :is(
     [class$="_iconButton"], [class*="_iconButton "],
     [class$="_searchButton"], [class*="_searchButton "]
   ):hover {
@@ -481,17 +479,17 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
     color: var(--claude-session-active-ink);
   }
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not(:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "]))) svg {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not([data-claude-ws-header="search"]) svg {
   width: 15px;
   height: 15px;
 }
 
 /* Expanded inline session search: full-pill 28px Claude search bar, aligned to 18px icon / 34px label axes */
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_root"], [class*="_root "]):not([class$="_rail"]):not([class*="_rail "]):has(:is([class$="_searchExpanded"], [class*="_searchExpanded "])) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-claude-ws-header="search"]:not([class$="_rail"]):not([class*="_rail "]):not([data-sidebar-workspace-header]) {
   --workspace-toolbar-height: 30px;
   --workspace-toolbar-gap: 6px;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:has(:is([class$="_searchExpanded"], [class*="_searchExpanded "])) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header][data-claude-ws-header="search"] {
   height: 30px;
   min-height: 30px;
   margin: 10px 0 6px;
@@ -573,7 +571,7 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
   flex: 0 1 auto;
   min-width: 0;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"]:has(input) > :is([class$="_projectText"], [class*="_projectText "]) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_projectText"], [class*="_projectText "]):has(> input) {
   flex: 1 1 auto;
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] :is([class$="_title"], [class*="_title "]) {
@@ -632,7 +630,7 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is(
   [data-row-key^="workspace:"][aria-expanded="true"] > :is([class$="_chevron"], [class*="_chevron "]),
-  [data-row-key^="workspace:"] > :is([class$="_chevron"], [class*="_chevron "]):has(:is([class$="_arrowOpen"], [class*="_arrowOpen "]))
+  [data-row-key^="workspace:"] > :is([class$="_chevron"], [class*="_chevron "]):has(> :is([class$="_arrowOpen"], [class*="_arrowOpen "]))
 )::before {
   transform: translate(0, -.5px) rotate(45deg);
 }
@@ -808,8 +806,8 @@ body[data-dsh-claude-theme] .claude-workspace-sort-action-icon[data-icon="manage
 }
 
 /* 7. Flush-Left 14px / 32px Session Rows (--df-row-font: 14px, --df-row-h: 32px), Hidden Blank Placeholder & Right Fade */
-/* Hide temporary unsent blank session rows inside workspace trees (only non-blank rows mount _rowResting). */
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="session:"]:not(:has(:is([class$="_rowResting"], [class*="_rowResting "]))) {
+/* Hide temporary unsent blank session rows inside workspace trees (blank rows render 2 direct child spans; non-blank rows render 4, including _rowResting). */
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="session:"]:has(> :nth-child(2):last-child) {
   display: none;
 }
 body[data-dsh-claude-theme] [data-sidebar-scrollport] [data-row-key^="session:"] {
@@ -853,7 +851,7 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="session:"] > :is([class$="_slot"], [class*="_slot "]) {
   display: none;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="session:"] > :is([class$="_slot"], [class*="_slot "]):is(:has(> :not([data-slot])), :has([data-slot] > *)) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="session:"] > :is([class$="_slot"], [class*="_slot "]):has(> :not([data-slot]), > [data-slot]:not(:empty)) {
   display: inline-flex;
   order: 3;
   width: auto;
@@ -898,7 +896,7 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
   margin-top: 8px;
 }
 /* Generous 18px breathing room after expanded workspaces that contain at least one visible non-blank session */
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_groupSection"], [class*="_groupSection "]):has([data-row-key^="session:"] :is([class$="_rowResting"], [class*="_rowResting "])) + :is([class$="_groupSection"], [class*="_groupSection "]) {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] :is([class$="_groupSection"], [class*="_groupSection "]):has(> [data-row-key^="workspace:"][aria-expanded="true"]):has(> [data-row-key^="session:"]:not(:has(> :nth-child(2):last-child))) + :is([class$="_groupSection"], [class*="_groupSection "]) {
   margin-top: 18px;
 }
 /* Flush-left 8px pill search results & empty status inside the sidebar search tree */
@@ -945,23 +943,23 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
 }
 
 /* 8. Bottom Account & Settings Footer: Full-Width 1px Hairline, Compact Bar, "Nick ⌄" & Right Settings Cog */
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) {
   border-top: 1px solid var(--claude-sidebar-divider);
   margin-inline: calc(-1 * var(--dsh-sidebar-inline-padding));
   padding: 4px var(--dsh-sidebar-inline-padding);
 }
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_triggerRow"], [class*="_triggerRow "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_triggerRow"], [class*="_triggerRow "]) {
   margin: 0;
 }
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) [data-inset="true"] {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) [data-inset="true"] {
   margin-inline: 0;
 }
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_anchor"], [class*="_anchor "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_anchor"], [class*="_anchor "]) {
   position: relative;
   display: flex;
   align-items: center;
 }
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) button:is([class$="_trigger"], [class*="_trigger "]):not([data-collapsed="true"]):not([class$="_rail"]):not([class*="_rail "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) button:is([class$="_trigger"], [class*="_trigger "]):not([data-collapsed="true"]):not([class$="_rail"]):not([class*="_rail "]) {
   height: 34px;
   border-inline: 0;
   border-radius: 8px;
@@ -971,16 +969,16 @@ body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "])
   gap: 8px;
   padding: 0 8px 0 var(--dsh-sidebar-row-padding);
 }
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_avatar"], [class*="_avatar "]) {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_avatar"], [class*="_avatar "]) {
   width: 19px;
   height: 19px;
 }
-body[data-dsh-claude-theme] :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_avatar"], [class*="_avatar "]) > * {
+body[data-dsh-claude-theme] :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) :is([class$="_avatar"], [class*="_avatar "]) > * {
   max-width: 100%;
   max-height: 100%;
 }
 /* Subtle chevron right after account name ("Nick ⌄") */
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sidebarCol"], [class*="_sidebarCol "]) :is([class$="_root"], [class*="_root "]):has(> :is([class$="_scrollRegion"], [class*="_scrollRegion "])):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) button:is([class$="_trigger"], [class*="_trigger "])[data-signed-out="false"]:not([data-collapsed="true"])::after {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([data-slot="sidebar"] > div, [data-shortcut-modal="sidebar"]):not([class$="_collapsed"]):not([class*="_collapsed "]) > :is([class$="_footArea"], [class*="_footArea "]) button:is([class$="_trigger"], [class*="_trigger "])[data-signed-out="false"]:not([data-collapsed="true"])::after {
   content: "";
   width: 4px;
   height: 4px;
@@ -992,10 +990,10 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([class$="_sideba
   flex: none;
 }
 /* The footer cog is a real, keyboard-accessible slot action, separate from the account menu. */
-body[data-dsh-claude-theme] :is([class$="_footArea"], [class*="_footArea "]):has(.claude-sidebar-settings-button) {
+body[data-dsh-claude-theme] :is([class$="_footArea"], [class*="_footArea "]):has(> .claude-sidebar-settings-button, > [data-slot] > .claude-sidebar-settings-button) {
   position: relative;
 }
-body[data-dsh-claude-theme] :is([class$="_footArea"], [class*="_footArea "]):has(.claude-sidebar-settings-button) > :is([class$="_settingsArea"], [class*="_settingsArea "]) {
+body[data-dsh-claude-theme] :is([class$="_footArea"], [class*="_footArea "]):has(> .claude-sidebar-settings-button, > [data-slot] > .claude-sidebar-settings-button) > :is([class$="_settingsArea"], [class*="_settingsArea "]) {
   box-sizing: border-box;
   padding-right: 38px;
 }
@@ -1055,14 +1053,12 @@ body[data-dsh-claude-theme] [data-composer-card] {
 body[data-dsh-claude-theme] [data-composer-card]:focus-within {
   box-shadow: 0 0 0 1px var(--claude-composer-border-focus), var(--claude-composer-shadow-focus);
 }
-body[data-dsh-claude-theme] [data-composer-input],
-body[data-dsh-claude-theme] [data-content-phase="hero"] [data-composer-input] {
+body[data-dsh-claude-theme] [data-composer-input] {
   min-height: 22px;
   padding: 1px 14px 0 15px;
   caret-color: var(--claude-clay);
 }
-body[data-dsh-claude-theme] [data-composer-placeholder],
-body[data-dsh-claude-theme] [data-content-phase="hero"] [data-composer-placeholder] {
+body[data-dsh-claude-theme] [data-composer-placeholder] {
   inset: 1px 14px auto 15px;
   color: var(--dsw-alias-label-dimmed);
   white-space: nowrap;
@@ -1174,6 +1170,7 @@ body[data-dsh-claude-theme] [data-content-phase="hero"] :is([class$="_headline"]
   line-height: 1.25;
   font-weight: 400;
   font-synthesis: none;
+  text-rendering: optimizeLegibility;
   letter-spacing: -.016em;
   color: var(--claude-session-active-ink);
   gap: 10px;
@@ -1183,7 +1180,7 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-content-phase=
   flex-direction: column;
   gap: 12px;
 }
-body[data-dsh-claude-theme] [data-content-phase="hero"] :is([class$="_headline"], [class*="_headline "]) svg {
+body[data-dsh-claude-theme] [data-content-phase="hero"] :is([class$="_headline"], [class*="_headline "]) .claude-hero-sunburst {
   color: var(--claude-clay);
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-content-phase="hero"] :is([class$="_previewBadge"], [class*="_previewBadge "]) {
@@ -1343,17 +1340,17 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) svg:not([data-icon])
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is(
   [data-dockkit-tab][class*="_tabActive_"],
-  [aria-selected="true"],
-  [class$="_current"],
-  [class*="_current "]
+  [data-files-content] [aria-selected="true"],
+  [data-files-content] [class$="_current"],
+  [data-files-content] [class*="_current "]
 ) {
   --dsh-file-type-icon-color: currentColor;
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is(
   [data-dockkit-tab][class*="_tabActive_"],
-  [aria-selected="true"],
-  [class$="_current"],
-  [class*="_current "]
+  [data-files-content] [aria-selected="true"],
+  [data-files-content] [class$="_current"],
+  [data-files-content] [class*="_current "]
 ) svg:not([data-icon])[viewBox="0 0 20 20"]:not(:has(> path[d^="M5.99951 12.7"])) {
   color: currentColor;
 }

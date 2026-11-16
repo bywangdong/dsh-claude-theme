@@ -7,7 +7,7 @@ window.__ModuleLoader__.load({
     /* BUILD_SETTINGS_NAV */
     /* BUILD_SIDEBAR_WORKSPACES */
     /* BUILD_SHORTCUTTER_SEARCH */
-    const VERSION = '0.11.6';
+    const VERSION = '0.11.8';
     const KEYS = {
       enabled: 'dsh-theme-claude.enabled.v1',
       palette: 'dsh-theme-claude.palette.v2',

@@ -1,8 +1,14 @@
 # Claude for DSH
 
-面向 DeepSeek Harness `0.2.2-rc.3` 的 Claude Desktop（Code 模式）质感主题插件（`0.11.6`）。
+面向 DeepSeek Harness `0.2.2-rc.3` 的 Claude Desktop（Code 模式）质感主题插件（`0.11.8`）。
 
 围绕 Claude Desktop（`@ant/cds` `fizzy-lake` + `.dframe-sidebar` + `.epitaxy-markdown`）核心视觉体验打磨九个维度：**1:1 原生 `PingFang SC` 中英文排版与字阶、深色 `#1F1F1F` 侧栏 / `#191919` 画布表面校准、窗口失焦侧栏柔和降噪、全量 102 组 `dsw-icon-*` + 64 处内联/`FileTypeIcon` SVG + 实验性插件图标体系、右侧 `Start` 工具启动台与 `Files` 单色文件树、1:1 原生通栏顶栏 + 分层表面设置页（`Settings`）与 `@ant/cds` 蓝胶囊开关、槽位安全（Slot-Safe）精确选择器、贴底输入卡与中心星芒新会话主页、以及双色温自适应 Token 与 100% 纯前端可逆架构**。
+
+## 0.11.8 大规模工作区与高频流式输出性能修复
+
+- 彻底消除 `body:has(...)` 与 `WorkspaceBrowser` 根容器子树 `:has(...)` 引发的全文档样式重算风暴：在 1.3 万 DOM 节点（700 会话行 + 80 轮长对话 + 200 文件行）基准下，打字 40 键耗时由 `4,998 ms` 降至 `0.4 ms`、流式输出 60 帧由 `7,548.8 ms` 降至 `6.9 ms`、侧栏悬停变更 80 次由 `10,020.8 ms` 降至 `6.3 ms`。
+- 将 21 处侧栏根 `:has(> _scrollRegion)` 替换为精确槽位入口 `[data-slot="sidebar"] > div`；侧栏会话空行与展开间距收敛为直接子选择器 `>`；窗口失焦降噪改为精确容器的 GPU 合成 `opacity: 0.58`（20 轮失焦/聚焦由 `2,185.6 ms` 降至 `24.5 ms`）。
+- 重构 `src/sidebar-workspaces.mjs` 观察器：跳过 `[data-row-key^="session:"]` 内部高频状态变更、缓存节点引用并移除 `disconnect/observe` 抖动（`ScriptDuration` 由 `45.49 ms` 降至 `2.84 ms`）；移除 `body` 全局 `text-rendering: optimizeLegibility`，并为内联 SVG 遮罩规则增加 `[data-icon^="dsw-icon-"]` 分流与 `> path:nth-child(-n+8)` 扫描上限。详见 `verification/performance-0.11.8/README.md`。
 
 ## 0.11.6 搜索面板原版对照修正
 
@@ -55,7 +61,7 @@ npm run pack:local
 
 以上命令均在 `dsh-claude-theme/` 仓库根目录执行。构建产物写入 `lib/`，本地安装包写入被 Git 忽略的 `dist/`。仓库目录名与插件包名 `dsh-theme-claude` 不同，插件标识及已有设置保持原样。
 
-桌面版 `0.2.2-rc.3` 由运行中的应用管理 `/Users/nick/.dsh/profiles/desktop`。请通过桌面内置 CLI（`/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh plugin --profile desktop`）或在应用 **Plugins → Add plugin → Install a third-party plugin** 中安装 `dist/dsh-theme-claude-0.11.6.tgz`。
+桌面版 `0.2.2-rc.3` 由运行中的应用管理 `/Users/nick/.dsh/profiles/desktop`。请通过桌面内置 CLI（`/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh plugin --profile desktop`）或在应用 **Plugins → Add plugin → Install a third-party plugin** 中安装 `dist/dsh-theme-claude-0.11.8.tgz`。
 
 插件详情页内置实时开关与分段控件：
 - **启用开关**：采用 Claude `@ant/cds` 原生蓝 `role="switch"` 胶囊（`#2A78D6` / `#3987E5`），即时挂载/卸载 `ctx.theme.overrideTokens()`、`conversation.hero.brand.mark` 插槽、窗口焦点监听、全量图标遮罩层与样式层

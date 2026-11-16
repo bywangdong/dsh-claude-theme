@@ -705,14 +705,16 @@ const EXPERIMENTAL_PACKAGE_ICONS = [
 export function buildIconCss() {
   const scope = 'body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"])';
   const families = Object.keys(DSH_ICON_MASKS).sort();
+  const capSvgScan = sel => sel.replaceAll('> path[', '> path:nth-child(-n+8)[');
+  const dswIconSelectors = families.flatMap(name => [
+    `[data-icon="dsw-icon-${name}-regular"]`,
+    `[data-icon="dsw-icon-${name}-medium"]`,
+  ]);
   const mappedSelectors = [
-    ...families.flatMap(name => [
-      `svg[data-icon="dsw-icon-${name}-regular"]`,
-      `svg[data-icon="dsw-icon-${name}-medium"]`,
-    ]),
+    `svg[data-icon^="dsw-icon-"]:is(\n    ${dswIconSelectors.join(',\n    ')}\n  )`,
     `button[data-sidebar-toggle] svg:is([class$="_panelIcon"], [class*="_panelIcon "])`,
     `button[data-sidebar-opener] > svg`,
-    ...INLINE_SVG_MASKS.map(item => item.selector),
+    `svg:not([data-icon]):is(\n    ${INLINE_SVG_MASKS.map(item => capSvgScan(item.selector)).join(',\n    ')}\n  )`,
   ];
 
   const lines = [
@@ -749,7 +751,7 @@ export function buildIconCss() {
   }
 
   for (const { selector, svg } of INLINE_SVG_MASKS) {
-    lines.push(`${scope} ${selector} { --claude-icon: ${toDataUri(svg)}; }`);
+    lines.push(`${scope} ${capSvgScan(selector)} { --claude-icon: ${toDataUri(svg)}; }`);
   }
 
   // Right Sidebar `Start` Guide: unify all 36x36 artworks & Session log cube onto crisp 16x16 (1.35px stroke) masks
