@@ -459,7 +459,11 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
   color: var(--dsw-alias-label-secondary);
   transition: background-color 120ms ease, color 120ms ease;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not([data-claude-ws-header="search"]) button[aria-haspopup="menu"] svg {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not([data-claude-ws-header="search"]) :is(
+  button[aria-haspopup="menu"] svg,
+  button:is([class$="_wide"], [class*="_wide "]) svg,
+  svg[data-icon^="dsw-icon-sliders-two-outline-"]
+) {
   --claude-icon: var(--claude-workspace-sort-icon);
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-sidebar-workspace-header]:not([data-claude-ws-header="search"]) :is(

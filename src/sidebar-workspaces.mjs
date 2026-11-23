@@ -209,8 +209,15 @@ export function enhanceSidebarWorkspaces(sidebarRoot, getWorkspaceOwner) {
   const getSearchInput = () => getHeader()?.querySelector('[class$="_searchInput"], [class*="_searchInput "]') ?? null;
   const getClearButton = () => getHeader()?.querySelector('[class$="_clearButton"], [class*="_clearButton "]') ?? null;
   const isSearchExpanded = () => Boolean(getHeader()?.querySelector('[class$="_searchExpanded"], [class*="_searchExpanded "]'));
-  const getAddWorkspaceButton = () =>
-    getHeader()?.querySelector(':is([class$="_headerActions"], [class*="_headerActions "]) button:not([aria-haspopup])') ?? null;
+  const getAddWorkspaceButton = () => {
+    const actions = getHeader()?.querySelector(':is([class$="_headerActions"], [class*="_headerActions "])');
+    if (!actions) return null;
+    const byIcon = actions.querySelector('svg[data-icon^="dsw-icon-project-add-"]')?.closest('button');
+    if (byIcon && actions.contains(byIcon)) return byIcon;
+    return actions.querySelector(':scope > button:not([aria-haspopup])')
+      ?? actions.querySelector('button:not([aria-haspopup]):not([class$="_wide"]):not([class*="_wide "])')
+      ?? null;
+  };
 
   let disposed = false;
   const sortButtons = new Set();

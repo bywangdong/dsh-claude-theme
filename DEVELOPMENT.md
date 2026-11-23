@@ -1,8 +1,13 @@
 # Claude for DSH
 
-面向 DeepSeek Harness `0.2.2-rc.3` 的 Claude Desktop（Code 模式）质感主题插件（`0.11.8`）。
+面向 DeepSeek Harness `0.2.2-rc.3` / `0.2.3-alpha.2` 的 Claude Desktop（Code 模式）质感主题插件（`0.11.9`）。
 
 围绕 Claude Desktop（`@ant/cds` `fizzy-lake` + `.dframe-sidebar` + `.epitaxy-markdown`）核心视觉体验打磨九个维度：**1:1 原生 `PingFang SC` 中英文排版与字阶、深色 `#1F1F1F` 侧栏 / `#191919` 画布表面校准、窗口失焦侧栏柔和降噪、全量 102 组 `dsw-icon-*` + 64 处内联/`FileTypeIcon` SVG + 实验性插件图标体系、右侧 `Start` 工具启动台与 `Files` 单色文件树、1:1 原生通栏顶栏 + 分层表面设置页（`Settings`）与 `@ant/cds` 蓝胶囊开关、槽位安全（Slot-Safe）精确选择器、贴底输入卡与中心星芒新会话主页、以及双色温自适应 Token 与 100% 纯前端可逆架构**。
+
+## 0.11.9 修复侧栏 `Add workspace…` 点击无响应及平铺视图排序图标选择器
+
+- 修复 `src/sidebar-workspaces.mjs` 中 `getAddWorkspaceButton()` 误命中 `ViewOptionsMenu` 按钮的问题：宿主 `_headerActions` 内的 `ViewOptionsMenu` 按钮不带 `aria-haspopup`，导致原先 `button:not([aria-haspopup])` 总是命中第一个视图选项按钮而非添加工作区按钮；现改为优先通过 `svg[data-icon^="dsw-icon-project-add-"]` 定位目标按钮，并保留直接子元素及排除 `_wide` 的兜底匹配（无目录选择器时返回 `null`）。
+- 同步修复 `src/theme.css` 中平铺（`flat`）工作区顶栏排序按钮图标规则，避免仅依赖 `button[aria-haspopup="menu"]` 匹配不到宿主 `ViewOptionsMenu` 的 `IconSlidersTwoOutlineRegular` 图标。
 
 ## 0.11.8 大规模工作区与高频流式输出性能修复
 
@@ -61,7 +66,7 @@ npm run pack:local
 
 以上命令均在 `dsh-claude-theme/` 仓库根目录执行。构建产物写入 `lib/`，本地安装包写入被 Git 忽略的 `dist/`。仓库目录名与插件包名 `dsh-theme-claude` 不同，插件标识及已有设置保持原样。
 
-桌面版 `0.2.2-rc.3` 由运行中的应用管理 `/Users/nick/.dsh/profiles/desktop`。请通过桌面内置 CLI（`/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh plugin --profile desktop`）或在应用 **Plugins → Add plugin → Install a third-party plugin** 中安装 `dist/dsh-theme-claude-0.11.8.tgz`。
+桌面版由运行中的应用管理 `/Users/nick/.dsh/profiles/desktop`。请通过桌面内置 CLI（`/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh plugin --profile desktop`）或在应用 **Plugins → Add plugin → Install a third-party plugin** 中安装 `dist/dsh-theme-claude-0.11.9.tgz`。
 
 插件详情页内置实时开关与分段控件：
 - **启用开关**：采用 Claude `@ant/cds` 原生蓝 `role="switch"` 胶囊（`#2A78D6` / `#3987E5`），即时挂载/卸载 `ctx.theme.overrideTokens()`、`conversation.hero.brand.mark` 插槽、窗口焦点监听、全量图标遮罩层与样式层

@@ -154,7 +154,7 @@ for (const scenario of [
     assert.equal(svg.props.className, 'claude-hero-sunburst');
   }
   if (!scenario.disabled) {
-    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.8');
+    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.9');
     assert.equal(attrs.get('data-claude-palette'), scenario.expectPalette);
     assert.equal(attrs.get('data-claude-prose'), scenario.expectProse);
     assert.equal(attrs.get('data-claude-chrome'), scenario.expectChrome);
@@ -283,11 +283,20 @@ for (const marker of [
   'M2.80078 10.2112',
   'M8.48924 28H19.5108',
 ]) {
-  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.8 semantic selector marker: ${marker}`);
+  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.9 semantic selector marker: ${marker}`);
 }
 assert.ok(
   injectedCss.includes('[data-sidebar-workspace-header][data-claude-ws-header="flat"]'),
   'flat/empty mode must keep workspace header reachable when no workspace rows are rendered',
+);
+assert.ok(
+  source.includes('svg[data-icon^="dsw-icon-project-add-"]')
+  && !source.includes('_headerActions "]) button:not([aria-haspopup])'),
+  'Add workspace lookup must target project-add icon / direct child and not match ViewOptionsMenu',
+);
+assert.ok(
+  injectedCss.includes('dsw-icon-sliders-two-outline-'),
+  'flat-mode workspace header sort icon rule must match ViewOptionsMenu without relying solely on aria-haspopup',
 );
 assert.ok(
   !/body\[[^\]]*\](?::not\([^)]*\))*:has\(/.test(injectedCss),
@@ -328,4 +337,4 @@ for (const pat of rawClassContains) {
 }
 
 assert.ok(!/https?:\/\/|fetch\(|XMLHttpRequest/.test(source.replaceAll('http://www.w3.org/2000/svg', '')), 'theme must be offline and self contained');
-console.log('PASS: emitted 0.11.8 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');
+console.log('PASS: emitted 0.11.9 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');

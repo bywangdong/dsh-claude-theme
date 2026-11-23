@@ -1,7 +1,7 @@
 {
   "plugin": "dsh-theme-claude",
-  "version": "0.11.8",
-  "host": "DeepSeek Harness 0.2.2-rc.3",
+  "version": "0.11.9",
+  "host": "DeepSeek Harness 0.2.3-alpha.2",
   "installedMatchesBuild": {
     "lib/client.js": true,
     "lib/index.js": true,
@@ -11,11 +11,11 @@
     "THIRD_PARTY_NOTICES.md": true
   },
   "sha256": {
-    "lib/client.js": "889d960c2f412262c8e1660dbe1f18f27cc9c33f9a0ef0a4d003d6b4b8a8e5cd",
+    "lib/client.js": "1a0aad3381ad899b37b74d647da4020b9f2b69355f2ef42969538566b9345fee",
     "lib/index.js": "60e2d41c24fe8aae18a27b1ff9b0eba58da8d0759ef06211c9f2e1e130bcdd45",
     "cordis.patch.yml": "c2659fd7a68aba594fd9fce79245b3de83b0113d9f7575f9af18b79ba53b61b5",
-    "README.md": "2dc08f694b56c28296445991295ca00db07f08d4aabfc47589144bad9815f40b",
-    "package.json": "98fb3397cfc47bb82d1720adf5429820e8027e2d2baa03e091c566204a0edf2e",
+    "README.md": "face11190e0e144feaa8c0262a8553388a757a62bec683c5f7e6cce857f2fe9b",
+    "package.json": "8be67563c90f2251216de1cb3f486fa5a9d5baa2ecdc8a421aee7ab81a65d29e",
     "THIRD_PARTY_NOTICES.md": "b1d7f6e6f2f9a5096df0dbdb5a795542a406a930843282cbfa4345e751a364a6"
   },
   "otherDependenciesPreserved": {
