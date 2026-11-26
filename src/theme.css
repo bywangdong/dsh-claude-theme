@@ -2,7 +2,7 @@
    All CSS Module selectors use exact suffix matching (:is([class$="_foo"], [class*="_foo "]))
    or DSH semantic data-* hooks, and NEVER use '>' across DSH <span data-slot="..."> wrappers. */
 body[data-dsh-claude-theme] {
-  --claude-hairline: 1px;
+  --claude-hairline: var(--dsh-hairline-width, 1px);
   --dsw-radius-xs: 4px;
   --dsw-radius-sm: 8px;
   --dsw-radius-md: 8px;
@@ -14,10 +14,15 @@ body[data-dsh-claude-theme] {
   --ds-transition-duration: 180ms;
   --ds-transition-duration-slow: 280ms;
   --ds-ease-in-out: cubic-bezier(.165, .84, .44, 1);
-  /* Explicit PingFang SC precedence matching Claude Desktop @ant/cds (--font-cjk-sans-sc: "PingFang SC") even under <html lang="en">. */
-  --claude-ui-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "PingFang TC", "Hiragino Sans", "Apple SD Gothic Neo", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  /* Explicit PingFang SC precedence matching Claude Desktop @ant/cds (--font-cjk-sans-sc: "PingFang SC") even under <html lang="en">,
+     while still honoring user-configured text/code fonts from DSH 0.2.3+ Settings (--dsh-font-family-text / --dsh-font-family-code). */
+  --claude-ui-sans-default: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "PingFang TC", "Hiragino Sans", "Apple SD Gothic Neo", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  --claude-code-default: ui-monospace, "SF Mono", Menlo, Monaco, "PingFang SC", monospace;
+  --dsh-font-family-text-default: var(--claude-ui-sans-default);
+  --dsh-font-family-code-default: var(--claude-code-default);
+  --claude-ui-sans: var(--dsh-font-family-text, var(--claude-ui-sans-default)), var(--claude-ui-sans-default);
   --dsw-font-family: var(--claude-ui-sans);
-  --ds-font-family-code: ui-monospace, "SF Mono", Menlo, Monaco, "PingFang SC", monospace;
+  --ds-font-family-code: var(--dsh-font-family-code, var(--claude-code-default)), var(--claude-code-default);
   /* Charter & Iowan Old Style precede ui-serif so Blink/Electron on macOS uses genuine book serif rather than Times. */
   --claude-display-font: Charter, "Iowan Old Style", Palatino, "PingFang SC", Georgia, serif;
   --claude-serif-prose: Charter, "Iowan Old Style", Palatino, "Songti SC", "STSong", "Noto Serif CJK SC", Georgia, serif;
@@ -840,11 +845,6 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scroll
   font-weight: inherit;
   color: inherit;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="session:"] > :is([class$="_title"], [class*="_title "])[data-clipped] {
-  text-overflow: clip;
-  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 20px), transparent);
-  mask-image: linear-gradient(90deg, #000 calc(100% - 20px), transparent);
-}
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="session:"] > :is([class$="_rowResting"], [class*="_rowResting "]) {
   order: 2;
 }
@@ -994,10 +994,10 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is([data-slot="side
   flex: none;
 }
 /* The footer cog is a real, keyboard-accessible slot action, separate from the account menu. */
-body[data-dsh-claude-theme] :is([class$="_footArea"], [class*="_footArea "]):has(> .claude-sidebar-settings-button, > [data-slot] > .claude-sidebar-settings-button) {
+body[data-dsh-claude-theme] :is([class$="_footArea"], [class*="_footArea "]):has(.claude-sidebar-settings-button) {
   position: relative;
 }
-body[data-dsh-claude-theme] :is([class$="_footArea"], [class*="_footArea "]):has(> .claude-sidebar-settings-button, > [data-slot] > .claude-sidebar-settings-button) > :is([class$="_settingsArea"], [class*="_settingsArea "]) {
+body[data-dsh-claude-theme] :is([class$="_footArea"], [class*="_footArea "]):has(.claude-sidebar-settings-button) > :is([class$="_settingsArea"], [class*="_settingsArea "]) {
   box-sizing: border-box;
   padding-right: 38px;
 }
@@ -1343,7 +1343,7 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) svg:not([data-icon])
   color: var(--dsw-alias-label-secondary);
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is(
-  [data-dockkit-tab][class*="_tabActive_"],
+  [data-dockkit-tab]:is([class$="_tabActive"], [class*="_tabActive "]),
   [data-files-content] [aria-selected="true"],
   [data-files-content] [class$="_current"],
   [data-files-content] [class*="_current "]
@@ -1351,7 +1351,7 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is(
   --dsh-file-type-icon-color: currentColor;
 }
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is(
-  [data-dockkit-tab][class*="_tabActive_"],
+  [data-dockkit-tab]:is([class$="_tabActive"], [class*="_tabActive "]),
   [data-files-content] [aria-selected="true"],
   [data-files-content] [class$="_current"],
   [data-files-content] [class*="_current "]
@@ -1361,10 +1361,10 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) :is(
 body[data-dsh-claude-theme] [data-dockkit-tab] {
   border-radius: 7px;
 }
-body[data-dsh-claude-theme] [data-dockkit-tab] [class*="_tabTitle_"] {
+body[data-dsh-claude-theme] [data-dockkit-tab] :is([class$="_tabTitle"], [class*="_tabTitle "]) {
   gap: 6px;
 }
-body[data-dsh-claude-theme] [data-dockkit-tab] [class*="_tabTitle_"] > :is(svg, span > svg) {
+body[data-dsh-claude-theme] [data-dockkit-tab] :is([class$="_tabTitle"], [class*="_tabTitle "]) > :is(svg, span > svg) {
   width: 15px;
   height: 15px;
   flex: none;
@@ -1373,7 +1373,7 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-files-content]
   --dsh-file-type-icon-color: var(--dsw-alias-label-tertiary);
   color: var(--dsw-alias-label-tertiary);
 }
-body[data-dsh-claude-theme] [class*="_tabCell_"][data-dockkit-host="dock"][data-dockkit-column="0"] > [class*="_tabHost_"] {
+body[data-dsh-claude-theme] :is([class$="_tabCell"], [class*="_tabCell "])[data-dockkit-host="dock"][data-dockkit-column="0"] > :is([class$="_tabHost"], [class*="_tabHost "]) {
   border-left: 1px solid var(--claude-sidebar-divider);
 }
 body[data-dsh-claude-theme] [data-dockkit-pane]:has([data-sidebar-right-guide]) {
@@ -1494,62 +1494,62 @@ body[data-dsh-claude-theme] [data-conversation-content] [data-chat-group-part="r
   --dsh-assistant-block-gap: 10px;
 }
 
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) {
   color: var(--claude-prose-ink);
   font-synthesis: none;
   letter-spacing: 0;
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) p {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) p {
   margin: 10px 0;
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) strong {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) strong {
   font-weight: var(--claude-prose-strong-weight);
   color: var(--claude-prose-strong-ink);
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) h1 {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) h1 {
   margin: 16px 0 6px;
   letter-spacing: -.01em;
   color: var(--claude-prose-strong-ink);
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) h2 {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) h2 {
   margin: 14px 0 6px;
   letter-spacing: -.01em;
   color: var(--claude-prose-strong-ink);
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) h3 {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) h3 {
   margin: 11px 0 4px;
   letter-spacing: -.01em;
   color: var(--claude-prose-strong-ink);
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) :where(h4, h5, h6) {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) :where(h4, h5, h6) {
   margin: 9px 0 4px;
   color: var(--claude-prose-strong-ink);
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) :where(ul, ol) {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) :where(ul, ol) {
   margin: 8px 0;
   padding-left: 20px;
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) li:not(:first-child) {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) li:not(:first-child) {
   margin-top: 8px;
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) li::marker {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) li::marker {
   line-height: var(--claude-prose-leading);
   color: var(--dsw-alias-label-tertiary);
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) li > p {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) li > p {
   margin: 6px 0;
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) hr {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) hr {
   margin: 12px 0;
   background: var(--dsw-alias-border-l2);
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]):not([class*="_compact_"]) blockquote {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg):not([class$="_compact"]):not([class*="_compact "]) blockquote {
   border-left: 2px solid var(--dsw-alias-border-l3);
   color: var(--dsw-alias-label-secondary);
   margin: 10px 0;
   padding-left: 12px;
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:not([class*="_1wejo_"]) :not(pre) > code {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_markdown"], [class*="_markdown "]):not(svg) :not(pre) > code {
   display: inline;
   white-space: pre-wrap;
   border: 0;
@@ -1560,29 +1560,29 @@ body[data-dsh-claude-theme] [data-conversation-content] [class*="_markdown_"]:no
   background-color: var(--dsw-alias-markdown-inline-code);
   color: var(--claude-prose-strong-ink);
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_tableScroll_"] th {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_tableScroll"], [class*="_tableScroll "]) th {
   padding: 8px 14px;
   color: var(--claude-prose-strong-ink);
   border-bottom: 1px solid var(--dsw-alias-border-l3);
   vertical-align: top;
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_tableScroll_"] td {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_tableScroll"], [class*="_tableScroll "]) td {
   padding: 8px 14px;
   color: var(--claude-prose-ink);
   border-bottom: 1px solid var(--dsw-alias-border-l2);
   vertical-align: top;
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_tableScroll_"] :is(th, td):first-child {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_tableScroll"], [class*="_tableScroll "]) :is(th, td):first-child {
   padding-left: 0;
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_tableScroll_"] table code {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_tableScroll"], [class*="_tableScroll "]) table code {
   font-size: .88em !important;
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_block_"]:has(> [class*="_bannerWrap_"]) {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_block"], [class*="_block "]):has(> :is([class$="_bannerWrap"], [class*="_bannerWrap "])) {
   border-radius: 10px;
   box-shadow: inset 0 0 0 1px var(--claude-sidebar-divider);
 }
-body[data-dsh-claude-theme] [data-conversation-content] [class*="_banner_"] {
+body[data-dsh-claude-theme] [data-conversation-content] :is([class$="_banner"], [class*="_banner "]) {
   border-bottom: 1px solid var(--claude-sidebar-divider);
   color: var(--dsw-alias-label-secondary);
 }
@@ -1596,7 +1596,7 @@ body[data-dsh-claude-theme] .dsh-switcher {
   --sw-muted: var(--dsw-alias-label-secondary);
   --sw-faint: var(--dsw-alias-label-tertiary);
 }
-body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"] {
+body[data-dsh-claude-theme] button[role="switch"]:is([class$="_switch"], [class*="_switch "]) {
   width: 36px;
   height: 20px;
   padding: 2px;
@@ -1604,10 +1604,10 @@ body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"] {
   background: var(--claude-switch-off);
   transition: background-color 140ms ease;
 }
-body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"][aria-checked="true"] {
+body[data-dsh-claude-theme] button[role="switch"]:is([class$="_switch"], [class*="_switch "])[aria-checked="true"] {
   background: var(--claude-switch-on);
 }
-body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"] [class*="_thumb_"] {
+body[data-dsh-claude-theme] button[role="switch"]:is([class$="_switch"], [class*="_switch "]) :is([class$="_thumb"], [class*="_thumb "]) {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -1615,11 +1615,11 @@ body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"] [class*="_t
   box-shadow: 0 1px 2.5px #00000033;
   transition: transform 140ms var(--ds-ease-in-out);
 }
-body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"][aria-checked="true"] [class*="_thumb_"] {
+body[data-dsh-claude-theme] button[role="switch"]:is([class$="_switch"], [class*="_switch "])[aria-checked="true"] :is([class$="_thumb"], [class*="_thumb "]) {
   background: #FFFFFF;
   transform: translateX(16px);
 }
-body[data-dsh-claude-theme] [class*="_dialog_"] {
+body[data-dsh-claude-theme] :is([class$="_dialog"], [class*="_dialog "]) {
   border-radius: 14px;
   border: 1px solid var(--claude-settings-divider);
   background: var(--claude-settings-panel-bg);
@@ -2055,7 +2055,7 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="
 /* Compact controls. Selectors read as values in a row; editable fields keep an outline. */
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) :is(
   :is([class$="_setting"], [class*="_setting "]) > button:is([class$="_button"], [class*="_button "]),
-  button[class*="_button_"][class*="_outline_"]
+  button:is([class$="_button"], [class*="_button "]):is([class$="_outline"], [class*="_outline "])
 ) {
   height: 34px;
   min-width: 0;
@@ -2074,7 +2074,7 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_opt
 @media (hover: hover) {
   body[data-dsh-claude-theme] [data-shortcut-modal="settings"] > :is([class$="_options"], [class*="_options "]) :is(
     :is([class$="_setting"], [class*="_setting "]) > button:is([class$="_button"], [class*="_button "]),
-    button[class*="_button_"][class*="_outline_"]
+    button:is([class$="_button"], [class*="_button "]):is([class$="_outline"], [class*="_outline "])
   ):hover:not(:disabled) {
     background: var(--claude-settings-field-hover);
     border-color: var(--claude-settings-card-border);
@@ -2092,6 +2092,16 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_stepp
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_stepper"], [class*="_stepper "]) :is([class$="_value"], [class*="_value "], [class$="_unit"], [class*="_unit "]) {
   font-size: 14px;
   line-height: 20px;
+}
+body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_expander"], [class*="_expander "]) {
+  border-radius: 6px;
+  color: var(--claude-settings-desc-ink);
+}
+@media (hover: hover) {
+  body[data-dsh-claude-theme] [data-shortcut-modal="settings"] button:is([class$="_expander"], [class*="_expander "]):hover {
+    background: var(--claude-settings-field-hover);
+    color: var(--claude-settings-ink);
+  }
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is([class$="_field"], [class*="_field "]) > :is(input, select) {
   box-sizing: border-box;
@@ -2162,7 +2172,7 @@ body[data-dsh-claude-theme] [data-shortcut-modal="settings"] select {
   background-repeat: no-repeat;
   background-size: 12px 12px;
 }
-html[data-theme="dark"] body[data-dsh-claude-theme] [data-shortcut-modal="settings"] select {
+body[data-ds-dark-theme][data-dsh-claude-theme] [data-shortcut-modal="settings"] select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%239E9E9E' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 body[data-dsh-claude-theme] [data-shortcut-modal="settings"] :is(
@@ -2613,7 +2623,7 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-se
 body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-text small {
   display: none;
 }
-body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result[data-claude-project-hit="true"] .sc-search-text small {
+body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-search .sc-search-result:is([data-sc-workspace-match="true"], [data-claude-project-hit="true"]:not([data-sc-workspace-match])) .sc-search-text small {
   display: inline;
   flex: 0 0 auto;
   max-width: 144px;
@@ -2838,8 +2848,8 @@ body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) dialog.sc-session-se
   body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] > :is([class$="_chevron"], [class*="_chevron "])::before,
   body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"]) [data-sidebar-scrollport] [data-row-key^="workspace:"] button,
   body[data-dsh-claude-theme] .claude-hero-sunburst,
-  body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"],
-  body[data-dsh-claude-theme] button[role="switch"][class*="_switch_"] [class*="_thumb_"],
+  body[data-dsh-claude-theme] button[role="switch"]:is([class$="_switch"], [class*="_switch "]),
+  body[data-dsh-claude-theme] button[role="switch"]:is([class$="_switch"], [class*="_switch "]) :is([class$="_thumb"], [class*="_thumb "]),
   .claude-theme-segmented button,
   .claude-theme-switch,
   .claude-theme-switch-thumb { transition: none; }

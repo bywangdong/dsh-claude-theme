@@ -1,8 +1,16 @@
 # Claude for DSH
 
-面向 DeepSeek Harness `0.2.2-rc.3` / `0.2.3-alpha.2` 的 Claude Desktop（Code 模式）质感主题插件（`0.11.9`）。
+面向 DeepSeek Harness `0.2.3-alpha.2` 的 Claude Desktop（Code 模式）质感主题插件（`0.12.1`）。
 
-围绕 Claude Desktop（`@ant/cds` `fizzy-lake` + `.dframe-sidebar` + `.epitaxy-markdown`）核心视觉体验打磨九个维度：**1:1 原生 `PingFang SC` 中英文排版与字阶、深色 `#1F1F1F` 侧栏 / `#191919` 画布表面校准、窗口失焦侧栏柔和降噪、全量 102 组 `dsw-icon-*` + 64 处内联/`FileTypeIcon` SVG + 实验性插件图标体系、右侧 `Start` 工具启动台与 `Files` 单色文件树、1:1 原生通栏顶栏 + 分层表面设置页（`Settings`）与 `@ant/cds` 蓝胶囊开关、槽位安全（Slot-Safe）精确选择器、贴底输入卡与中心星芒新会话主页、以及双色温自适应 Token 与 100% 纯前端可逆架构**。
+围绕 Claude Desktop（`@ant/cds` `fizzy-lake` + `.dframe-sidebar` + `.epitaxy-markdown`）核心视觉体验打磨九个维度：**1:1 原生 `PingFang SC` 中英文排版与字阶、深色 `#1F1F1F` 侧栏 / `#191919` 画布表面校准、窗口失焦侧栏柔和降噪、全量 106 组 `dsw-icon-*` + 62 处内联/`FileTypeIcon` SVG + 实验性插件图标体系、右侧 `Start` 工具启动台与 `Files` 单色文件树、1:1 原生通栏顶栏 + 分层表面设置页（`Settings`）与 `@ant/cds` 蓝胶囊开关、槽位安全（Slot-Safe）精确选择器、贴底输入卡与中心星芒新会话主页、以及双色温自适应 Token 与 100% 纯前端可逆架构**。
+
+## 0.12.0 全面适配 DeepSeek Harness `0.2.3-alpha.2` 与原生清单元数据
+
+- **修复 CSS Module 命名变更新导致的 5 组样式失效**：DSH `0.2.3-alpha.2` 将 `ui-primitives`、`dockkit`、Markdown 与 CodeBlock 的 CSS Module 类名统一为 `<hash>_<name>`；全面将 `src/theme.css` 中 15 处 `[class*="_foo_"]` 迁移为后缀安全选择器 `:is([class$="_foo"], [class*="_foo "])`，恢复 Markdown 正文/标题/列表/行内代码/表格/代码块、Claude 蓝胶囊开关、全局弹窗外框、右侧栏 DockKit 标签页与分割线以及设置页描边按钮；移除硬编码哈希 `_1wejo_`（改用 `:not(svg)`）与已移除的 `[data-clipped]` 死规则。
+- **兼容 `0.2.3` 新增字体家族与 DPR 发丝线**：`src/theme.css` 将 `--dsh-font-family-text` / `--dsh-font-family-code` 置于默认 Claude 字体栈之前，避免吞掉用户在通用设置「更多字体设置」中自定义的正文/代码字体；同时微调展开按钮 `.expander` 样式，并将 `--claude-hairline` 绑定至宿主 `var(--dsh-hairline-width, 1px)`。
+- **补全 106 组图标与修正内联 SVG 漂移**：`src/icons.mjs` 补齐 `0.2.3` 新增的 4 组 `dsw-icon-*`（`files-diff-outline`、`mail-read-outline`、`mail-unread-outline`、`remote-connection-outline`）；修正 `ui-primitives` 重构后的 4 枚权限盾牌图标路径与语义映射（Read Only / Workspace Write / Full Access / Auto Review）；修复账户登出图标 `LogoutIcon` 路径、新增终端空状态 28×28 SVG 映射、清理已迁移至 `dsw-icon-*` 的 3 条死规则，并为 `dsh-timeline` / `dsh-deepseek-chat-import` / `dsh-subagent-*` 补充实验包图标。
+- **适配设置页「远程连接」与深色下拉箭头**：`src/settings-icons.mjs` 与 `src/settings-navigation.mjs` 补充 `remote-connection`（及 `archived-sessions`）专属线性图标和中英文搜索别名；修复 `src/theme.css` 中 `<select>` 深色下拉箭头选择器（由死规则 `html[data-theme="dark"]` 修正为 `body[data-ds-dark-theme]`）。
+- **接入 `0.2.3` 原生插件图标与双语元信息**：新增根目录 `icon.svg`（36×36 Claude 陶土星芒）、`locale/en.json`、`locale/zh.json` 与 `package.json` 的 `icon` / `dsh.manifestVersion: 1` / `./locale/*.json` 导出声明，使 Plugins 页面与详情页在任何开关状态下均原生展示图标与中英双语简介。
 
 ## 0.11.9 修复侧栏 `Add workspace…` 点击无响应及平铺视图排序图标选择器
 
@@ -66,7 +74,7 @@ npm run pack:local
 
 以上命令均在 `dsh-claude-theme/` 仓库根目录执行。构建产物写入 `lib/`，本地安装包写入被 Git 忽略的 `dist/`。仓库目录名与插件包名 `dsh-theme-claude` 不同，插件标识及已有设置保持原样。
 
-桌面版由运行中的应用管理 `/Users/nick/.dsh/profiles/desktop`。请通过桌面内置 CLI（`/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh plugin --profile desktop`）或在应用 **Plugins → Add plugin → Install a third-party plugin** 中安装 `dist/dsh-theme-claude-0.11.9.tgz`。
+桌面版由运行中的应用管理 `/Users/nick/.dsh/profiles/desktop`。请通过桌面内置 CLI（`/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh plugin --profile desktop`）或在应用 **Plugins → Add plugin → Install a third-party plugin** 中安装 `dist/dsh-theme-claude-0.12.1.tgz`。
 
 插件详情页内置实时开关与分段控件：
 - **启用开关**：采用 Claude `@ant/cds` 原生蓝 `role="switch"` 胶囊（`#2A78D6` / `#3987E5`），即时挂载/卸载 `ctx.theme.overrideTokens()`、`conversation.hero.brand.mark` 插槽、窗口焦点监听、全量图标遮罩层与样式层

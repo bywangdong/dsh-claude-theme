@@ -19,10 +19,12 @@ export function enhanceSettingsNavigation(panel, getSections) {
   };
   const aliases = {
     account: 'profile account 账户 帐号 个人资料',
-    general: 'general appearance theme font language permission 通用 外观 主题 字体 语言 权限',
+    general: 'general appearance theme font family size language permission 通用 外观 主题 字体 字号 语言 权限',
     models: 'model provider api 模型 供应商',
     plugins: 'plugin extension 插件 扩展',
     'agent-presets': 'agent preset 智能体 预设',
+    'remote-connection': 'remote connection qr code pairing token link browser 远程 连接 扫码 二维码 配对 令牌 链接 浏览器',
+    'archived-sessions': 'archived sessions history 归档 会话 历史',
   };
   const normalize = value => String(value).normalize('NFKC').toLocaleLowerCase().trim();
   const originalNavLabel = nav.getAttribute('aria-label');

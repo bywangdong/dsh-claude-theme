@@ -14,6 +14,7 @@ export async function checkSettingsNavigation(enhance) {
     { id: 'models', label: 'Models' },
     { id: 'plugins', label: 'Built-in plugins' },
     { id: 'agent-presets', label: 'Agent presets' },
+    { id: 'remote-connection', label: 'Remote connection' },
     { id: 'dsh-shortcutter', label: 'Shortcutter' },
   ];
   const clicks = [];
@@ -41,9 +42,14 @@ export async function checkSettingsNavigation(enhance) {
       await flush();
       assert(!old.hasAttribute('data-claude-settings-id'), 'removed rows must be restored immediately');
     }
-    assert(list.querySelectorAll('[data-claude-settings-id]').length === 6, 'replacement must keep six live rows');
+    assert(list.querySelectorAll('[data-claude-settings-id]').length === 7, 'replacement must keep seven live rows');
 
     const input = panel.querySelector('input[type="search"]');
+    input.value = 'qr';
+    input.dispatchEvent(new Event('input'));
+    const remoteVisible = [...list.querySelectorAll('button:not([data-claude-search-hidden])')];
+    assert(remoteVisible.length === 1 && remoteVisible[0].textContent === 'Remote connection', 'alias search should show Remote connection');
+
     input.value = 'shortcuts';
     input.dispatchEvent(new Event('input'));
     const visible = [...list.querySelectorAll('button:not([data-claude-search-hidden])')];
@@ -66,7 +72,7 @@ export async function checkSettingsNavigation(enhance) {
     await flush();
     assert(input.placeholder === '搜索', 'locale change must refresh search copy');
     panel.querySelector('.claude-settings-search-clear').click();
-    assert(list.querySelectorAll('button:not([data-claude-search-hidden])').length === 6, 'clear should restore all original rows');
+    assert(list.querySelectorAll('button:not([data-claude-search-hidden])').length === 7, 'clear should restore all original rows');
 
     dispose();
     assert(!panel.querySelector('.claude-settings-search'), 'dispose must remove search');

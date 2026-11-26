@@ -7,7 +7,7 @@ window.__ModuleLoader__.load({
     /* BUILD_SETTINGS_NAV */
     /* BUILD_SIDEBAR_WORKSPACES */
     /* BUILD_SHORTCUTTER_SEARCH */
-    const VERSION = '0.11.9';
+    const VERSION = '0.12.1';
     const KEYS = {
       enabled: 'dsh-theme-claude.enabled.v1',
       palette: 'dsh-theme-claude.palette.v2',
@@ -238,7 +238,7 @@ window.__ModuleLoader__.load({
 
         return React.createElement('section', { className: 'claude-theme-settings' },
           React.createElement('h3', null, '外观细节'),
-          React.createElement('p', null, '调整主题、色温和回复字体。会话字号与键盘快捷键可在通用设置中修改。'),
+          React.createElement('p', null, '调整主题、色温和回复字体。全局字体、会话字号与键盘快捷键可在通用设置中修改。'),
           React.createElement('div', { className: 'claude-theme-rows' },
             renderRow(
               '启用 Claude 主题',
@@ -292,8 +292,7 @@ window.__ModuleLoader__.load({
         ctx.slots.register({ name: 'plugins.bundle.config', key: 'dsh-theme-claude' }, Settings)), 'dsh-theme-claude: settings');
 
       function currentSettingsActions() {
-        const owner = ctx.slots.entriesOfSlot('sidebar.settings')
-          .find(entry => entry.children?.['settings.section']);
+        const owner = ctx.slots.entriesOfSlot('sidebar.settings')[0];
         const store = owner?.store;
         return store && typeof store !== 'function' ? store.create().actions : undefined;
       }

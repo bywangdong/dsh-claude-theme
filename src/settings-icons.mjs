@@ -22,6 +22,12 @@ export function buildSettingsIconCss() {
   const manageDotsSvg = toDataUri(
     `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='black'><circle cx='3.5' cy='8' r='1.15'/><circle cx='8' cy='8' r='1.15'/><circle cx='12.5' cy='8' r='1.15'/></svg>`,
   );
+  const remoteConnSvg = toDataUri(
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'><rect x='2.5' y='3.5' width='15' height='10.25' rx='1.9'/><path d='M6.75 16.75h6.5M10 13.75v3M7.75 9.35a3.1 3.1 0 0 1 4.5 0M9 10.85a1.45 1.45 0 0 1 2 0'/></svg>`,
+  );
+  const archivedSvg = toDataUri(
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'><rect x='2.4' y='3.25' width='15.2' height='3.6' rx='1.2'/><path d='M3.6 6.85v8.1a1.6 1.6 0 0 0 1.6 1.6h9.6a1.6 1.6 0 0 0 1.6-1.6v-8.1M8 10.75h4'/></svg>`,
+  );
   const scope = 'body[data-dsh-claude-theme] [data-shortcut-modal="settings"]';
   const lines = [
     `body[data-dsh-claude-theme] { --claude-sidebar-settings-icon: ${asset('claude-settings/settings')}; --claude-sidebar-search-icon: ${asset('claude-settings/search')}; --claude-modal-close-icon: ${asset('lucide/x')}; --claude-workspace-sort-icon: ${sortSvg}; --claude-workspace-plus-icon: ${plusSvg}; --claude-menu-check-icon: ${checkSvg}; --claude-workspace-add-icon: ${folderAddSvg}; --claude-workspace-manage-icon: ${manageDotsSvg}; --claude-palette-search-icon: ${asset('claude-search/search')}; --claude-palette-close-icon: ${asset('claude-search/close')}; --claude-code-session-icon: ${asset('claude-search/code')}; --claude-return-enter-icon: ${asset('claude-search/return')}; }`,
@@ -32,6 +38,8 @@ export function buildSettingsIconCss() {
   for (const [id, name] of Object.entries(icons)) {
     lines.push(`${scope} [data-claude-settings-id="${id}"] { --claude-settings-icon: ${asset(name)}; }`);
   }
+  lines.push(`${scope} [data-claude-settings-id="remote-connection"] { --claude-settings-icon: ${remoteConnSvg}; }`);
+  lines.push(`${scope} [data-claude-settings-id="archived-sessions"] { --claude-settings-icon: ${archivedSvg}; }`);
   lines.push(`${scope} [data-claude-settings-id*="shortcutter"] { --claude-settings-icon: ${asset('lucide/keyboard')}; }`);
   return lines.join('\n');
 }

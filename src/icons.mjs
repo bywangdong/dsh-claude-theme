@@ -1,5 +1,5 @@
-// Claude Desktop inspired icon pack for DeepSeek Harness (0.2.2-rc.x).
-// Covers all 102 DSH `dsw-icon-*` symbol families (regular + medium), 36 DSH inline SVGs,
+// Claude Desktop inspired icon pack for DeepSeek Harness (0.2.3).
+// Covers all 106 DSH `dsw-icon-*` symbol families (regular + medium), inline & FileTypeIcon SVGs,
 // Right Sidebar `Start` Guide optical sizing, and `@deepseek-ai/*` experimental bundle icons
 // via pure reversible CSS masks (`body[data-dsh-claude-theme]:not([data-claude-chrome="dsh"])`).
 
@@ -79,7 +79,7 @@ const SETTINGS_COG_24 = strokeSvg(
   { viewBox: '0 0 24 24', strokeWidth: 1.8 },
 );
 
-// Exact 102 DSH icon families (`dsw-icon-<family>-regular` & `dsw-icon-<family>-medium`)
+// Exact 106 DSH icon families (`dsw-icon-<family>-regular` & `dsw-icon-<family>-medium`)
 export const DSH_ICON_MASKS = {
   'agent-preset-outline': strokeSvg(
     `<rect x='2.8' y='3.1' width='10.4' height='6.7' rx='1.15'/><path d='M2.8 9.8l-1.05 2.35a.6.6 0 0 0 .55.85h11.4a.6.6 0 0 0 .55-.85L13.2 9.8'/>`,
@@ -177,6 +177,9 @@ export const DSH_ICON_MASKS = {
   'eye-outline': strokeSvg(
     `<path d='M1.8 8c1.5-3 3.7-4.5 6.2-4.5S12.7 5 14.2 8c-1.5 3-3.7 4.5-6.2 4.5S3.3 11 1.8 8Z'/><circle cx='8' cy='8' r='1.9'/>`,
   ),
+  'files-diff-outline': strokeSvg(
+    `${FILE_SHEET_BASE}<path d='M8 6.8v2.8M6.6 8.2h2.8M6.6 11.4h2.8'/>`,
+  ),
   'flat-list-outline': strokeSvg(
     `<path d='M5.6 4.2h8M5.6 8h8M5.6 11.8h8'/><circle cx='2.9' cy='4.2' r='.95' fill='black' stroke='none'/><circle cx='2.9' cy='8' r='.95' fill='black' stroke='none'/><circle cx='2.9' cy='11.8' r='.95' fill='black' stroke='none'/>`,
   ),
@@ -221,6 +224,12 @@ export const DSH_ICON_MASKS = {
     `<path d='M3.4 3.5h6.8M3.4 6.7h5.2M3.4 9.9h3.2M11.6 7.4a1.2 1.2 0 0 1 1.7 1.7l-3.8 3.8-2.1.5.5-2.1 3.7-3.9Z'/>`,
   ),
   'loading-outline': strokeSvg(`<path d='M8 2.2a5.8 5.8 0 1 1-4.1 1.7'/>`),
+  'mail-read-outline': strokeSvg(
+    `<path d='M13.8 6.3v5.4a1.3 1.3 0 0 1-1.3 1.3h-9a1.3 1.3 0 0 1-1.3-1.3V6.3L8 2.4l5.8 3.9Z'/><path d='M2.3 6.5L8 10l5.7-3.5'/>`,
+  ),
+  'mail-unread-outline': strokeSvg(
+    `<path d='M13.8 7.6v4.1a1.3 1.3 0 0 1-1.3 1.3h-9a1.3 1.3 0 0 1-1.3-1.3V5.3A1.3 1.3 0 0 1 3.5 4h5.7'/><path d='M2.5 5.4L8 9l2.6-1.7'/><circle cx='12.8' cy='4' r='1.7' fill='black' stroke='none'/>`,
+  ),
   'microphone-outline': strokeSvg(
     `<rect x='5.5' y='2' width='5' height='7.6' rx='2.5'/><path d='M3.3 7.6a4.7 4.7 0 0 0 9.4 0M8 12.3v1.9M5.8 14.2h4.4'/>`,
   ),
@@ -268,6 +277,9 @@ export const DSH_ICON_MASKS = {
   ),
   'refresh-outline': strokeSvg(
     `<path d='M13.5 3.6v3.4h-3.4'/><path d='M12.85 10a5.25 5.25 0 1 1-.75-5.2L13.5 7'/>`,
+  ),
+  'remote-connection-outline': strokeSvg(
+    `<rect x='2' y='2.8' width='12' height='8.2' rx='1.5'/><path d='M5.4 13.4h5.2M8 11v2.4M6.2 7.5a2.5 2.5 0 0 1 3.6 0M7.2 8.7a1.15 1.15 0 0 1 1.6 0'/>`,
   ),
   'right-up-outline': strokeSvg(`<path d='M4.2 11.8L11.8 4.2M6.2 4.2h5.6v5.6'/>`),
   'save-outline': strokeSvg(
@@ -342,22 +354,22 @@ export const INLINE_SVG_MASKS = [
     svg: strokeSvg(`<path d='M8 12.8V3.2M4 7.2L8 3.2l4 4'/>`, { strokeWidth: 1.55 }),
   },
   {
-    // Permission: Workspace Write (shield + check)
+    // Permission: Read Only (PermissionIconReadOnly* in ui-primitives: shield + check)
     selector: `svg:not([data-icon]):has(> path[d^="M5.08545"])`,
     svg: strokeSvg(`${SHIELD_BASE}<path d='M5.8 8l1.5 1.5 3-3.1'/>`),
   },
   {
-    // Permission: Read Only (shield + eye dot)
-    selector: `svg:not([data-icon]):has(> path[d^="M6.4209"])`,
-    svg: strokeSvg(`${SHIELD_BASE}<circle cx='8' cy='8' r='1.45'/>`),
+    // Permission: Workspace Write (PermissionIconWorkspaceWrite* in ui-primitives: shield + edit)
+    selector: `svg:not([data-icon]):has(> path[d^="M14 6.68994V4"])`,
+    svg: strokeSvg(`${SHIELD_BASE}<path d='M5.7 6.8h4.6M5.7 9.5h3.1'/>`),
   },
   {
-    // Permission: Full access (shield + alert)
-    selector: `svg:not([data-icon]):has(> path[d^="M8 4.39209"])`,
+    // Permission: Full access (PermissionIconFullAccess* in ui-primitives: shield + alert)
+    selector: `svg:not([data-icon]):has(> path[d="M8 4.5V10"])`,
     svg: strokeSvg(`${SHIELD_BASE}<path d='M8 5.4v2.9'/><circle cx='8' cy='10.6' r='.65' fill='black' stroke='none'/>`),
   },
   {
-    // Permission: Auto review (shield + sparkle)
+    // Permission: Auto review (PermissionIconAutoReview* in ui-primitives: shield + sparkle)
     selector: `svg:not([data-icon]):has(> path[d^="M5.75 10.15L8 4.95"])`,
     svg: strokeSvg(
       `${SHIELD_BASE}<path d='M8 5.4l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6.6-1.7Z' fill='black' stroke='none'/>`,
@@ -369,9 +381,12 @@ export const INLINE_SVG_MASKS = [
     svg: strokeSvg(`<rect x='2.2' y='3.2' width='11.6' height='10.4' rx='1.6'/><path d='M5.2 1.9v2.4M10.8 1.9v2.4M2.2 6.5h11.6'/>`),
   },
   {
-    // Right sidebar Terminal tab icon (dsh-client-ui-sidebar-terminal)
-    selector: `svg:not([data-icon]):has(> path[d="M3 4L7 8L3 12"])`,
-    svg: TERMINAL_PROMPT,
+    // Right sidebar Terminal missing/empty state artwork (dsh-client-ui-sidebar-terminal)
+    selector: `svg:not([data-icon])[viewBox="0 0 28 28"]:has(> path[d^="m8 10 4 4-4 4"])`,
+    svg: strokeSvg(`<rect x='6' y='8.5' width='24' height='19' rx='3.2'/><path d='M12 14.5l4.2 3.5-4.2 3.5M18.5 21.5h5'/>`, {
+      viewBox: '0 0 36 36',
+      strokeWidth: 1.85,
+    }),
   },
   {
     // Account notifications bell (dsh-client-ui-account-notifications)
@@ -492,8 +507,8 @@ export const INLINE_SVG_MASKS = [
     svg: strokeSvg(`<circle cx='8' cy='8' r='4.6'/><path d='M8 1.8v2.6M8 11.6v2.6M1.8 8h2.6M11.6 8h2.6'/>`),
   },
   {
-    // Account settings sign-out icon (dsh-client-ui-settings-account)
-    selector: `svg:not([data-icon]):has(> path[d^="M3.9961 1.40039"])`,
+    // Account settings sign-out icon (dsh-client-ui-settings-account LogoutIcon.tsx)
+    selector: `svg:not([data-icon]):has(> path[d^="M5.5 1.5H3"])`,
     svg: strokeSvg(`<path d='M6.2 2.4H3.8A1.4 1.4 0 0 0 2.4 3.8v8.4a1.4 1.4 0 0 0 1.4 1.4h2.4M10.2 5.2L13.4 8l-3.2 2.8M6.4 8h6.8'/>`),
   },
   {
@@ -614,16 +629,6 @@ export const INLINE_SVG_MASKS = [
     svg: DSH_ICON_MASKS['edit-outline'],
   },
   {
-    // Shortcuts settings error badge
-    selector: `svg:not([data-icon]):has(> path[d^="M8.90039 3.97328"])`,
-    svg: DSH_ICON_MASKS['warning-outline'],
-  },
-  {
-    // Shortcuts settings success badge
-    selector: `svg:not([data-icon]):has(> path[d^="M12.5303 6.53027"])`,
-    svg: DSH_ICON_MASKS['check-circle-outline'],
-  },
-  {
     // Trajectory / Session log role wrench
     selector: `svg[data-role-icon="wrench"]:not([data-icon])`,
     svg: TOOL_WRENCH,
@@ -700,6 +705,9 @@ const EXPERIMENTAL_PACKAGE_ICONS = [
   ['liveshare', DSH_ICON_MASKS['share-outline']],
   ['agent-team', DSH_ICON_MASKS['users-outline']],
   ['ralph', DSH_ICON_MASKS.sparkle],
+  ['timeline', DSH_ICON_MASKS['clock-outline']],
+  ['chat-import', DSH_ICON_MASKS['download-outline']],
+  ['subagent', DSH_ICON_MASKS['layers-outline']],
 ];
 
 export function buildIconCss() {
@@ -718,7 +726,7 @@ export function buildIconCss() {
   ];
 
   const lines = [
-    '/* Auto-generated Claude Desktop Icon Pack (102 DSH symbol families + 64 inline UI glyphs + Guide & Plugin overrides) */',
+    `/* Auto-generated Claude Desktop Icon Pack (${families.length} DSH symbol families + ${INLINE_SVG_MASKS.length} inline UI glyphs + Guide & Plugin overrides) */`,
     // Keep HTML elements out of this large matcher. In particular, a trailing
     // universal child selector made ordinary text/input changes recheck the
     // entire icon list. :where preserves the original rule specificity.

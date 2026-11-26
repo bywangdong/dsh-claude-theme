@@ -41,16 +41,16 @@ for (const [paletteName, map] of Object.entries(PALETTES)) {
   }
 }
 
-// Validate all 102 DSH icon family SVG masks and 64 inline UI glyph masks
+// Validate all 106 DSH icon family SVG masks and 62 inline UI glyph masks
 const iconNames = Object.keys(DSH_ICON_MASKS);
-assert.equal(iconNames.length, 102, 'DSH_ICON_MASKS must cover all 102 DSH icon families');
+assert.equal(iconNames.length, 106, 'DSH_ICON_MASKS must cover all 106 DSH icon families');
 for (const [name, svg] of Object.entries(DSH_ICON_MASKS)) {
   assert.match(svg, /^<svg xmlns='http:\/\/www\.w3\.org\/2000\/svg' viewBox='[^']+'[\s\S]*<\/svg>$/, `${name}: invalid SVG root`);
   assert.ok(!svg.includes('"'), `${name}: use single quotes inside SVG markup for clean CSS data URI embedding`);
   const uri = toDataUri(svg);
   assert.ok(!uri.includes('#'), `${name}: data URI must percent-encode #`);
 }
-assert.equal(INLINE_SVG_MASKS.length, 64, 'INLINE_SVG_MASKS must cover all 64 DSH inline & FileTypeIcon SVGs');
+assert.equal(INLINE_SVG_MASKS.length, 62, 'INLINE_SVG_MASKS must cover all 62 active DSH inline & FileTypeIcon SVGs');
 for (const { selector, svg } of INLINE_SVG_MASKS) {
   assert.match(svg, /^<svg xmlns='http:\/\/www\.w3\.org\/2000\/svg' viewBox='[^']+'[\s\S]*<\/svg>$/, `${selector}: invalid SVG root`);
   assert.ok(!svg.includes('"'), `${selector}: use single quotes inside SVG markup for clean CSS data URI embedding`);
@@ -65,7 +65,7 @@ for (const scenario of [
 ]) {
   const effects = [], componentEffects = [], bodyWrites = [], attrs = new Map(), styles = new Set(), layers = new Map(), registeredSlots = new Map(), windowListeners = new Map(), slotSubscriptions = new Set(), themeSubscriptions = new Set();
   let settingsOpens = 0;
-  let settingsOwners = [{ children: { 'settings.section': {} }, store: { create: () => ({ actions: { open: () => settingsOpens++ } }) } }];
+  let settingsOwners = [{ children: { 'settings.trigger': {} }, store: { create: () => ({ actions: { open: () => settingsOpens++ } }) } }];
   let plugin;
   let focused = true;
   const storage = new Map();
@@ -154,7 +154,7 @@ for (const scenario of [
     assert.equal(svg.props.className, 'claude-hero-sunburst');
   }
   if (!scenario.disabled) {
-    assert.equal(attrs.get('data-dsh-claude-theme'), '0.11.9');
+    assert.equal(attrs.get('data-dsh-claude-theme'), '0.12.1');
     assert.equal(attrs.get('data-claude-palette'), scenario.expectPalette);
     assert.equal(attrs.get('data-claude-prose'), scenario.expectProse);
     assert.equal(attrs.get('data-claude-chrome'), scenario.expectChrome);
@@ -247,6 +247,9 @@ assert.equal(PALETTES.neutral['--claude-cmdk-bg'].dark, '#303030');
 assert.equal(PALETTES.neutral['--claude-cmdk-selected-bg'].dark, '#4F4F4F');
 for (const marker of [
   'PingFang SC',
+  '--dsh-font-family-text',
+  '--dsh-font-family-code',
+  '--dsh-hairline-width',
   '--dsw-font-markdown-table:',
   '--claude-prose-strong-weight',
   '[data-claude-window-inactive="true"]',
@@ -270,11 +273,16 @@ for (const marker of [
   'canvas[data-home-whale]',
   '[data-sidebar-right-guide]',
   '[data-shortcut-modal="settings"]',
+  '[data-claude-settings-id="remote-connection"]',
+  'body[data-ds-dark-theme][data-dsh-claude-theme] [data-shortcut-modal="settings"] select',
   'grid-template-rows: 44px minmax(0, 1fr)',
   '--claude-settings-panel-bg',
   '--claude-settings-nav-bg',
   '--claude-settings-field-bg',
-  'button[role="switch"][class*="_switch_"]',
+  'button[role="switch"]:is([class$="_switch"], [class*="_switch "])',
+  ':is([class$="_markdown"], [class*="_markdown "]):not(svg)',
+  ':is([class$="_tabActive"], [class*="_tabActive "])',
+  ':is([class$="_dialog"], [class*="_dialog "])',
   '_rowResting',
   '_headerBlank',
   '--claude-icon:',
@@ -282,9 +290,15 @@ for (const marker of [
   '--dsh-file-type-icon-color:',
   'M2.80078 10.2112',
   'M8.48924 28H19.5108',
+  'M14 6.68994V4',
+  'M8 4.5V10',
+  'M5.5 1.5H3',
 ]) {
-  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.11.9 semantic selector marker: ${marker}`);
+  assert.ok(injectedCss.includes(marker), `emitted CSS must include 0.12.1 semantic selector marker: ${marker}`);
 }
+assert.ok(!injectedCss.includes('html[data-theme="dark"]'), 'must use body[data-ds-dark-theme], not html[data-theme="dark"]');
+assert.ok(!injectedCss.includes('_1wejo_'), 'must not hardcode legacy Vite CSS module hashes');
+assert.ok(!injectedCss.includes('[data-clipped]'), 'must not retain removed workspace data-clipped hook');
 assert.ok(
   injectedCss.includes('[data-sidebar-workspace-header][data-claude-ws-header="flat"]'),
   'flat/empty mode must keep workspace header reachable when no workspace rows are rendered',
@@ -327,14 +341,28 @@ assert.ok(!/_newSessionRow["\]\s)]*>\s*button/.test(injectedCss), 'must never us
 assert.ok(!/_fishHitbox["\]\s)]*>\s*svg/.test(injectedCss), 'must never use > between _fishHitbox and svg (broken by <span data-slot="conversation.hero.brand.mark">)');
 assert.ok(!/_composerHero["\]\s)]*>\s*:is\(\[class\$="_root"/.test(injectedCss), 'must never use > between _composerHero and _root (broken by <span data-slot>)');
 
-// Guard against unanchored [class*="_foo"] substring collisions (only trailing-space [class*="_foo "] or Vite _foo_ allowed)
+// Guard against unanchored [class*="_foo"] substring collisions and legacy Vite [class*="_foo_"] patterns (DSH 0.2.3+ emits <hash>_foo)
 const rawClassContains = [...injectedCss.matchAll(/\[class\*="([^"]+)"\]/g)].map(m => m[1]);
 for (const pat of rawClassContains) {
   assert.ok(
-    pat.endsWith(' ') || (pat.startsWith('_') && pat.endsWith('_')),
-    `ambiguous substring selector [class*="${pat}"] is forbidden; use :is([class$="${pat}"], [class*="${pat} "])`,
+    pat.endsWith(' '),
+    `ambiguous or legacy [class*="${pat}"] selector is forbidden; use :is([class$="_foo"], [class*="_foo "])`,
   );
 }
 
+// Validate DSH 0.2.3+ native manifest icon and localized meta files
+const pkgJson = JSON.parse(readFileSync(new URL('package.json', root), 'utf8'));
+assert.equal(pkgJson.version, '0.12.1');
+assert.equal(pkgJson.icon, './icon.svg');
+assert.equal(pkgJson.dsh?.manifestVersion, 1);
+const iconSvg = readFileSync(new URL('icon.svg', root), 'utf8');
+assert.match(iconSvg, /^<svg\b[^>]*viewBox="0 0 36 36"[\s\S]*<\/svg>\s*$/);
+for (const loc of ['en', 'zh']) {
+  const meta = JSON.parse(readFileSync(new URL(`locale/${loc}.json`, root), 'utf8')).meta;
+  assert.equal(typeof meta?.title, 'string');
+  assert.equal(typeof meta?.description, 'string');
+  assert.equal(meta?.detail, 'README.md');
+}
+
 assert.ok(!/https?:\/\/|fetch\(|XMLHttpRequest/.test(source.replaceAll('http://www.w3.org/2000/svg', '')), 'theme must be offline and self contained');
-console.log('PASS: emitted 0.11.9 JS, palette completeness, semantic CSS, bundled icons, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');
+console.log('PASS: emitted 0.12.1 JS, palette completeness, semantic CSS, 106 icon families + 62 inline glyphs, DSH 0.2.3 manifest/locale metadata, saved preferences, slot/style lifecycle and offline bundle. Visual acceptance is recorded separately in design-qa.md.');
